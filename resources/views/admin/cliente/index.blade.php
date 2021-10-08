@@ -12,6 +12,18 @@
 
 @section('content')
 @php
+// foreach($config['data'] as $row){
+//             foreach($row as $cell){
+//                 print_r($cell . " : " . $row);
+//             }
+// }
+
+// foreach($heads as $key => $value){
+//     print_r($key . " : " . $value);
+// }
+
+// foreach($config['data'] as $k => $v) { dd($v); }
+// dd("done");
 // $heads = [
 //     'ID',
 //     'Name',
@@ -39,17 +51,25 @@
 //     'columns' => [null, null, null, ['orderable' => false]],
 // ];
 @endphp
-    
+
+@if (isset($message))
+<x-adminlte-alert theme="primary" title="Exito">
+    {{ $message }}
+</x-adminlte-alert>
+@endif
+
 {{-- Minimal example / fill data using the component slot --}}
 <x-adminlte-datatable class="mt-3" id="table_clientes" :heads="$heads" hoverable>
     @foreach($config['data'] as $row)
         <tr>
-            @foreach($row as $cell)
-                <td>{!! $cell !!}</td>
+            @foreach($heads as $h)
+                <td>{!! $row[$h] !!}</td>
             @endforeach
         </tr>
     @endforeach
 </x-adminlte-datatable>
+
+
 @stop
 
 @section('css')
@@ -57,5 +77,9 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script>
+    $('.delete_client').click(function(e){
+        if(!confirm('Are you sure?')) return false;
+      });
+      </script>
 @stop

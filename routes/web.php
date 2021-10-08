@@ -20,6 +20,9 @@ Route::get('/', function () {
 
 Route::resource('cliente', ClienteController::class)->middleware(['auth:sanctum', 'verified']);
 
+Route::get('cliente/delete/{id}', [ClienteController::class,'destroy'])
+     ->name('cliente.destroy')->middleware(['auth:sanctum', 'verified']);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dash.index');
 })->name('dashboard');

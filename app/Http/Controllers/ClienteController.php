@@ -12,31 +12,29 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index($message = null)
+    {   
+
+        $clientes = Cliente::get();
+        //dd($message);
+        //dd($clientes->toJson());
         $heads = [
-            'ID',
-            'Name',
-            ['label' => 'Phone', 'width' => 40],
-            ['label' => 'Actions', 'no-export' => true, 'width' => 5],
+            'id',
+            'nombre',
+            'apellido',
+            'tipo_doc',
+            'doc',
+            'direccion',
+            'telefono',
+            'celular',
+            'licencia',
+            'actions',
         ];
-        
-        $btnEdit = '<button class="btn btn-s btn-default text-primary mx-1 shadow" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-pen"></i>
-                    </button>';
-        $btnDelete = '<button class="btn btn-s btn-default text-danger mx-1 shadow" title="Delete">
-                          <i class="fa fa-lg fa-fw fa-trash"></i>
-                      </button>';
-        $btnDetails = '<button class="btn btn-s btn-default text-teal mx-1 shadow" title="Details">
-                           <i class="fa fa-lg fa-fw fa-eye"></i>
-                       </button>';
-        
+
+        $items = $clientes->map->only($heads);
+
         $config = [
-            'data' => [
-                [22, 'John Bender', '+02 (123) 123456789', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-                [19, 'Sophia Clemens', '+99 (987) 987654321', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-                [3, 'Peter Sousa', '+69 (555) 12367345243', '<nobr>'.$btnEdit.$btnDelete.$btnDetails.'</nobr>'],
-            ],
+            'data' => $items,
             'order' => [[1, 'asc']],
             'columns' => [null, null, null, ['orderable' => false]],
         ];
@@ -86,7 +84,8 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        $cliente = Cliente::find($id)->toArray();
+        return view('admin.cliente.show', $cliente);
     }
 
     /**
@@ -97,7 +96,8 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Cliente::find($id)->toArray();
+        return view('admin.cliente.edit', $cliente);
     }
 
     /**
@@ -108,8 +108,23 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {   
+        $validated = $request->validate([
+            'nombre'    => 'required|max:255',
+            'apellido'  => 'required|max:255',
+            'email'     => 'required|email|max:255',
+            'direccion' => 'required|max:255',
+            'telefono'  => 'required|max:255',
+            'celular'   => 'required|max:255',
+            'tipo_doc'  => 'required|max:255',
+            'doc' => 'required|max:255',
+            'licencia'  => 'required|max:255',
+        ]);
+
+        $cliente = Cliente::find($id);
+        $cliente->update($validated);
+
+        return redirect()->route('cliente.index')->with('message','Se edito el cliente');
     }
 
     /**
@@ -120,6 +135,7 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cliente::findOrFail($id)->delete();
+        return redirect()->route('cliente.index')->with('message','Se elimino el cliente');
     }
 }
