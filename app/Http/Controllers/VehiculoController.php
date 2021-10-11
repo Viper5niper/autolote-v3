@@ -85,7 +85,7 @@ class VehiculoController extends Controller
 
         Vehiculo::where('id',$id)->update($fields);
 
-        return redirect()->route('vehiculo.show',$id)->with('message','Se edito el vehiculo');
+        return redirect()->route('vehiculo.show',$id)->with('mensaje','Se edito el vehiculo');
     }
 
     /**
@@ -94,9 +94,11 @@ class VehiculoController extends Controller
      * @param  \App\Models\Vehiculo  $vehiculo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Vehiculo $vehiculo)
+    public function destroy($id)
     {
-
+        Vehiculo::findOrFail($id)->delete();
+        $message = 'Se elimino el vehiculo';
+        return redirect()->route('vehiculo',compact('message'));
     }
 
     public static function toUppercase($fields){

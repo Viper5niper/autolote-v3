@@ -19,12 +19,17 @@
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
                 Editar
             </a>
-            <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
+            <a class="btn btn-md btn-outline-danger" data-toggle="modal" data-target="#ExampleModal" >
                 Eliminar
             </a>
         </div>
     </div>
 </div>
+@if(isset($mensaje))
+<x-adminlte-alert theme="success" title="Exito!">
+    Cliente registrado!
+</x-adminlte-alert>
+@endif
 
 @stop
 @section('content')
@@ -38,13 +43,16 @@
     <a href=""><img src="/img/frontier-7.jpg" width="144" height="96"></a>
 </div>
 
-<form method="" action="" class="mt-3">
-    @csrf
+<div class="mt-3">
     {{$vehiculo->placa}}
     {{$vehiculo->marca}}
     {{$vehiculo->modelo}}
     {{$vehiculo->anio}}
-</form>
+</div>
+@include('/partials/_modal-message',
+['modal_title'=> 'Eliminar Vehiculo '.$vehiculo->placa,
+'modal_message'=>'Esta seguro que desea eliminar el vehiculo?','btnTipo'=>'danger',
+'ruta'=>route('vehiculo.destroy',$vehiculo->id)])
 @stop
 
 @section('css')
@@ -55,6 +63,6 @@
 @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js"></script>
 <script>
-    console.log('Hi!'); 
+   
 </script>
 @stop

@@ -15,6 +15,14 @@
         </a>
     </div>
 </div>
+@if(isset($message))
+<div class="alert alert-success alert-dismissible fade show mp-2 mb-2" role="alert">
+    <strong>{{$message}}</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endif
 
 @stop
 
