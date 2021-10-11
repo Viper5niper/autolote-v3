@@ -309,7 +309,7 @@ return [
         ['header' => 'ADMINISTRACION', 'can'  => ['is-admin'],],
         [
             'text'        => 'Vehiculos',
-            'url'         => 'admin/ventas',
+            'route'       => 'vehiculo',
             'icon'        => 'fas fa-fw fa-car',
             'label'       => 'nuevo',
             'label_color' => 'success',
