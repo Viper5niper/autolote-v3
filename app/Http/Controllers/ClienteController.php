@@ -13,7 +13,7 @@ class ClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($message = null)
+    public function index()
     {   
 
         $clientes = Cliente::get();
