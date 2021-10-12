@@ -40,8 +40,8 @@ class SaveVehiculoRequest extends FormRequest
             'n_chasis'  => 'required|max:25',
             'n_vin'     => 'required|max:25',
             'calidad'   => 'required|max:40',
-            'n_pol_s'   => 'required|max:40',
-            'v_pol_s'   => 'required|max:8'
+            'n_pol_s'   => 'max:40',
+            'v_pol_s'   => 'max:8'
         ];
     }
 }

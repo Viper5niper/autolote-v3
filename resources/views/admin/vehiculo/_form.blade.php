@@ -125,7 +125,7 @@
     <div class="form-group col-md-6 first"> 
         <label for="vehiculo_nps">N Poliza</label>
         <input type="text" name="n_pol_s" class="form-control @error('n_pol_s') is-invalid 
-        @enderror" id="vehiculo_nps" placeholder="" value="{{old('n_pol_s',$vehiculo->n_pol_s)}}" onKeyUp="mayus(this);" required>
+        @enderror" id="vehiculo_nps" placeholder="" value="{{old('n_pol_s',$vehiculo->n_pol_s)}}" onKeyUp="mayus(this);">
         @error('n_pol_s')
         <div class="invalid-feedback">{{ $message }}</div>
           @enderror 
@@ -133,7 +133,7 @@
     <div class="form-group col-md-6 first"> 
         <label for="vehiculo_vps">V Poliza</label>
         <input type="month" name="v_pol_s" class="form-control @error('v_pol_s') is-invalid 
-        @enderror" id="vehiculo_vps" placeholder="" value="{{old('v_pol_s',$vehiculo->v_pol_s)}}" onKeyUp="mayus(this);" required>
+        @enderror" id="vehiculo_vps" placeholder="" value="{{old('v_pol_s',$vehiculo->v_pol_s)}}" onKeyUp="mayus(this);">
         @error('v_pol_s')
         <div class="invalid-feedback">{{ $message }}</div>
           @enderror 
