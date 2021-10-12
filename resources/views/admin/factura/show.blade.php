@@ -10,7 +10,7 @@
             <h1>Informacion del Vehiculo</h1>
         </div>
         <div class="btn-group float-right" role="group" aria-label="">
-            <a class="btn btn-md btn-outline-success" href="{{route('factura',$vehiculo)}}">
+            <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
                 Vender
             </a>
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">

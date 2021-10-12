@@ -23,24 +23,25 @@ class SaveVehiculoRequest extends FormRequest
      */
     public function rules()
     {
+ 
         return [
-            'placa' => 'required',
-            'vto' => 'required',
-            'marca' => 'required',
-            'modelo' => 'required',
-            'color' => 'required',
-            'anio' => 'required|numeric',
-            'capacidad' => 'required',
-            'clase' => 'required',
-            'traccion' => 'required',
-            'tipo' => 'required',
-            'dominio' => 'required',
-            'n_motor' => 'required',
-            'n_chasis' => 'required',
-            'n_vin' => 'required',
-            'calidad' => 'required',
-            'n_pol_s' => 'required',
-            'v_pol_s' => 'required'
+            'placa'     => 'required|max:8',
+            'vto'       => 'required|max:8',
+            'marca'     => 'required|max:50',
+            'modelo'    => 'required|max:50',
+            'color'     => 'required|max:100',
+            'anio'      => 'required|max:4',
+            'capacidad' => 'required|max:10',
+            'clase'     => 'required|max:60',
+            'traccion'  => 'required|max:8',
+            'tipo'      => 'required|max:60',
+            'dominio'   => 'required|max:40',
+            'n_motor'   => 'required|max:25',
+            'n_chasis'  => 'required|max:25',
+            'n_vin'     => 'required|max:25',
+            'calidad'   => 'required|max:40',
+            'n_pol_s'   => 'required|max:40',
+            'v_pol_s'   => 'required|max:8'
         ];
     }
 }

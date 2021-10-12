@@ -30,3 +30,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::resource('vehiculo', 'VehiculoController')->name('index','vehiculo');
+
+Route::get('/factura/{id}','FacturaController@index')->name('factura');
+
+//Route::resource('factura','FacturaController')->name('index','factura');
