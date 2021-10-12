@@ -44,7 +44,9 @@ class VehiculoController extends Controller
     
         Vehiculo::create($fields);
         
-        return redirect()->route('vehiculo');
+        return redirect()->route('vehiculo')
+        ->with('message','Vehiculo creado.')
+        ->with('status','success');
     }
 
     /**
@@ -85,7 +87,10 @@ class VehiculoController extends Controller
 
         Vehiculo::where('id',$id)->update($fields);
 
-        return redirect()->route('vehiculo.show',$id)->with('mensaje','Se edito el vehiculo');
+        // return redirect()->route('vehiculo.show',$id)->with('mensaje','Se edito el vehiculo');
+        return redirect()->route('vehiculo')
+        ->with('message','Vehiculo editado.')
+        ->with('status','success');
     }
 
     /**
@@ -97,8 +102,9 @@ class VehiculoController extends Controller
     public function destroy($id)
     {
         Vehiculo::findOrFail($id)->delete();
-        $message = 'Se elimino el vehiculo';
-        return redirect()->route('vehiculo',compact('message'));
+        return redirect()->route('vehiculo')
+        ->with('message','Vehiculo eliminado.')
+        ->with('status','success');
     }
 
     public static function toUppercase($fields){

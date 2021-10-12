@@ -3,20 +3,22 @@
 @section('title', 'Clientes')
 
 @section('content_header')
-    <h1 class="float-left">Clientes</h1>
+
+@include('partials._status')
+<div class="row mt-3">
+    <h1 class="col">Clientes</h1>
+    <div class="col">
     <a class="btn btn-md btn-success float-right" href="{{route('cliente.create')}}">
         Crear nuevo cliente
     </a>
+    </div>
+</div>
 @stop
 
 
 @section('content')
 
-@if (isset($message))
-<x-adminlte-alert theme="primary" title="Exito">
-    {{ $message }}
-</x-adminlte-alert>
-@endif
+{{-- @include('partials._status') --}}
 
 {{-- Minimal example / fill data using the component slot --}}
 <x-adminlte-datatable class="mt-3" id="table_clientes" :heads="$heads" hoverable>
@@ -39,7 +41,7 @@
 @section('js')
     <script>
     $('.delete_client').click(function(e){
-        if(!confirm('Are you sure?')) return false;
+        if(!confirm('Va a eliminar un cliente, esta seguro?')) return false;
       });
       </script>
 @stop

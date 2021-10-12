@@ -31,7 +31,7 @@ class Cliente extends Model
         $btnDelete = '<a class="btn btn-s btn-default text-danger mx-1 shadow delete_client" href="/cliente/delete/'.$this->id.'"" title="Delete">
                           <i class="fa fa-lg fa-fw fa-trash"></i>
                       </a>';
-        $btnDetails = '<a class="btn btn-s btn-default text-teal mx-1 shadow" href="/cliente/'.$this->id.'/edit" title="Details">
+        $btnDetails = '<a class="btn btn-s btn-default text-teal mx-1 shadow" href="/cliente/'.$this->id.'/editar" title="Details">
                           <i class="fa fa-lg fa-fw fa-pen"></i>
                        </a>';
 
