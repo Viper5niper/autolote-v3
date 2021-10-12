@@ -7,22 +7,16 @@
 @stop
 
 @section('content_header')  <!--Contenido de cabecera-->
-<div class="d-flex p-2 bd-highlight" >
-    <div class="col-lg-12">
-        <h1 class="float-left">Vehiculos</h1>
-        <a class="btn btn-md btn-success float-right" href="{{route('vehiculo.create')}}">
+
+@include('partials._status')
+<div class="row mt-3">
+    <h1 class="col">Vehiculos</h1>
+    <div class="col">
+    <a class="btn btn-md btn-success float-right" href="{{route('vehiculo.create')}}">
         Crear nuevo vehiculo
-        </a>
+    </a>
     </div>
 </div>
-@if(isset($message))
-<div class="alert alert-success alert-dismissible fade show mp-2 mb-2" role="alert">
-    <strong>{{$message}}</strong> You should check in on some of those fields below.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-@endif
 
 @stop
 

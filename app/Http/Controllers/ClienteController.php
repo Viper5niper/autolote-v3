@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveClienteRequest;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 
@@ -49,31 +50,24 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('admin.cliente.create');
+        return view('admin.cliente.create',['cliente'=>new Cliente]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\SaveClienteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveClienteRequest $request)
     {   
-        $validated = $request->validate([
-            'nombre'    => 'required|max:255',
-            'apellido'  => 'required|max:255',
-            'email'     => 'required|email|max:255',
-            'direccion' => 'required|max:255',
-            'telefono'  => 'required|max:255',
-            'celular'   => 'required|max:255',
-            'tipo_doc'  => 'required|max:255',
-            'doc' => 'required|max:255',
-            'licencia'  => 'required|max:255',
-        ]);
+        $validated = $request->validated();
 
         Cliente::create($validated);
-        return view('admin.cliente.create', ['success' => true]);
+        
+        return redirect()->route('cliente.index')
+        ->with('message','Cliente creado.')
+        ->with('status','success');
     }
 
     /**
@@ -82,49 +76,38 @@ class ClienteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Cliente $cliente)
     {
-        $cliente = Cliente::find($id)->toArray();
-        return view('admin.cliente.show', $cliente);
+        return view('admin.cliente.show', $cliente->toArray());
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $cliente = Cliente::find($id)->toArray();
-        return view('admin.cliente.edit', $cliente);
+    public function edit(Cliente $cliente)
+    {   
+        return view('admin.cliente.edit', ['cliente' => $cliente]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\SaveClienteRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveClienteRequest $request, $id)
     {   
-        $validated = $request->validate([
-            'nombre'    => 'required|max:255',
-            'apellido'  => 'required|max:255',
-            'email'     => 'required|email|max:255',
-            'direccion' => 'required|max:255',
-            'telefono'  => 'required|max:255',
-            'celular'   => 'required|max:255',
-            'tipo_doc'  => 'required|max:255',
-            'doc' => 'required|max:255',
-            'licencia'  => 'required|max:255',
-        ]);
+        $validated = $request->validated();
 
-        $cliente = Cliente::find($id);
-        $cliente->update($validated);
+        $cliente = Cliente::find($id)->update($validated);
 
-        return redirect()->route('cliente.index')->with('message','Se edito el cliente');
+        return redirect()->route('cliente.index')
+        ->with('message','Informacion editada.')
+        ->with('status','success');
     }
 
     /**
@@ -136,6 +119,8 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         Cliente::findOrFail($id)->delete();
-        return redirect()->route('cliente.index')->with('message','Se elimino el cliente');
+        return redirect()->route('cliente.index')
+        ->with('message','Cliente eliminado.')
+        ->with('status','success');
     }
 }

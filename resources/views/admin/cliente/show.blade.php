@@ -92,7 +92,8 @@
         </div>
       </div>
 
-      <a class="btn btn-primary" href="{{route('cliente.index')}}">Ir a Lista de clientes</a>
+      <a class="btn btn-primary" href="{{route('cliente.edit', ['cliente'=> $id])}}">Editar</a>
+      <a class="btn btn-secondary" href="{{route('cliente.index')}}">Ir a Lista de clientes</a>
 </form>
 @stop
 
