@@ -24,7 +24,9 @@
 <div class="row d-flex justify-content-center mx-auto">
     @forelse($vehiculos as $vehiculoItem)
         <div class="card mx-2" style="width: 18rem;">
-            <img src="/img/car.png" class="card-img-top" alt="imagen de auto">
+            <img src="{{!empty($vehiculoItem->images) ? $vehiculoItem->path.$vehiculoItem->images[0]
+            : 'img/car.png'}}" 
+            class="card-img-top rounded mx-auto d-block" alt="imagen de auto" style="height: 14rem;">
             <div class="card-body">
                 <h5 class="card-title">{{$vehiculoItem->placa}}</h5>
                 <p class="card-text">

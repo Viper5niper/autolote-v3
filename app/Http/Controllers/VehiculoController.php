@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveVehiculoRequest;
 use App\Models\Vehiculo;
+use Exception;
+use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class VehiculoController extends Controller
 {
@@ -16,7 +20,7 @@ class VehiculoController extends Controller
     public function index()
     {
         $vehiculos = Vehiculo::paginate(6);
-        return view("/admin/vehiculo/index",compact('vehiculos'));
+        return view("/admin/vehiculo/index", compact('vehiculos'));
     }
 
     /**
@@ -26,7 +30,7 @@ class VehiculoController extends Controller
      */
     public function create()
     {
-        return view("/admin/vehiculo/create",['vehiculo'=>new Vehiculo]);
+        return view("/admin/vehiculo/create", ['vehiculo' => new Vehiculo]);
     }
 
     /**
@@ -37,16 +41,22 @@ class VehiculoController extends Controller
      */
     public function store(SaveVehiculoRequest $request)
     {
-    
+
         $fields = $request->validated();
-        $fields = VehiculoController::toUppercase($fields);
+        $fields = toUppercase($fields);
         $fields['estado'] = 'D';
-    
-        Vehiculo::create($fields);
-        
+
+        $vehiculo = Vehiculo::create($fields);
+
+        $files = $request->file('images');
+
+        foreach ($files as $file) {
+            upload_global($file, $vehiculo->path);
+        }
+
         return redirect()->route('vehiculo')
-        ->with('message','Vehiculo creado.')
-        ->with('status','success');
+            ->with('message', 'Vehiculo creado.')
+            ->with('status', 'success');
     }
 
     /**
@@ -57,9 +67,9 @@ class VehiculoController extends Controller
      */
     public function show($id)
     {
-       
-        return view('/admin/vehiculo/show',['vehiculo'=>Vehiculo::findOrFail($id)]);
 
+        //dd(Vehiculo::findOrFail($id));
+        return view('/admin/vehiculo/show', ['vehiculo' => Vehiculo::findOrFail($id)]);
     }
 
     /**
@@ -70,7 +80,7 @@ class VehiculoController extends Controller
      */
     public function edit(Vehiculo $vehiculo)
     {
-        return view('/admin/vehiculo/edit',['vehiculo'=>$vehiculo]);
+        return view('/admin/vehiculo/edit', ['vehiculo' => $vehiculo]);
     }
 
     /**
@@ -83,14 +93,14 @@ class VehiculoController extends Controller
     public function update(SaveVehiculoRequest $request, $id)
     {
         $fields = $request->validated();
-        $fields = VehiculoController::toUppercase($fields);
+        $fields = toUppercase($fields);
 
-        Vehiculo::where('id',$id)->update($fields);
+        Vehiculo::where('id', $id)->update($fields);
 
         // return redirect()->route('vehiculo.show',$id)->with('mensaje','Se edito el vehiculo');
         return redirect()->route('vehiculo')
-        ->with('message','Vehiculo editado.')
-        ->with('status','success');
+            ->with('message', 'Vehiculo editado.')
+            ->with('status', 'success');
     }
 
     /**
@@ -101,18 +111,10 @@ class VehiculoController extends Controller
      */
     public function destroy($id)
     {
+
         Vehiculo::findOrFail($id)->delete();
         return redirect()->route('vehiculo')
-        ->with('message','Vehiculo eliminado.')
-        ->with('status','success');
-    }
-
-    public static function toUppercase($fields){
-        
-        foreach($fields as $key => $field){
-            $fields[$key] = mb_strtoupper($field, 'UTF-8');
-        }
-
-        return $fields;
+            ->with('message', 'Vehiculo eliminado.')
+            ->with('status', 'success');
     }
 }

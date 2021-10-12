@@ -63,7 +63,7 @@ class ClienteController extends Controller
     {   
         $validated = $request->validated();
 
-        Cliente::create($validated);
+        Cliente::create($validated);        
         
         return redirect()->route('cliente.index')
         ->with('message','Cliente creado.')

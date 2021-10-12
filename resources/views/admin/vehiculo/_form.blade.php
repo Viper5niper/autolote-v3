@@ -138,6 +138,10 @@
         <div class="invalid-feedback">{{ $message }}</div>
           @enderror 
     </div>
+    <div class="form-group col-md-6 first"> 
+      <label for="images">Subir Imagenes</label>
+      <input type="file" name="images[]" id="images" multiple class="form-control">
+  </div>
 </div>
 <script type="">
   function mayus(e) {
