@@ -44,6 +44,11 @@ class Vehiculo extends Model
             $result = F::makeDirectory($path, 0775, true);
         });
 
+        static::updated(function($vehiculo){
+            $path = public_path() . '/v/' . $vehiculo->placa . '-' . $vehiculo->id;
+            !is_dir($path) && F::makeDirectory($path, 0775, true);
+        });
+
         static::deleted(function ($vehiculo) {
             $path = public_path() . '/v/' . $vehiculo->placa . '-' . $vehiculo->id;
             is_dir($path) && delete_files($path);

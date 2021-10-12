@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">       
             <h2>Editar Vehiculo</h2>
-            <form class="form-horizontal" method="POST" action="{{ route('vehiculo.update',[$vehiculo->id]) }}">
+            <form class="form-horizontal" method="POST" action="{{ route('vehiculo.update',[$vehiculo->id])}}" enctype="multipart/form-data">
                 @method('PATCH')
                 @include('admin.vehiculo._form',['btnText'=>'Guardar Cambios','vehiculo'=>$vehiculo])
             </form>

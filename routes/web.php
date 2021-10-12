@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('auth.login2');
 });
 
 Route::resource('cliente','ClienteController')->middleware(['auth:sanctum', 'verified']);
@@ -29,8 +29,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dash.index');
 })->name('dashboard');
 
-Route::resource('vehiculo', 'VehiculoController')->name('index','vehiculo');
+Route::resource('vehiculo', 'VehiculoController')->name('index','vehiculo')->middleware(['auth:sanctum', 'verified']);
 
-Route::get('/factura/{id}','FacturaController@index')->name('factura');
-
-//Route::resource('factura','FacturaController')->name('index','factura');
+Route::get('/factura/{id}','FacturaController@index')->name('factura')->middleware(['auth:sanctum', 'verified']);

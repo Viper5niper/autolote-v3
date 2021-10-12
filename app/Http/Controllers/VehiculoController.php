@@ -19,7 +19,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        $vehiculos = Vehiculo::paginate(6);
+        $vehiculos = Vehiculo::paginate(16);
         return view("/admin/vehiculo/index", compact('vehiculos'));
     }
 
@@ -95,9 +95,16 @@ class VehiculoController extends Controller
         $fields = $request->validated();
         $fields = toUppercase($fields);
 
-        Vehiculo::where('id', $id)->update($fields);
+        $vehiculo = Vehiculo::find($id);
 
-        // return redirect()->route('vehiculo.show',$id)->with('mensaje','Se edito el vehiculo');
+        $vehiculo->update($fields);
+
+        $files = $request->file('images');
+
+        foreach ($files as $file) {
+            upload_global($file, $vehiculo->path);
+        }
+
         return redirect()->route('vehiculo')
             ->with('message', 'Vehiculo editado.')
             ->with('status', 'success');
