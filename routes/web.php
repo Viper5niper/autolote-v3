@@ -1,4 +1,7 @@
 <?php
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\VehiculoController;
+use App\Models\Vehiculo;
 
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +22,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dash.index');
+})->name('dashboard');
+
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('cliente','ClienteController')->middleware(['auth:sanctum', 'verified']);
+Route::get('cliente/delete/{id}', [ClienteController::class,'destroy'])
+     ->name('cliente.destroy')->middleware(['auth:sanctum', 'verified']);
+
+Route::resource('vehiculo', 'VehiculoController')->name('index','vehiculo')->middleware(['auth:sanctum', 'verified']);
