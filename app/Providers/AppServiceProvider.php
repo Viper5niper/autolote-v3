@@ -3,6 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Pagination\Paginator;
+use Nette\Schema\Schema as SchemaSchema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+    
+        Schema::defaultStringLength(191);
+        Paginator::useBootstrap();
+        Route::resourceVerbs([
+            'create' => 'crear',
+            'edit' => 'editar'
+        ]);
     }
 }
