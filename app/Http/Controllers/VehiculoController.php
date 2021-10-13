@@ -67,8 +67,6 @@ class VehiculoController extends Controller
      */
     public function show($id)
     {
-
-        //dd(Vehiculo::findOrFail($id));
         return view('/admin/vehiculo/show', ['vehiculo' => Vehiculo::findOrFail($id)]);
     }
 
