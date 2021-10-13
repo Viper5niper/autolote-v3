@@ -13,7 +13,7 @@
             <a class="btn btn-md btn-outline-success" href="{{route('factura',$vehiculo)}}">
                 Vender
             </a>
-            <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
+            <a class="btn btn-md btn-outline-success" href="{{route('renta',$vehiculo->id)}}">
                 Rentar
             </a>
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
