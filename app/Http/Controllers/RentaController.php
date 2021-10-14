@@ -93,4 +93,42 @@ class RentaController extends Controller
     {
         //
     }
+
+    //Para buscar Vehiculo o cliente
+    public function buscarVC(Request $request)
+    {
+
+        $criterio = $request->request->get('criterio');
+        $type = $request->request->get('type');
+        $cliente_id = $request->request->get('cliente_id');
+        $vehiculo_id = $request->request->get('vehiculo_id');
+
+        try{
+
+        if($type == 'cliente'){
+            $cliente = Cliente::where('doc',$criterio)
+                        ->orWhere('id',$criterio)
+                        ->firstOrFail();
+            $cliente_id = $cliente->id;
+        }
+
+        if($type == 'vehiculo'){
+            $vehiculo = Vehiculo::where('placa',$criterio)
+                        ->orWhere('id',$criterio)
+                        ->where('estado','D')
+                        ->firstOrFail();
+            $vehiculo_id = $vehiculo->id;
+        }
+        
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            
+            return redirect()->route('renta.create',[$request->request->get('vehiculo_id'),$request->request->get('cliente_id')])
+            ->with('message','No se encontro el criterio de busqueda')
+            ->with('status','warning');
+        }
+        
+        return redirect()->route('renta.create',[$vehiculo_id,$cliente_id])
+        ->with('message',$criterio.' encontrado!')
+        ->with('status','success');
+    }
 }

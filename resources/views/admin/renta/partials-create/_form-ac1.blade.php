@@ -1,15 +1,12 @@
-<form class="form-inline mb-4" action="">
+<form class="form-inline mb-4" method="POST" action="{{route('renta.buscarvc')}}">
     @csrf
     <div class="input-group-prepend float-right">
-        <select class="custom-select" id="inputGroupSelect04">
-            <option selected>Seleccionar ...</option>
-            <option value="dui">DUI</option>
-            <option value="licencia">Licencia</option>
-            <option value="passport">Pasaporte</option>
-        </select>
-        <input type="text" class="form-control mx-1" aria-label="Text input with segmented dropdown button">
+        <input type="text" name="criterio" class="form-control mx-1">
+        <input type="text" name="cliente_id" hidden class="form-control mx-1" value="{{$cliente->id ?? 0}}">
+        <input type="text" name="vehiculo_id" hidden class="form-control mx-1" value="{{$vehiculo->id ?? 0}}">
+        <input type="text" name="type" hidden class="form-control mx-1" value="cliente">
         <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button">Buscar Cliente</button>
+            <button type="submit" class="btn btn-outline-secondary" type="button">Buscar Cliente</button>
         </div>
         <div class="input-group-append">
             <a href="{{route('cliente.create')}}" onclick="window.open(this.href, 'mywin',
@@ -28,12 +25,20 @@
             </h5>
         </div>
 
-        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id="collapseOne" class="collapse @if($cliente->id) show @endif" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
+                @if ($cliente->id)
                 <ul>
-                    <li>Nombre: Juan Camanei</li>
-                    <li>Apellidos: Morales Mora</li>
+                    <li>Nombre: {{$cliente->nombre}}</li>
+                    <li>Apellidos: {{$cliente->apellido}}</li>
                 </ul>
+                {{-- @php
+                    print_r($cliente)
+                @endphp --}}
+                @else
+                    <p>Por favor busque un cliente</p>
+                @endif
+                
             </div>
         </div>
     </div>
