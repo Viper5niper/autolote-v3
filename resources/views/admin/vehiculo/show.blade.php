@@ -3,6 +3,14 @@
 @section('title', 'Vehiculo')
 
 @section('content_header')
+<pre>
+@php
+    if(!empty($vehiculo->rentas)){
+        print_r($vehiculo->rentas);   
+    }
+     
+@endphp
+</pre>
 <!--Contenido de cabecera-->
 <div class="d-flex p-2 bd-highlight">
     <div class="col-lg-12">
@@ -13,7 +21,7 @@
             <a class="btn btn-md btn-outline-success" href="{{route('factura',$vehiculo)}}">
                 Vender
             </a>
-            <a class="btn btn-md btn-outline-success" href="{{route('renta',$vehiculo->id)}}">
+            <a class="btn btn-md btn-outline-success" href="{{route('renta.create',$vehiculo->id)}}">
                 Rentar
             </a>
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">

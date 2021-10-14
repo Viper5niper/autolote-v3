@@ -123,11 +123,4 @@ class VehiculoController extends Controller
             ->with('status', 'success');
     }
 
-    public function venta($id){
-        return view('admin/vehiculo/venta_vehiculo',['vehiculo' => Vehiculo::findOrFail($id)]);
-    }
-
-    public function renta($id){
-        return view('admin/vehiculo/renta_vehiculo',['vehiculo' => Vehiculo::findOrFail($id)]);
-    }
 }

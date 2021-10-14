@@ -38,7 +38,7 @@
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">
                     <a href="{{route('vehiculo.show',$vehiculoItem->id)}}" class="btn btn-info">Ver</a>
-                    <a href="{{route('renta',$vehiculoItem->id)}}" class="btn btn-outline-success">Rentar</a>
+                    <a href="{{route('renta.create',$vehiculoItem->id)}}" class="btn btn-outline-success">Rentar</a>
                     <a href="{{route('venta',$vehiculoItem->id)}}" class="btn btn-outline-success">Vender</a>
                 </div>
                 

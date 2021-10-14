@@ -37,9 +37,9 @@ Route::get('cliente/delete/{id}', [ClienteController::class,'destroy'])
 Route::resource('vehiculo','VehiculoController')->name('index','vehiculo')->middleware(['auth:sanctum', 'verified']);
 
 /** Ruta de rentas */
-Route::get('/renta/{id}','RentaController@index')->name('renta')->middleware(['auth:sanctum', 'verified']);
-Route::get('/crear','RentaController@store')->name('renta.create')->middleware(['auth:sanctum', 'verified']);
-
+Route::resource('renta','RentaController')->name('index','renta')->except(['create'])->middleware(['auth:sanctum', 'verified']);
+Route::get('renta/crear/{vehiculo_id?}/{cliente_id?}','RentaController@create')
+->name('renta.create')->middleware(['auth:sanctum', 'verified']);
 
 Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(['auth:sanctum', 'verified']);
 

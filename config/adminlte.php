@@ -258,7 +258,7 @@ return [
         ],
         [
             'text'        => 'Rentas',
-            'url'         => 'admin/rentas',
+            'route'         => 'renta',
             'icon'        => 'fas fa-fw fa-car-side',
             'label'       => 'nuevo',
             'label_color' => 'success',
