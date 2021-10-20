@@ -48,4 +48,9 @@ Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(
 
 Route::get('/factura/{id}','FacturaController@index')->name('factura')->middleware(['auth:sanctum', 'verified']);
 
-/** */
+/** Rutas Usuario*/
+Route::resource('user','UserController')->name('index','user')->middleware(['auth:sanctum', 'verified']);
+
+/** Rutas Empleado */
+Route::post('empleado/buscar','EmpleadoController@buscaremp')->name('empleado.buscaremp')->middleware(['auth:sanctum', 'verified']);
+Route::resource('empleado','EmpleadoController')->name('index','empleado')->middleware(['auth:sanctum', 'verified']);
