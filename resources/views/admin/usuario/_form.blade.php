@@ -1,4 +1,5 @@
 @csrf
+
 <div class="form-row">
   @if(isset($empleado->id))
   <input type="text" name="empleado_id" hidden value="{{old('empleado_id',$empleado->id)}}">
@@ -22,9 +23,9 @@
     @enderror
   </div>
   <div class="form-group col-md-6 first">
-    <label for="empleado_nombres">Correo Electronico</label>
+    <label for="usuario_email">Correo Electronico</label>
     <input type="email" name="email" class="form-control @error('email') is-invalid 
-        @enderror" id="empleado_emails" placeholder="" value="{{old('email',$usuario->email)}}" required>
+        @enderror" id="usuario_email" placeholder="" value="{{old('email',$usuario->email)}}" required>
     @error('email')
     <div class="invalid-feedback">{{ $message }}</div>
     @enderror
@@ -56,10 +57,10 @@
     @endif
   </div>
 
-
   <div class="form-group col-md-6 first">
-    @if (!empty($usuario->role))
-    <select class="form-control" name="role">
+    @if(!empty($usuario->role))
+    <select class="form-control @error('role') is-invalid 
+    @enderror" name="role">
       @if ($usuario->role == 1)
       <option value="1" selected>Admin</option>
       <option value="2">Usuario</option>
@@ -68,12 +69,19 @@
       <option value="2" selected>Usuario</option>
       @endif
     </select>
+    @error('role')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
     @else
-    <select class="form-control" name='role'>
+    <select class="form-control @error('email') is-invalid 
+    @enderror" name='role'>
       <option disabled selected>Seleccione un Rol</option>
       <option value="1">Admin</option>
       <option value="2">Usuario</option>
     </select>
+    @error('role')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
     @endif
   </div>
 

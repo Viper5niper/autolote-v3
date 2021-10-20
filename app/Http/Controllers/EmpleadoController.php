@@ -89,26 +89,5 @@ class EmpleadoController extends Controller
         //
     }
 
-    public function buscaremp(Request $request)
-    {
-        $criterio = $request->request->get('criterio');
-
-        try{
-            $empleado = Empleado::where('doc',$criterio)
-                        ->orWhere('id',$criterio)
-                        ->firstOrFail();
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            
-            return redirect()->route('user.create')
-            ->with('message','No se encontro el criterio de busqueda')
-            ->with('status','warning');
-        }
-
-        return view('admin.usuario.create',['usuario'=>new User(),'empleado'=>$empleado])->with('message',$criterio.' encontrado!')
-        ->with('status','success');
-      
-        // return redirect()->route('user.create',array($empleado))
-        // ->with('message',$criterio.' encontrado!')
-        // ->with('status','success');
-    }
+    
 }

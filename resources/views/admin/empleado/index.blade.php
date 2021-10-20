@@ -28,18 +28,17 @@
             : 'img/car.png'}}" 
             class="card-img-top rounded mx-auto d-block" alt="imagen de auto" style="height: 14rem;">
             <div class="card-body">
-                <h5 class="card-title">{{$empleado->nombre." ".$empleado->apellido}}</h5>
+                <h5 class="card-title">{{$empleado->doc}}</h5>
                 <p class="card-text">
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li>{{$empleado->nombre}}</li>
+                        <li>{{$empleado->apellido}}</li>
+                        <li>{{$empleado->cargo}}</li>
                     </ul>
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">
-                    <a href="{{route('vehiculo.create')}}" class="btn btn-info">Ver</a>
-                    <a href="{{route('vehiculo.create')}}" class="btn btn-outline-success">Rentar</a>
-                    <a href="{{route('vehiculo.create')}}" class="btn btn-outline-success">Vender</a>
+                    <a href="{{route('empleado.create')}}" class="btn btn-info">Ver</a>
+                    <a href="{{route('empleado.create')}}" class="btn btn-outline-success">Modificar</a>
                 </div>
                 
             </div>

@@ -24,11 +24,11 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'role' => ['required', 'numeric','min:1','max:2'],
-            'empleado_id' => ['required', 'numeric'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'        => 'required|max:255',
+            'email'       => 'required|email|max:255|unique:users',
+            'role'        => 'required|numeric|min:1|max:2',
+            'empleado_id' => 'required|max:10',
+            'password'    => 'min:8',
         ];
     }
 }

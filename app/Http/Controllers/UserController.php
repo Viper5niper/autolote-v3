@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveEmpleadoRequest;
 use App\Http\Requests\SaveUserRequest;
+use App\Models\Empleado;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -11,41 +12,38 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index()
-    {   
+    {
 
         $usuarios = User::get();
-        $heads = [
-            'id',
-            'name',
-            'email',
-            'role',
-            'actions',
-        ];
-
-        $items = $usuarios->map->only($heads);
-
-        $config = [
-            'data' => $items,
-            'order' => [[1, 'asc']],
-            'columns' => [null, null, null, ['orderable' => false]],
-        ];
-
-        return view('admin.usuario.index', ["config" => $config, "heads" => $heads]);
+        
+        return view('admin.usuario.index', ["usuarios" => $usuarios]);
     }
 
-    public function create(){
-        return view('admin.usuario.create',['usuario'=>new User()]);
+    public function create()
+    {
+        return view('admin.usuario.create', ['usuario' => new User()]);
     }
 
-    public function store(SaveUserRequest $request){
+    public function store(SaveUserRequest $request)
+    {
 
         $fields = $request->validated();
-        //$fields = toUppercase($fields);
 
-        $fields['password'] = Hash::make($fields['password']);
+        try {
+            $empleado = Empleado::where('doc', $fields['empleado_id'])
+                ->orWhere('id', $fields['empleado_id'])
+                ->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 
-        //return $fields;
-        
+            return redirect()->route('user.create')
+                ->with('message', 'No se encontro el empleado con ese numero de DUI')
+                ->with('status', 'warning');
+        }
+
+        $fields['password'] = Hash::make($fields['empleado_id']);
+
+        $fields['empleado_id'] = $empleado->id;
+
         $user = User::create($fields);
 
         return redirect()->route('user')
