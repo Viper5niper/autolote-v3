@@ -10,7 +10,7 @@
         
         <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">       
             @include('partials._status')
-            <h2>Crear Empleado</h2>
+            <h2>Crear Usuario</h2>
             @if(!isset($empleado))
             <form class="form-inline mb-4" method="POST" action="{{route('empleado.buscaremp')}}">
                 @csrf
@@ -28,8 +28,8 @@
            
             @endif
            
-            <form method="POST" action="{{ route('cliente.store') }}" class="mt-3">
-                @include('admin.usuario._form',['usuario'=> $usuario ,'btnText'=>'Registrar Usuario','empleado'=>isset($empleado->id) ? dd($empleado) : ''])
+            <form method="POST" action="{{ route('user.store') }}" class="mt-3">
+                @include('admin.usuario._form',['usuario'=> $usuario ,'btnText'=>'Registrar Usuario','empleado'=>isset($empleado->id) ? $empleado : ''])
             </form>
         </div>
     </div>

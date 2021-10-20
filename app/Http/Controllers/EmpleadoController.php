@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SaveEmpleadoRequest;
 use App\Models\Empleado;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -102,9 +103,12 @@ class EmpleadoController extends Controller
             ->with('message','No se encontro el criterio de busqueda')
             ->with('status','warning');
         }
-      
-        return redirect()->route('user.create',array($empleado))
-        ->with('message',$criterio.' encontrado!')
+
+        return view('admin.usuario.create',['usuario'=>new User(),'empleado'=>$empleado])->with('message',$criterio.' encontrado!')
         ->with('status','success');
+      
+        // return redirect()->route('user.create',array($empleado))
+        // ->with('message',$criterio.' encontrado!')
+        // ->with('status','success');
     }
 }
