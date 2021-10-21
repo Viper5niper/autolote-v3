@@ -34,9 +34,10 @@ class EmpleadoController extends Controller
         $empleado = Empleado::create($fields);
 
         $files = $request->file('images');
-
-        foreach ($files as $file) {
-            upload_global($file, $empleado->path);
+        if($files){
+            foreach ($files as $file) {
+                upload_global($file, $empleado->path);
+            }
         }
 
         return redirect()->route('empleado')
@@ -52,7 +53,7 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        //
+        return view("admin.empleado.show",['empleado'=> Empleado::findOrFail($id)]);
     }
 
     /**
@@ -63,7 +64,7 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view("admin.empleado.edit",['empleado'=> Empleado::findOrFail($id)]);
     }
 
     /**
@@ -73,9 +74,26 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveEmpleadoRequest $request, $id)
     {
-        //
+        $fields = $request->validated();
+        $fields = toUppercase($fields);
+
+        $vehiculo = Empleado::find($id);
+
+        $vehiculo->update($fields);
+
+        $files = $request->file('images');
+
+        if($files) {
+            foreach ($files as $file) {
+                upload_global($file, $vehiculo->path);
+            }
+        }
+        
+        return redirect()->route('vehiculo')
+            ->with('message', 'Vehiculo editado.')
+            ->with('status', 'success');
     }
 
     /**

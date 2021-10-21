@@ -1,4 +1,4 @@
-<div class="modal" id="ExampleModal" tabindex="-1" role="dialog">
+<div class="modal" id="DeletedModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +11,7 @@
                 <p>{{$modal_message}}</p>
             </div>
             <div class="modal-footer">
-            <form method="POST" action="{{$ruta}}">
+            <form method="POST" action="{{$ruta}}" id="form-delete">
                 @method('DELETE')
                 @csrf
                 <button class="btn btn-md btn-secundary" data-dismiss="modal">

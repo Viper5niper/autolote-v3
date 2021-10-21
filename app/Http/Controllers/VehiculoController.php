@@ -49,9 +49,10 @@ class VehiculoController extends Controller
         $vehiculo = Vehiculo::create($fields);
 
         $files = $request->file('images');
-
-        foreach ($files as $file) {
-            upload_global($file, $vehiculo->path);
+        if ($files) {
+            foreach ($files as $file) {
+                upload_global($file, $vehiculo->path);
+            }
         }
 
         return redirect()->route('vehiculo')
@@ -122,5 +123,4 @@ class VehiculoController extends Controller
             ->with('message', 'Vehiculo eliminado.')
             ->with('status', 'success');
     }
-
 }

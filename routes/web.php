@@ -49,6 +49,7 @@ Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(
 Route::get('/factura/{id}','FacturaController@index')->name('factura')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Usuario*/
+Route::view('/perfil','admin.usuario.perfil')->name('perfil')->middleware(['auth:sanctum', 'verified']);
 Route::resource('user','UserController')->name('index','user')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Empleado */

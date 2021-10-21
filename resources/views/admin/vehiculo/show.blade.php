@@ -27,7 +27,7 @@
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
                 Editar
             </a>
-            <a class="btn btn-md btn-outline-danger" data-toggle="modal" data-target="#ExampleModal">
+            <a class="btn btn-md btn-outline-danger" data-toggle="modal" data-target="#DeletedModal">
                 Eliminar
             </a>
         </div>
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-@include('/partials/_modal-message',
+@include('/partials/_modal-deleted',
 ['modal_title'=> 'Eliminar Vehiculo '.$vehiculo->placa,
 'modal_message'=>'Esta seguro que desea eliminar el vehiculo?','btnTipo'=>'danger',
 'ruta'=>route('vehiculo.destroy',$vehiculo->id)])

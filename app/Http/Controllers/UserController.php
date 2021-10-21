@@ -50,4 +50,61 @@ class UserController extends Controller
             ->with('message', 'Usuario creado.')
             ->with('status', 'success');
     }
+
+    public function edit($id)
+    {
+        try {
+            $usuario = User::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('user')
+                ->with('message', 'Peticion no puede ser procesada usuario no existe [UE001]')
+                ->with('status', 'warning');
+        }
+        return view('admin.usuario.edit', ['usuario' => $usuario]);
+    }
+
+    public function update(SaveUserRequest $request,$id)
+    {
+        $fields = $request->validated();
+       
+        try {
+            $usuario = User::findOrFail($id);
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('user')
+                ->with('message', 'Peticion no puede ser procesada usuario no existe [UE004]')
+                ->with('status', 'warning');
+        }
+        $usuario->update($fields);
+
+        return redirect()->route('user')
+            ->with('message', 'Usuario editado.')
+            ->with('status', 'success');
+    }
+
+    public function destroy($id)
+    {
+
+        try {
+            User::findOrFail($id)->delete();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('user')
+                ->with('message', 'Peticion no puede ser procesada usuario no existe [UE003]')
+                ->with('status', 'warning');
+        }
+        
+        return redirect()->route('user')
+            ->with('message', 'Usuario eliminado.')
+            ->with('status', 'success');
+    }
+    // try {
+            
+    //     $empleado = Empleado::findOrFail($usuario->empleado_id);
+    
+    // } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+    //     $empleado = new Empleado();
+    // }
+
 }

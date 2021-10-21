@@ -343,7 +343,7 @@ return [
         ['header' => 'AJUSTES'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'route'=> 'perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [

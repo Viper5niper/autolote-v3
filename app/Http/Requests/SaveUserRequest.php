@@ -25,7 +25,7 @@ class SaveUserRequest extends FormRequest
     {
         return [
             'name'        => 'required|max:255',
-            'email'       => 'required|email|max:255|unique:users',
+            'email'       => 'required|email|max:255|unique:users,email,'.$this->user,
             'role'        => 'required|numeric|min:1|max:2',
             'empleado_id' => 'required|max:10',
             'password'    => 'min:8',
