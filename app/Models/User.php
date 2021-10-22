@@ -35,6 +35,8 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $appends = ['empleado'];
+
     /**
      * The attributes that should be cast.
      *
@@ -44,5 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ]; 
 
+    public function getEmpleadoAttribute(){
+        $empleado = Empleado::find($this->empleado_id);
+        return !empty($empleado->id) ? $empleado : new Empleado();
+    }
 
 }

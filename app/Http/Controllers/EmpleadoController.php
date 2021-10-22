@@ -79,20 +79,20 @@ class EmpleadoController extends Controller
         $fields = $request->validated();
         $fields = toUppercase($fields);
 
-        $vehiculo = Empleado::find($id);
+        $empleado = Empleado::find($id);
 
-        $vehiculo->update($fields);
+        $empleado->update($fields);
 
         $files = $request->file('images');
 
         if($files) {
             foreach ($files as $file) {
-                upload_global($file, $vehiculo->path);
+                upload_global($file, $empleado->path);
             }
         }
         
-        return redirect()->route('vehiculo')
-            ->with('message', 'Vehiculo editado.')
+        return redirect()->route('empleado')
+            ->with('message', 'Usuario editado.')
             ->with('status', 'success');
     }
 
@@ -104,7 +104,18 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Empleado::findOrFail($id)->delete();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('empleado')
+                ->with('message', 'Peticion no puede ser procesada empleado no existe [VE003]')
+                ->with('status', 'warning');
+        }
+
+        return redirect()->route('empleado')
+            ->with('message', 'Empleado eliminado.')
+            ->with('status', 'success');
     }
 
     

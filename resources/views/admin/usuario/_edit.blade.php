@@ -21,7 +21,7 @@
     <div class="form-group col-md-6 first">
         <label for="id_empleado">DUI del Empleado</label>
         <input type="text" class="form-control @error('empleado_id') is-invalid 
-        @enderror" value="{{old('empleado_id', $usuario->empleado_id)}}" id="id_empleado" name="empleado_id"
+        @enderror" value="{{old('empleado_id', $usuario->empleado->doc)}}" id="id_empleado" name="empleado_id"
             onkeyup="this.value = pass(this.value);" required>
         @error('empleado_id')
         <div class="invalid-feedback">{{ $message }}</div>

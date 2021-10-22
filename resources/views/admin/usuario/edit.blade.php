@@ -3,7 +3,7 @@
 @section('title', 'Editar Usuario')
 
 @section('content')
-
+@include('partials._status')
 <div class="container">
     
     <div class="row">

@@ -54,13 +54,16 @@ class UserController extends Controller
     public function edit($id)
     {
         try {
+            
             $usuario = User::findOrFail($id);
+            
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
 
             return redirect()->route('user')
                 ->with('message', 'Peticion no puede ser procesada usuario no existe [UE001]')
                 ->with('status', 'warning');
         }
+
         return view('admin.usuario.edit', ['usuario' => $usuario]);
     }
 
@@ -68,14 +71,19 @@ class UserController extends Controller
     {
         $fields = $request->validated();
        
-        try {
-            $usuario = User::findOrFail($id);
-        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+        $usuario = User::findOrFail($id);
 
+        try {
+            $empleado = Empleado::where('doc', $fields['empleado_id'])
+                    ->orWhere('id', $fields['empleado_id'])
+                    ->firstOrFail();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return redirect()->route('user')
-                ->with('message', 'Peticion no puede ser procesada usuario no existe [UE004]')
+                ->with('message', 'Peticion no puede ser procesada empleado no existe [UE004]')
                 ->with('status', 'warning');
         }
+
+        $fields['empleado_id'] = $empleado->id;
         $usuario->update($fields);
 
         return redirect()->route('user')
@@ -99,6 +107,7 @@ class UserController extends Controller
             ->with('message', 'Usuario eliminado.')
             ->with('status', 'success');
     }
+
     // try {
             
     //     $empleado = Empleado::findOrFail($usuario->empleado_id);

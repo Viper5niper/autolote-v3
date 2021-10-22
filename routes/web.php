@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home','dash.index')->name('home');
 
 Route::resource('cliente','ClienteController')->middleware(['auth:sanctum', 'verified']);
 Route::get('cliente/delete/{id}', [ClienteController::class,'destroy'])
@@ -49,8 +50,13 @@ Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(
 Route::get('/factura/{id}','FacturaController@index')->name('factura')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Usuario*/
-Route::view('/perfil','admin.usuario.perfil')->name('perfil')->middleware(['auth:sanctum', 'verified']);
 Route::resource('user','UserController')->name('index','user')->middleware(['auth:sanctum', 'verified']);
+
+/** Rutas Perfil de Usuario */
+Route::view('perfil/reset','auth.passwords.reset')->name('perfil.reset')->middleware(['auth:sanctum', 'verified']);
+Route::post('perfil/password','PerfilController@changePwd')->name('perfil.change')->middleware(['auth:sanctum', 'verified']);
+Route::resource('perfil','PerfilController')->name('index','perfil')->middleware(['auth:sanctum', 'verified']);
+
 
 /** Rutas Empleado */
 Route::post('empleado/buscar','EmpleadoController@buscaremp')->name('empleado.buscaremp')->middleware(['auth:sanctum', 'verified']);

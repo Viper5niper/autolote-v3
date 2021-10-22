@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\File as F;
@@ -42,8 +43,9 @@ class Empleado extends Model
             !is_dir($path) && F::makeDirectory($path, 0775, true);
         });
 
-        static::deleted(function ($empleadp) {
-            $path = public_path() . '/e/' . $empleadp->doc;
+        static::deleted(function ($empleado) {
+            User::where('empleado_id',$empleado->id)->delete();
+            $path = public_path() . '/e/' . $empleado->doc;
             is_dir($path) && delete_files($path);
         });
     }

@@ -118,7 +118,15 @@ class VehiculoController extends Controller
     public function destroy($id)
     {
 
-        Vehiculo::findOrFail($id)->delete();
+        try {
+            Vehiculo::findOrFail($id)->delete();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('vehiculo')
+                ->with('message', 'Peticion no puede ser procesada vehiculo no existe [VE003]')
+                ->with('status', 'warning');
+        }
+
         return redirect()->route('vehiculo')
             ->with('message', 'Vehiculo eliminado.')
             ->with('status', 'success');

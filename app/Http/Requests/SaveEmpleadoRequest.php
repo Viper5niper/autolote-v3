@@ -26,7 +26,7 @@ class SaveEmpleadoRequest extends FormRequest
         return [
             'nombre'    => 'required|max:75',
             'apellido'  => 'required|max:75',
-            'doc'       => 'required|max:20',
+            'doc'       => 'required|max:20|unique:empleados,doc,'.$this->empleado,
             'direccion' => 'required|max:200',
             'telefono'  => 'max:20',
             'celular'   => 'max:20',
