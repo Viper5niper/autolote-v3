@@ -1,121 +1,73 @@
 @csrf
-
 <div class="form-row">
-  @if(isset($empleado->id))
-  <input type="text" name="empleado_id" hidden value="{{old('empleado_id',$empleado->id)}}">
   <div class="form-group col-md-6 first">
-    <label for="nombres">Nombres Empleado</label>
-    <input type="text" name="nombre" class="form-control" value="{{old('nombre',$empleado->nombre)}}" id="nombres"
-      disabled>
-  </div>
-  <div class="form-group col-md-6 first">
-    <label for="apellidos">Apellidos Empleado</label>
-    <input type="text" name="apellido" class="form-control" value="{{old('apellido',$empleado->apellido)}}"
-      id="apellidos" disabled>
-  </div>
-  @endif
-  <div class="form-group col-md-6 first">
-    <label for="username">Nombre de Usuario</label>
-    <input type="text" name="name" class="form-control @error('name') is-invalid 
-        @enderror" id="username" placeholder="" value="{{old('name',$usuario->name)}}" required>
-    @error('name')
+    <label for="empleado_nombres">Nombres</label>
+    <input type="text" name="nombre" class="form-control @error('nombre') is-invalid 
+        @enderror" id="empleado_nombres" placeholder="" value="{{old('nombre',$empleado->nombre)}}"
+      onKeyUp="mayus(this);" required>
+    @error('nombre')
     <div class="invalid-feedback">{{ $message }}</div>
     @enderror
   </div>
   <div class="form-group col-md-6 first">
-    <label for="usuario_email">Correo Electronico</label>
-    <input type="email" name="email" class="form-control @error('email') is-invalid 
-        @enderror" id="usuario_email" placeholder="" value="{{old('email',$usuario->email)}}" required>
-    @error('email')
+    <label for="empleado_apellidos">Apellidos</label>
+    <input type="text" name="apellido" class="form-control @error('apellido') is-invalid 
+        @enderror" id="empleado_apellidos" placeholder="" value="{{old('apellido',$empleado->apellido)}}"
+      onKeyUp="mayus(this);" required>
+    @error('apellido')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+  <div class="form-group col-md-12 first">
+    <label for="empleado_direccion">Direccion</label>
+    <input type="text" name="direccion" class="form-control @error('direccion') is-invalid 
+        @enderror" id="empleado_direccion" placeholder="" value="{{old('direccion',$empleado->direccion)}}"
+      onKeyUp="mayus(this);" required>
+    @error('direccion')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+  <div class="form-group col-md-6 first">
+    <label for="empleado_telefono">Telefono</label>
+    <input type="text" name="telefono" class="form-control @error('telefono') is-invalid 
+        @enderror" id="empleado_telefono" placeholder="" value="{{old('telefono',$empleado->telefono)}}"
+      onKeyUp="mayus(this);" required>
+    @error('telefono')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+  <div class="form-group col-md-6 first">
+    <label for="empleado_celular">Celular</label>
+    <input type="text" name="celular" class="form-control @error('celular') is-invalid 
+        @enderror" id="empleado_celular" placeholder="" value="{{old('celular',$empleado->celular)}}"
+      onKeyUp="mayus(this);">
+    @error('celular')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+  </div>
+  <div class="form-group col-md-6 first">
+    <label for="empleado_profesion">Profesion u Oficio</label>
+    <input type="text" name="profesion" class="form-control @error('profesion') is-invalid 
+        @enderror" id="empleado_profesion" placeholder="" value="{{old('profesion',$empleado->profesion)}}"
+      onKeyUp="mayus(this);" required>
+    @error('profesion')
     <div class="invalid-feedback">{{ $message }}</div>
     @enderror
   </div>
 
-  {{-- Password field --}}
   <div class="form-group col-md-6 first">
-    <label for="user_password">Contrase&ntilde;a</label>
-    <input type="password" name="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-      placeholder="{{ __('adminlte::adminlte.password') }}">
-    @if($errors->has('password'))
-    <div class="invalid-feedback">
-      <strong>{{ $errors->first('password') }}</strong>
-    </div>
-    @endif
+    <label for="images">Subir Fotografia</label>
+    <input type="file" name="images[]" id="images" accept="image/png, image/pneg, image/jpeg,image/jpg" class="form-control">
   </div>
-
-  {{-- Confirm password field --}}
-  <div class="form-group col-md-6 first">
-    <label for="user_password_confirmation">Repita la Contrase&ntilde;a</label>
-    <input type="password" name="password_confirmation"
-      class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
-      placeholder="{{ __('adminlte::adminlte.retype_password') }}" onchange="onChangeInputPwd();">
-    <span id="spanpwd"></span>
-    @if($errors->has('password_confirmation'))
-    <div class="invalid-feedback">
-      <strong>{{ $errors->first('password_confirmation') }}</strong>
-    </div>
-    @endif
-  </div>
-
-  <div class="form-group col-md-6 first">
-    @if(!empty($usuario->role))
-    <select class="form-control @error('role') is-invalid 
-    @enderror" name="role">
-      @if ($usuario->role == 1)
-      <option value="1" selected>Admin</option>
-      <option value="2">Usuario</option>
-      @else
-      <option value="1">Admin</option>
-      <option value="2" selected>Usuario</option>
-      @endif
-    </select>
-    @error('role')
-    <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-    @else
-    <select class="form-control @error('email') is-invalid 
-    @enderror" name='role'>
-      <option disabled selected>Seleccione un Rol</option>
-      <option value="1">Admin</option>
-      <option value="2">Usuario</option>
-    </select>
-    @error('role')
-    <div class="invalid-feedback">{{ $message }}</div>
-    @enderror
-    @endif
-  </div>
-
 </div>
 <script type="">
-  function onChangeInputPwd(e) {
-        var password = document.getElementsByName("password");
-        var confirm = document.getElementsByName("password_confirmation");
-        var btnpwd = document.getElementById("btn-pwd");
-        
-        if (password[0].value != null && confirm[0].value != null) {
-            var span = document.getElementById('spanpwd');
-            if (confirm[0].value != password[0].value) {
-                span.innerHTML = "Las contraseñas no coinciden";
-                //btnpwd.disabled = true;
-            } else {
-                span.innerHTML = "";
-                //btnpwd.disabled = false;
-            }
-        }
-    }
-
-    // const onClickShowPwd = () => {
-    //     var x = document.getElementById("password");
-    //     var y = document.getElementById("pwd2");
-
-    //     if (x.type === "password") { x.type = "text"; }
-    //     else { x.type = "password"; }
-
-    //     if (y.type === "password") { y.type = "text"; }
-    //     else { y.type = "password"; }
-    // }
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+ 
 </script>
 
-<div class="form-button pt-4"> <button type="submit" class="btn btn-primary btn-block btn-lg"
-    id="btn-pwd"><span>{{$btnText}}</span></button> </div>
+<div class="form-button pt-4"> <button type="submit"
+    class="btn btn-primary btn-block btn-lg"><span>{{$btnText}}</span></button> </div>
+
 </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveEmpleadoRequest;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,35 @@ class PerfilController extends Controller
         }
 
         return view('admin.usuario.perfil',['usuario'=>$usuario, 'message' => $message, 'status'=> $status ]);
+    }
+
+    public function edit($id){
+        
+        $usuario = Auth::user();
+        
+        return view('admin.usuario.perfil_edit',['usuario'=>$usuario]);
+    }
+
+    public function update(SaveEmpleadoRequest $request, $id)
+    {
+        $fields = $request->validated();
+        $fields = toUppercase($fields);
+
+        $empleado = Empleado::find($id);
+
+        $empleado->update($fields);
+
+        $files = $request->file('images');
+
+        if($files) {
+            foreach ($files as $file) {
+                upload_global($file, $empleado->path);
+            }
+        }
+        
+        return redirect()->route('empleado')
+            ->with('message', 'Usuario editado.')
+            ->with('status', 'success');
     }
 
     public function changePwd(Request $request){

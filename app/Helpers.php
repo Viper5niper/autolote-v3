@@ -23,13 +23,13 @@ function delete_files($dir) {
     return rmdir($dir);
 }
 
-function upload_global($file, $folder){ 
+function upload_global($file, $folder,$name = null){ 
 
     $file_type = $file->getClientOriginalExtension(); 
     $folder = $folder; 
     $destinationPath = public_path().$folder; 
-    $destinationPathThumb = public_path().$folder.'thumb'; 
-    $filename = uniqid().'_'.time() . '.' . $file_type;
+    $destinationPathThumb = public_path().$folder.'thumb';
+    $name != null ? $filename = $name. '.' . $file_type : $filename = uniqid().'_'.time() . '.' . $file_type;
     $url = $folder.'/'.$filename; 
 
     if ($file->move($destinationPath.'/' , $filename)) { 

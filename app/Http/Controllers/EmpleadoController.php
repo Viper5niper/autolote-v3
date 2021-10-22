@@ -32,11 +32,11 @@ class EmpleadoController extends Controller
         $fields = toUppercase($fields);
     
         $empleado = Empleado::create($fields);
-
+        $name = $empleado->doc;
         $files = $request->file('images');
         if($files){
             foreach ($files as $file) {
-                upload_global($file, $empleado->path);
+                upload_global($file, $empleado->path,$name);
             }
         }
 
@@ -82,12 +82,13 @@ class EmpleadoController extends Controller
         $empleado = Empleado::find($id);
 
         $empleado->update($fields);
-
+        
+        $name = $empleado->doc;
         $files = $request->file('images');
 
         if($files) {
             foreach ($files as $file) {
-                upload_global($file, $empleado->path);
+                upload_global($file, $empleado->path,$name);
             }
         }
         

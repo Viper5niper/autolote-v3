@@ -3,7 +3,7 @@
 @section('title', 'Perfil')
 
 @section('content_header')
-@if (isset($message))
+@if (!empty($message))
 @include('partials._message-alert')
 @endif
 <!--Contenido de cabecera-->
@@ -14,9 +14,15 @@
                 <h1>Perfil de Usuario</h1>
             </div>
             <div class="btn-group float-right" role="group" aria-label="">
-                <a class="btn btn-md btn-outline-success" >
-                    Editar
-                </a>
+                @if (empty($usuario->empleado->id))
+                    <a class="btn btn-md btn-outline-success" >
+                        Editar
+                    </a>
+                @else
+                    <a class="btn btn-md btn-outline-success" href="{{route('perfil.edit',[$usuario->id])}}">
+                        Editar
+                    </a>    
+                @endif
                 <a class="btn btn-md btn-outline-success" href="{{route('perfil.reset')}}">
                     Cambiar Contrase&ntilde;a
                 </a>
@@ -102,7 +108,6 @@
                             {{$usuario->empleado->profesion}}
                         </div>
                     </div>
-                    <hr>
                     
                 </div>
             </div>
