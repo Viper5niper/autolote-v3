@@ -48,6 +48,7 @@ class User extends Authenticatable
 
     public function getEmpleadoAttribute(){
         $empleado = Empleado::find($this->empleado_id);
+        
         return !empty($empleado->id) ? $empleado : new Empleado();
     }
 

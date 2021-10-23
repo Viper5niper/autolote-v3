@@ -33,6 +33,9 @@
 
 @stop
 
+@php
+   
+@endphp
 @section('content')
 <div class="container">
     <div class="row gutters-sm">
@@ -40,8 +43,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img src="{{!isset($usuario->empleado->images) ? $usuario->empleado->path.$usuario->empleado->images[0]
-                            : 'img/profile.png'}}" alt="Admin" class="rounded-circle"
+                        <img src="{{!empty($usuario->empleado->images) ? $usuario->empleado->path.$usuario->empleado->images[0]
+                            : '/img/profile.png'}}" alt="Admin" class="rounded-circle"
                             width="150">
                         <div class="mt-3">
                             <h5>{{$usuario->name}}</h5>

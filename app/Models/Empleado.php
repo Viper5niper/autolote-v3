@@ -58,6 +58,6 @@ class Empleado extends Model
     public function getImagesAttribute()
     {
         $path = public_path() . '/e/' . $this->doc;
-        return is_dir($path) ? array_slice(scandir($path), 2) : [];
+        return $this->doc != null ? (is_dir($path) ? array_slice(scandir($path), 2) : [] ): [];
     }
 }

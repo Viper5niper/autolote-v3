@@ -22,7 +22,7 @@
         <label for="id_empleado">DUI del Empleado</label>
         <input type="text" class="form-control @error('empleado_id') is-invalid 
         @enderror" value="{{old('empleado_id', $usuario->empleado->doc)}}" id="id_empleado" name="empleado_id"
-            onkeyup="this.value = pass(this.value);" required>
+            onkeyup="this.value = doc(this.value);" required>
         @error('empleado_id')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -52,7 +52,7 @@
 </div>
 
 <script>
-    function pass(doc){
+    function doc(doc){
         
         if (doc.match(/^\d{8}$/) !== null) {
             return doc + '-';

@@ -6,9 +6,10 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">       
+        <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">
             <h2>Editar Vehiculo</h2>
-            <form class="form-horizontal" method="POST" action="{{ route('empleado.update',[$empleado->id])}}" enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="{{ route('empleado.update',[$empleado->id])}}"
+                enctype="multipart/form-data">
                 @method('PATCH')
                 @include('admin.empleado._form',['btnText'=>'Guardar Cambios','empleado'=>$empleado])
             </form>
@@ -18,9 +19,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script src="https://unpkg.com/imask"></script>
 @stop
