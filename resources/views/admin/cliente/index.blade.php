@@ -43,5 +43,7 @@
     $('.delete_client').click(function(e){
         if(!confirm('Va a eliminar un cliente, esta seguro?')) return false;
       });
-      </script>
+    </script>
+      <script src="https://unpkg.com/imask"></script>
+      <script src="/js/utilities.js"></script>
 @stop

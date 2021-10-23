@@ -346,11 +346,7 @@ return [
             'route'=> 'perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Cambiar Clave',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+        
     ],
 
     /*

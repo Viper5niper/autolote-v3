@@ -51,4 +51,8 @@
     {{$empleados->links()}}
 </div>
 @endsection
+@section('js')
+<script src="https://unpkg.com/imask"></script>
+<script src="/js/utilities.js"></script>
+@stop
 
