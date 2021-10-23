@@ -23,10 +23,10 @@
 @section('content') <!--Contenido de la pagina-->
 <div class="row d-flex justify-content-center mx-auto">
     @forelse($empleados as $empleado)
-        <div class="card mx-2" style="width: 18rem;">
-            <img src="{{!empty($empleado->images) ? $empleado->path.$empleado->images[0]
+        <div class="card mx-2" >
+            <img style="width: 18rem;height:18rem" src="{{!empty($empleado->images) ? $empleado->path.$empleado->images[0]
             : 'img/profile.png'}}" 
-            class="card-img-top rounded mx-auto d-block" alt="imagen de auto" style="height: 14rem;">
+            class="card-img-top rounded mx-auto d-block" alt="imagen de auto">
             <div class="card-body">
                 <h5 class="card-title">{{$empleado->doc}}</h5>
                 <p class="card-text">

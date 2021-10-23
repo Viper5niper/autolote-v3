@@ -34,9 +34,10 @@ class EmpleadoController extends Controller
         $empleado = Empleado::create($fields);
         $name = $empleado->doc;
         $files = $request->file('images');
-        if($files){
+        
+        if($files) {
             foreach ($files as $file) {
-                upload_global($file, $empleado->path,$name);
+                upload_global($file,$empleado->path,$name,288,288);
             }
         }
 
@@ -88,7 +89,7 @@ class EmpleadoController extends Controller
 
         if($files) {
             foreach ($files as $file) {
-                upload_global($file, $empleado->path,$name);
+                upload_global($file,$empleado->path,$name,288,288);
             }
         }
         
