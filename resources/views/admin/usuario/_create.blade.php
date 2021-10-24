@@ -21,7 +21,7 @@
     <div class="form-group col-md-6 first">
         <label for="id_empleado">DUI del Empleado</label>
         <input type="text" class="form-control @error('empleado_id') is-invalid 
-        @enderror" value="{{old('empleado_id')}}" id="id_empleado" name="empleado_id" onkeyup="this.value = pass(this.value);" required>
+        @enderror" value="{{old('empleado_id')}}" id="id_empleado" name="empleado_id" onkeyup="n_dui_mask(this);" required>
         @error('empleado_id')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -36,7 +36,7 @@
         @enderror
     </div>
 
-    <select class="form-control @error('email') is-invalid 
+    <select class="form-control @error('role') is-invalid 
         @enderror" name='role' required>
         <option disabled selected>Seleccione un Rol</option>
         <option value="1">Admin</option>
@@ -51,18 +51,3 @@
 <div class="form-button pt-4"> <button type="submit" class="btn btn-primary btn-block btn-lg"
         id="btn-pwd"><span>{{$btnText}}</span></button> </div>
 </div>
-
-<script>
-    function pass(doc){
-        //let doc = document.getElementById('id_empleado').value;
-        document.getElementById('password').value = doc;
-        
-        if (doc.match(/^\d{8}$/) !== null) {
-            return doc + '-';
-        } else if (doc.match(/^\d{8}\-\d{0}$/) !== null) {
-            return doc + '-';
-        }
-        
-        return cadena;
-    }
-</script>

@@ -61,3 +61,7 @@ Route::resource('perfil','PerfilController')->name('index','perfil')->middleware
 /** Rutas Empleado */
 Route::post('empleado/buscar','EmpleadoController@buscaremp')->name('empleado.buscaremp')->middleware(['auth:sanctum', 'verified']);
 Route::resource('empleado','EmpleadoController')->name('index','empleado')->middleware(['auth:sanctum', 'verified']);
+
+/** Calculadora */
+
+Route::view('calculadora','common.calculadora.index')->name('calculadora');

@@ -26,5 +26,6 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+<script src="https://unpkg.com/imask"></script>
+<script src="/js/utilities.js"></script>
 @stop

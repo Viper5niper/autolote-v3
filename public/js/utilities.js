@@ -33,4 +33,26 @@ function n_placa_mask(e) {
     var mask = IMask(e, maskOptions);
 }
 
+function money_mask(e){
+    
+    var numberMask = IMask(e, {
+        mask:'$num',
+        blocks:{
+            num:{
+                // other options are optional with defaults below
+        scale: 2,  // digits after point, 0 for integers
+        signed: false,  // disallow negative
+        thousandsSeparator: '',  // any single char
+        padFractionalZeros: false,  // if true, then pads zeros at end to the length of scale
+        normalizeZeros: true,  // appends or removes zeros at ends
+        radix: '.',  // fractional delimiter
+        mapToRadix: ['.'],  // symbols to process as radix
+        max: 1000000
+            }
+        }
+        
+      });
+    
+}
+
 /* Otras Funciones */

@@ -22,7 +22,7 @@
         <label for="id_empleado">DUI del Empleado</label>
         <input type="text" class="form-control @error('empleado_id') is-invalid 
         @enderror" value="{{old('empleado_id', $usuario->empleado->doc)}}" id="id_empleado" name="empleado_id"
-            onkeyup="this.value = doc(this.value);" required>
+            onkeyup="n_dui_mask(this);" required>
         @error('empleado_id')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -50,16 +50,3 @@
 <div class="form-button pt-4"> <button type="submit" class="btn btn-primary btn-block btn-lg"
         id="btn-pwd"><span>{{$btnText}}</span></button> </div>
 </div>
-
-<script>
-    function doc(doc){
-        
-        if (doc.match(/^\d{8}$/) !== null) {
-            return doc + '-';
-        } else if (doc.match(/^\d{8}\-\d{0}$/) !== null) {
-            return doc + '-';
-        }
-        
-        return cadena;
-    }
-</script>

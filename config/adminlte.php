@@ -225,7 +225,7 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
+        /* Navbar items:
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -240,7 +240,7 @@ return [
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
+        ],*/
         ['header' => 'TRANSACCIONES'],
         [
             'text'        => 'Inicio',
@@ -252,16 +252,24 @@ return [
             'text'        => 'Ventas',
             'url'         => 'admin/ventas',
             'icon'        => 'fas fa-fw fa-dollar-sign',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'        => 'Pago de Cuota',
+            'url'         => 'admin/ventas',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Rentas',
             'route'         => 'renta',
             'icon'        => 'fas fa-fw fa-car-side',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'        => 'Calculadora',
+            'route'         => 'calculadora',
+            'icon'        => 'fa fa-calculator',
             'can'  => ['is-admin'],
         ],
         [
@@ -294,16 +302,12 @@ return [
             'text'        => 'Centro de servicios',
             'url'         => 'admin/rentas',
             'icon'        => 'fas fa-fw fa-hand-holding',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-sector'],
         ],
         [
             'text'        => 'Reportes',
             'url'         => 'admin/rentas',
             'icon'        => 'fas fa-fw fa-dollar-sign',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-sector'],
         ],
         ['header' => 'ADMINISTRACION', 'can'  => ['is-admin'],],
@@ -311,16 +315,12 @@ return [
             'text'        => 'Vehiculos',
             'route'       => 'vehiculo',
             'icon'        => 'fas fa-fw fa-car',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Clientes',
             'route'       => 'cliente.index',
             'icon'        => 'fas fa-fw fa-user-friends',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'active' => ['pages', 'cliente', 'cliente*', 'regex:@^cliente/[0-9]+$@'],
             'can'  => ['is-admin'],
         ],
@@ -328,18 +328,34 @@ return [
             'text'        => 'Usuarios',
             'route'       => 'user',
             'icon'        => 'fas fa-fw fa-user',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Empleados',
             'route'       => 'empleado',
             'icon'        => 'fas fa-fw fa-user',
-            'label'       => '',
-            'label_color' => '',
             'can'  => ['is-admin'],
         ],
+        [
+            'text'    => 'Colsultas',
+            'icon'    => 'fa fa-bookmark',
+            'can'  => ['is-admin'],
+            'submenu' => [
+                [
+                    'text' => 'Facturas',
+                    'url'  => 'menu/child1',
+                    'icon'    => 'fa fa-archive',
+                    'shift'   => 'ml-3',
+                ],
+                [
+                    'text' => 'Reportes',
+                    'url'  => 'menu/child2',
+                    'icon'    => 'fa fa-file',
+                    'shift'   => 'ml-3',
+                ],
+            ],
+        ],
+        
         ['header' => 'AJUSTES'],
         [
             'text' => 'Perfil',

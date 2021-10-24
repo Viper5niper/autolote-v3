@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-6">
                             <img src="{{!empty($vehiculo->images) ? $vehiculo->path.$vehiculo->images[0]
-                                : 'img/car.png'}}" alt="imagen del vehiculo" width="100%" height="90%">
+                                : '/img/car.png'}}" alt="imagen del vehiculo" width="100%" height="90%">
                         </div>
                     </div>
                     {{-- @php
