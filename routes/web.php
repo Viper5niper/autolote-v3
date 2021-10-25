@@ -64,4 +64,5 @@ Route::resource('empleado','EmpleadoController')->name('index','empleado')->midd
 
 /** Calculadora */
 
-Route::view('calculadora','common.calculadora.index')->name('calculadora');
+Route::post('calculadora/generar',"CalculadoraController@generate")->name('calculadora.generate');
+Route::resource('calculadora','CalculadoraController')->name('index','calculadora');

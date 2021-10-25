@@ -11,7 +11,7 @@
         <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">       
             @include('partials._status')
             <h2>Generador de Presupuesto</h2>
-            <form method="POST" action="" class="mt-3">
+            <form method="POST" action="{{route('calculadora.generate')}}" class="mt-3">
                 @csrf
                
                 <h5>Datos del Cliente</h5>
@@ -20,7 +20,7 @@
                     <div class="form-group col-md-6 first">
                         <label for="name">Nombres</label>
                         <input type="text" class="form-control @error('nombre') is-invalid 
-                        @enderror" value="{{old('nombre')}}" id="name" name="nombre" required>
+                        @enderror" value="{{old('nombre')}}" id="name" name="nombre" onkeyup="toUpperCaseField(this)" required>
                         @error('nombre')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -28,7 +28,7 @@
                     <div class="form-group col-md-6 first">
                         <label for="lastname">Apellidos</label>
                         <input type="text" class="form-control @error('apellido') is-invalid 
-                        @enderror" value="{{old('apellido')}}" id="lastname" name="apellido" required>
+                        @enderror" value="{{old('apellido')}}" id="lastname" name="apellido" onkeyup="toUpperCaseField(this)" required>
                         @error('apellido')
                         <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -98,7 +98,7 @@
                 <div class="form-group col-md-6 first">
                     <label for="dpago">Dia de Pago</label>
                     <input type="number" class="form-control @error('dpago') is-invalid 
-                    @enderror" value="{{old('dpago')}}" id="dpago" name="dpago" required>
+                    @enderror" value="{{old('dpago')}}" id="dpago" name="dpago" maxlength="2" required>
                     @error('dpago')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -120,34 +120,34 @@
                 <div class="form-row">
                 
                 <div class="form-group col-md-6 first">
-                    <label for="cuotas">Placa</label>
-                    <input type="text" class="form-control @error('cuotas') is-invalid 
-                    @enderror" value="{{old('cuotas')}}" id="cuotas" name="cuotas" required>
-                    @error('cuotas')
+                    <label for="placa">Placa</label>
+                    <input type="text" class="form-control @error('placa') is-invalid 
+                    @enderror" value="{{old('placa')}}" id="placa" name="placa" onkeydown="n_placa_mask(this)" required>
+                    @error('placa')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>  
                 <div class="form-group col-md-6 first">
-                    <label for="dpago">Marca</label>
-                    <input type="number" class="form-control @error('dpago') is-invalid 
-                    @enderror" value="{{old('dpago')}}" id="dpago" name="dpago" required>
-                    @error('dpago')
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control @error('marca') is-invalid 
+                    @enderror" value="{{old('marca')}}" id="marca" name="marca" onkeyup="toUpperCaseField(this)" required>
+                    @error('marca')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>  
                 <div class="form-group col-md-6 first">
-                    <label for="dpago">Modelo</label>
-                    <input type="number" class="form-control @error('dpago') is-invalid 
-                    @enderror" value="{{old('dpago')}}" id="dpago" name="dpago" required>
-                    @error('dpago')
+                    <label for="modelo">Modelo</label>
+                    <input type="text" class="form-control @error('modelo') is-invalid 
+                    @enderror" value="{{old('modelo')}}" id="modelo" name="modelo" onkeyup="toUpperCaseField(this)" required>
+                    @error('modelo')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div> 
                 <div class="form-group col-md-6 first">
-                    <label for="dpago">A&ntilde;o</label>
-                    <input type="number" class="form-control @error('dpago') is-invalid 
-                    @enderror" value="{{old('dpago')}}" id="dpago" name="dpago" required>
-                    @error('dpago')
+                    <label for="anio">A&ntilde;o</label>
+                    <input type="number" class="form-control @error('anio') is-invalid 
+                    @enderror" value="{{old('anio')}}" id="anio" name="anio" maxlength="4" required>
+                    @error('anio')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div> 
