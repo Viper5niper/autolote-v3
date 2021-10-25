@@ -28,57 +28,7 @@
                 {{$info->interes * 100}}%&nbsp;&nbsp; Fecha de Pago: {{$info->dpago}} de cada mes.
             </p>
             <div class="col-lg-10 d-flex mt-2">
-                <table class="table table-bordered">
-                    <thead>
-                      <tr>
-                        <th scope="col">N&deg;</th>
-                        <th scope="col">Cuota</th>
-                        <th scope="col">Interes</th>
-                        <th scope="col">Monto a Pagar</th>
-                        <th scope="col">Nuevo Saldo</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @php
-                        $interes = 0;
-                        $cuotas = 0;
-                        $monto = 0;
-                        $cuota = floor(($info->monto/$info->cuotas)/1);
-                        $nmonto = $info->monto; 
-                    @endphp
-    
-                    @for ($i = 0; $i < $info->cuotas; $i++)
-                    
-                    @php
-                        $interess = $nmonto * $info->interes;
-                        $cuota = floor($cuota);
-                    @endphp
-                
-                    @if ($i != $info->cuotas)
-                    @php
-                        $interess = round($interess);
-                        $nmonto = $nmonto-$cuota;
-                        $montoapagar = $cuota + $interess;
-                        $monto += $montoapagar;
-                        $montoapagar = ceil($montoapagar);
-                        $nmonto = floor($nmonto);
-                        $interes += $interess;
-                
-                        $cuotas += $cuota;
-                    @endphp
-                    
-                    <tr>
-                        <th scope="row">{{$i+1}}</th>
-                        <td>${{$cuota}}</td>
-                        <td>${{$interess}}</td>
-                        <td>${{$montoapagar}}</td>
-                        <td>${{$nmonto}}</td>
-                    </tr> 
-                   
-                    @endif
-                    @endfor
-                    </tbody>
-                  </table>
+                @include('common.calculadora._tabla')
             </div>
         </div>
         <div id="volver">
@@ -98,8 +48,6 @@
 <script type="text/javascript">
     function imprimir() {
         if (window.print) {
-           
-       
             window.print();
         } else {
             alert("La función de impresion no esta soportada por su navegador.");
