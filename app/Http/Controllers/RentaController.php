@@ -18,7 +18,7 @@ class RentaController extends Controller
     public function index()
     {
         $renta = Renta::paginate(16);
-        return view('/admin/renta/index', compact('renta'));
+        return view('/common/renta/index', compact('renta'));
     }
 
     /**
@@ -31,7 +31,7 @@ class RentaController extends Controller
         $cliente = $cliente_id == 0 ? new Cliente : Cliente::findOrFail($cliente_id);
         $vehiculo = $vehiculo_id == 0 ? new Vehiculo : Vehiculo::findOrFail($vehiculo_id);
         
-        return view('/admin/renta/create',['vehiculo'=>$vehiculo,'cliente'=>$cliente]);
+        return view('/common/renta/create',['vehiculo'=>$vehiculo,'cliente'=>$cliente]);
     }
 
     public function create_renta(){
