@@ -18,7 +18,7 @@
                 @include('common.renta.partials-create._form-ac2')
             </div>
             <div id="form">
-                <form action="">
+                <form action="{{route('renta.store')}}" method="POST">
                     @include('common.renta.partials-create._form',['btnText'=>'Registrar Renta'])
                 </form>
             </div>
@@ -44,7 +44,7 @@
     FechaF = new Date().toISOString().split('T')[0];
 
     $('#renta_final').val(FechaF);
-    console.log('aaaa');
-   })
+        console.log('aaaa');
+    })
 </script>
 @stop

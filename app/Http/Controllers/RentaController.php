@@ -5,27 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Renta;
 use App\Models\Vehiculo;
+use App\Models\Factura;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 
 class RentaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $renta = Renta::paginate(16);
         return view('/common/renta/index', compact('renta'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($vehiculo_id = 0,$cliente_id = 0)
     {
         $cliente = $cliente_id == 0 ? new Cliente : Cliente::findOrFail($cliente_id);
@@ -38,57 +29,64 @@ class RentaController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $cliente = Cliente::findOrFail($request->cliente_id);
+        $vehiculo = Vehiculo::findOrFail($request->vehiculo_id);
+
+        $payload = [
+            "Cliente"=>$cliente,
+            "Vehiculo"=>$vehiculo,
+            "n_factura"=>$request->n_factura,
+            "tipo"=>$request->tipo,
+            "area_factura"=>"R",
+            "descripcion"=>"Renta de Vehiculo",
+            "monto" => $request->monto,
+        ]; 
+
+        $factura = Factura::create([
+            'n_factura'=>$request->n_factura,
+            'cliente_id' => (Int) $cliente->cliente_id,
+            'credito_id' => null,
+            'vehiculo_id' => (Int) $vehiculo->vehiculo_id,
+            'tipo'=>$request->tipo,
+            'area_factura'=>"R",
+            'descripcion'=>"Renta de Vehiculo",
+            'payload'=> $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+        ]);
+      
+        $request->merge(['factura_id' =>  $factura->id]);
+        $request->merge(['json_array' =>  $payload]);
+
+        $renta = $request->validate([
+            'vehiculo_id' => 'required',
+            'dias' => 'required',
+            'monto' => 'required',
+            'cliente_id' => 'required',
+            'factura_id' => 'required',
+            'json_array' => 'required',
+        ]);
+
+        $result = Renta::create($renta);
+
+         return $result;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

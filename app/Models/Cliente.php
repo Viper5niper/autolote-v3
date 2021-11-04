@@ -37,4 +37,8 @@ class Cliente extends Model
 
         return '<nobr>'.$btnDetails.$btnEdit.$btnDelete.'</nobr>';
     }
+
+    public function facturas(){
+        return $this->hasMany(Facturas::class);
+    }
 }

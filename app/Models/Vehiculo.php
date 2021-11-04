@@ -33,7 +33,7 @@ class Vehiculo extends Model
         'v_pol_s'
     ];
 
-    protected $appends = ['images', 'path','rentas'];
+    protected $appends = ['images', 'path'];
 
     protected static function booted()
     {
@@ -68,6 +68,10 @@ class Vehiculo extends Model
     {
         $path = public_path() . '/v/' . $this->placa . '-' . $this->id;
         return is_dir($path) ? array_slice(scandir($path), 2) : [];
+    }
+
+    public function facturas(){
+        return $this->hasMany(Facturas::class);
     }
 
 

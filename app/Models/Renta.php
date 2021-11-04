@@ -17,4 +17,7 @@ class Renta extends Model
         'factura_id',
         'json_array'
     ];
+
+    protected $casts = ['json_array'=>'array'];
+    
 }
