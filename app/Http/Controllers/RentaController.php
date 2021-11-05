@@ -42,6 +42,10 @@ class RentaController extends Controller
             "area_factura"=>"R",
             "descripcion"=>"Renta de Vehiculo",
             "monto" => $request->monto,
+            "dias" => $request->dias,
+            "inicio" => $request->inicio,
+            "final" => $request->final,
+            "ncr" => $request->ncr,
         ]; 
 
         $factura = Factura::create([
@@ -69,7 +73,8 @@ class RentaController extends Controller
 
         $result = Renta::create($renta);
 
-         return $result;
+        return redirect()->route('factura.show',$factura->id);
+
     }
 
     public function show($id)

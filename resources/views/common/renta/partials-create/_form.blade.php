@@ -6,7 +6,7 @@
     <div class="form-group col-md-4 first">
         <label for="renta_inicio">Inicio</label>
         <input type="date" name="inicio" class="form-control @error('inicio') is-invalid 
-        @enderror" id="renta_inicio" value="{{old('inicio')}}"
+        @enderror" id="renta_inicio" value="{{old('inicio')}}" onchange="fecha_final('renta_inicio','renta_ndr','renta_final')"
             required>
         @error('inicio')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -15,8 +15,8 @@
     <div class="form-group col-md-4 first">
         <label for="renta_final">Final</label>
         <input type="date" name="final" class="form-control @error('final') is-invalid 
-      @enderror" id="renta_final" value="{{old('final')}}" onchange="fechafinal()"
-            disabled>
+      @enderror" id="renta_final" value="{{old('final')}}"  
+      readonly>
         @error('final')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -24,7 +24,7 @@
     <div class="form-group col-md-4 first">
         <label for="renta_ndr">N Dias de Renta</label>
         <input type="number" min="1" max="366" name="dias" class="form-control @error('dias') is-invalid 
-        @enderror" id="renta_ndr" value="{{old('dias')}}"
+        @enderror" id="renta_ndr" onKeyUp="fecha_final('renta_inicio','renta_ndr','renta_final')" value="{{old('dias')}}"
             required>
         @error('dias')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -41,7 +41,7 @@
     </div>
     <div class="form-group col-md-4 first"> 
         <label for="factura_tipo">Tipo de Factura</label>
-        <select name="tipo" id="factura_tipo"  class="form-control">
+        <select name="tipo" id="factura_tipo"  class="form-control" onchange="allow_ncr('renta_ncr','factura_tipo','renta_ncr_label')">
             <option value="consumidor">Consumidor Final</option>
             <option value="credito">Credito Fiscal</option>
         </select>
@@ -52,6 +52,14 @@
         @enderror" id="renta_factura_id" palceholder="$" value="{{old('n_factura')}}"
             required>
         @error('n_factura')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group col-md-4 first">
+        <label for="renta_ncr" id="renta_ncr_label" hidden>N# Registro</label>
+        <input type="number" accept="any" name="ncr" class="form-control @error('ncr') is-invalid 
+        @enderror" id="renta_ncr" value="{{old('ncr')}}" hidden>
+        @error('ncr')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>

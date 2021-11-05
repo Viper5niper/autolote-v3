@@ -47,8 +47,9 @@ Route::get('renta/crear/{vehiculo_id?}/{cliente_id?}','RentaController@create')
 
 Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(['auth:sanctum', 'verified']);
 
-Route::get('/factura/{id}','FacturaController@index')->name('factura')->middleware(['auth:sanctum', 'verified']);
-
+/** Rutas Factura */
+Route::resource('factura','FacturaController')->name('index','factura')->middleware(['auth:sanctum', 'verified']);
+Route::get('/servicio/renta/{id}','FacturaController@show_renta_invoice')->name('factura_renta')->middleware(['auth:sanctum', 'verified']);
 /** Rutas Usuario*/
 Route::resource('user','UserController')->name('index','user')->middleware(['auth:sanctum', 'verified']);
 

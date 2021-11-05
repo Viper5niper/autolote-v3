@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Factura;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,7 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -47,7 +48,24 @@ class FacturaController extends Controller
      */
     public function show($id)
     {
-        //
+        $factura = Factura::findOrFail($id);
+        return view('/common/factura/show', compact('factura'));
+    }
+
+    public function show_renta_invoice($id)
+    {
+        $factura = Factura::findOrFail($id);
+        $fecha = preg_split("/[\s-]/", $factura->created_at);
+        $factura['anio'] = $fecha[0];
+        $factura['mes']  = $fecha[1];
+        $factura['dia']  = $fecha[2];
+       
+        if($factura->tipo == 'consumidor') {
+            return view('/common/factura/impresion/FacturaRenta', compact('factura'));
+        }else{
+            return view('/common/factura/impresion/FacturaCreditoRenta', compact('factura'));
+        }
+        
     }
 
     /**

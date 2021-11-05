@@ -56,3 +56,64 @@ function money_mask(e){
 }
 
 /* Otras Funciones */
+
+function fecha_final(from,time,to)
+{   
+    var str = document.getElementById(from).value;
+    var str_aux = str.split("-");
+    var anio = str_aux[0];
+    var mes = str_aux[1];
+    var dia = str_aux[2];
+    fecha = new Date(mes+" "+dia+" "+anio);
+    
+    var tiempo;
+    tiempo = document.getElementById(time).value;
+    
+    var tm = tiempo;
+    console.log(tm);
+    if(parseInt(tm)==10){
+        tiempo = "9";
+        console.log("wi");
+    }
+    if(parseInt(tm)==100){
+        tiempo="99";
+    }
+    
+    fecha.setDate(fecha.getDate()+parseInt(tiempo));
+    //entrega.setDate(entrega.getDate());
+    if(parseInt(tm)==10 || parseInt(tm)==100){
+         dia = fecha.getDate();
+    }else{
+        dia = fecha.getDate()-1;
+    }
+   
+    mes=(fecha.getMonth()+1);
+    anio = fecha.getFullYear();
+    if(dia < 10){
+        dia = "0"+dia;
+    }
+    
+    
+    if(mes <10 ){
+        mes = "0"+mes;
+    }
+
+    var fin = anio + "-" + mes + "-" + dia;
+	document.getElementById(to).value = fin;
+	//document.getElementById("fin").value = fin;
+    
+}
+
+function allow_ncr(id_input,id_select,id_label){
+    var select = document.getElementById(id_select).value;
+    var input = document.getElementById(id_input);
+    var label = document.getElementById(id_label);
+    
+    if(select === 'credito'){
+        input.removeAttribute("hidden");
+        label.removeAttribute("hidden");
+    }else{
+        label.setAttribute("hidden",true);
+        input.setAttribute("hidden",true);
+    }
+}

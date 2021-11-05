@@ -32,19 +32,5 @@
 @stop
 
 @section('js')
-<script>
-   function fechafinal(){
-    
-    var Dias = Number.parseInt($('#renta_monto').val());
-    var FechaI = new Date($('#renta_inicio').val());
-    var FechaF = new Date();
-
-    // Add 1 Day
-    FechaF.setDate(FechaI.getDate() + Dias);
-    FechaF = new Date().toISOString().split('T')[0];
-
-    $('#renta_final').val(FechaF);
-        console.log('aaaa');
-    })
-</script>
+    <script src="/js/utilities.js"></script>
 @stop
