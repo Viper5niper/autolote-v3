@@ -60,10 +60,24 @@ class FacturaController extends Controller
         $factura['mes']  = $fecha[1];
         $factura['dia']  = $fecha[2];
        
-        if($factura->tipo == 'consumidor') {
-            return view('/common/factura/impresion/FacturaRenta', compact('factura'));
-        }else{
-            return view('/common/factura/impresion/FacturaCreditoRenta', compact('factura'));
+        if($factura->area_factura === 'R'){
+            if($factura->tipo == 'consumidor') {
+                return view('/common/factura/impresion/FacturaRenta', compact('factura'));
+            }else{
+                return view('/common/factura/impresion/FacturaCreditoRenta', compact('factura'));
+            }
+        }else if($factura->area_factura === 'V'){
+            if($factura->tipo == 'consumidor') {
+                return view('/common/factura/impresion/FacturaVehiculo', compact('factura'));
+            }else{
+                return view('/common/factura/impresion/FacturaCreditoVehiculo', compact('factura'));
+            }
+        }else if($factura->area_factura === 'LC'){
+            if($factura->tipo == 'consumidor') {
+                return view('/common/factura/impresion/FacturaCouta', compact('factura'));
+            }else{
+                return view('/common/factura/impresion/FacturaCreditoCouta', compact('factura'));
+            }
         }
         
     }

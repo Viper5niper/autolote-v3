@@ -31,7 +31,7 @@ class RentaController extends Controller
 
     public function store(Request $request)
     {
-        $cliente = Cliente::findOrFail($request->cliente_id);
+        $cliente = Cliente::findOrFail($request->cliente_id)->setAppends([]);
         $vehiculo = Vehiculo::findOrFail($request->vehiculo_id);
 
         $payload = [
@@ -61,6 +61,8 @@ class RentaController extends Controller
       
         $request->merge(['factura_id' =>  $factura->id]);
         $request->merge(['json_array' =>  $payload]);
+
+        $vehiculo->where('id',$request->vehiculo_id)->update(['estado'=>'R']);
 
         $renta = $request->validate([
             'vehiculo_id' => 'required',

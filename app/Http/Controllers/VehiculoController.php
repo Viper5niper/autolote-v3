@@ -19,7 +19,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        $vehiculos = Vehiculo::paginate(16);
+        $vehiculos = Vehiculo::where('estado','D')->paginate(16);
         return view("/admin/vehiculo/index", compact('vehiculos'));
     }
 

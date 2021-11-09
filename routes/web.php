@@ -45,11 +45,18 @@ Route::resource('renta','RentaController')->name('index','renta')->except(['crea
 Route::get('renta/crear/{vehiculo_id?}/{cliente_id?}','RentaController@create')
 ->name('renta.create')->middleware(['auth:sanctum', 'verified']);
 
-Route::get('/venta/{id}','VehiculoController@venta')->name('venta')->middleware(['auth:sanctum', 'verified']);
+/** Ruta de Ventas */
+Route::post('venta/buscarVC','VentaController@buscarVC')
+->name('venta.buscarvc')->middleware(['auth:sanctum', 'verified']);
+
+Route::resource('venta', 'VentaController')->name('index','venta')->middleware(['auth:sanctum', 'verified']);
+Route::get('/venta/crear/{vehiculo_id?}/{cliente_id?}','VentaController@create_venta_vehiculo')->name('venta.vehiculo')->middleware(['auth:sanctum', 'verified']);
+Route::post('/venta/vehiculo','VentaController@store_venta_vehiculo')->name('store.venta.vehiculo')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Factura */
 Route::resource('factura','FacturaController')->name('index','factura')->middleware(['auth:sanctum', 'verified']);
 Route::get('/servicio/renta/{id}','FacturaController@show_renta_invoice')->name('factura_renta')->middleware(['auth:sanctum', 'verified']);
+
 /** Rutas Usuario*/
 Route::resource('user','UserController')->name('index','user')->middleware(['auth:sanctum', 'verified']);
 
@@ -57,7 +64,6 @@ Route::resource('user','UserController')->name('index','user')->middleware(['aut
 Route::view('perfil/reset','auth.passwords.reset')->name('perfil.reset')->middleware(['auth:sanctum', 'verified']);
 Route::post('perfil/password','PerfilController@changePwd')->name('perfil.change')->middleware(['auth:sanctum', 'verified']);
 Route::resource('perfil','PerfilController')->name('index','perfil')->middleware(['auth:sanctum', 'verified']);
-
 
 /** Rutas Empleado */
 Route::post('empleado/buscar','EmpleadoController@buscaremp')->name('empleado.buscaremp')->middleware(['auth:sanctum', 'verified']);

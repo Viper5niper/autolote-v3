@@ -20,6 +20,7 @@ class CreateRentasTable extends Migration
             $table->integer('factura_id');
             $table->integer('dias');
             $table->integer('monto');
+            $table->integer('estado')->default('1'); //Estado del vehiculo en renta, 1 para renta activa y 0 para finalizada
             $table->longText('json_array');
             $table->timestamps();
         });

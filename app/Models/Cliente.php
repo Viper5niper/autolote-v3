@@ -39,6 +39,10 @@ class Cliente extends Model
     }
 
     public function facturas(){
-        return $this->hasMany(Facturas::class);
+        return $this->hasMany(Factura::class);
+    }
+
+    public function creditos(){
+        return $this->hasMany(Credito::class);
     }
 }

@@ -117,3 +117,18 @@ function allow_ncr(id_input,id_select,id_label){
         input.setAttribute("hidden",true);
     }
 }
+
+function show_hidden_input(input, condision, campo){
+
+    input.forEach(element => {
+        let input = document.getElementById(element);
+        let cam = document.getElementById(campo);
+
+        if(cam.value === condision){
+            input.removeAttribute("hidden");
+            
+        }else{
+            input.setAttribute("hidden",true);
+        }
+    });
+}
