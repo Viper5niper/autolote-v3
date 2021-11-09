@@ -8,16 +8,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-11  card d-flex justify-content-center mx-auto my-3 p-5">
+        <div class="col-lg-11 card mx-auto my-3 p-5">
             <h2>Renta Vehiculo</h2>
             <hr>
-            <div id="ac1">
+            <div class="col" id="ac1">
                 @include('common.renta.partials-create._form-ac1')
             </div>
-            <div id="ac2">
+            <div class="col" id="ac2">
                 @include('common.renta.partials-create._form-ac2')
             </div>
-            <div id="form">
+            <div class="col" id="form">
                 <form action="{{route('renta.store')}}" method="POST">
                     @include('common.renta.partials-create._form',['btnText'=>'Registrar Renta'])
                 </form>

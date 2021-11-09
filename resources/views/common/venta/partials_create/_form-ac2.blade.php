@@ -1,6 +1,6 @@
-<form class="form-inline mb-4 mt-4" method="POST" action="{{route('venta.buscarvc')}}">
+<form class="form-row mb-4 mt-4" method="POST" action="{{route('venta.buscarvc')}}">
     @csrf
-    <div class="input-group-prepend float-right">
+    <div class="input-group float-right">
         <input type="text" name="criterio" class="form-control mx-1">
         <input type="text" name="cliente_id" hidden class="form-control mx-1" value="{{$cliente->id ?? 0}}">
         <input type="text" name="vehiculo_id" hidden class="form-control mx-1" value="{{$vehiculo->id ?? 0}}">
@@ -11,10 +11,10 @@
     </div>
 </form>
 <div id="accordion-2">
-    <div class="card ">
-        <div class="card-header" id="headingTwo">
-            <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo"
+    <div class="">
+        <div class="" id="headingTwo">
+            <h5 class="mb-4">
+                <button class="btn btn-outline-primary col-md-12" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     Mostrar Vehiculo
                 </button>
