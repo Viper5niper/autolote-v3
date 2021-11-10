@@ -256,7 +256,7 @@ return [
         ],
         [
             'text'        => 'Pago de Cuota',
-            'url'         => 'admin/ventas',
+            'route'         => 'credito.pay',
             'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-admin'],
         ],
@@ -334,6 +334,12 @@ return [
             'text'        => 'Empleados',
             'route'       => 'empleado',
             'icon'        => 'fas fa-fw fa-user',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'        => 'Creditos',
+            'route'         => 'creditos',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-admin'],
         ],
         [

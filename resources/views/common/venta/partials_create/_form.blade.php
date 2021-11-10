@@ -4,8 +4,8 @@
     <input type="text" name="vehiculo_id" hidden class="form-control mx-1" value="{{$vehiculo->id ?? null}}">
     <div class="form-group col-md-4 first"> 
         <label for="venta_tipo">Tipo de venta</label>
-        <select name="tipo_venta" id="venta_tipo"  class="form-control" onchange="show_hidden_input(['prima_label','prima',
-        'interes_label','interes','n_couta_label','n_couta'],'credito','venta_tipo')">
+        <select name="tipo_venta" id="venta_tipo"  class="form-control" onchange="show_hidden_input(['prima_div','prima_label','prima',
+        'interes_div','interes_label','interes','n_couta_div','n_couta_label','n_couta'],'credito','venta_tipo')">
             <option value="contado">Contado</option>
             <option value="credito">Credito</option>
         </select>
@@ -45,7 +45,7 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
-    <div class="form-group col-md-4 first"> 
+    <div class="form-group col-md-4 first" id="interes_div" hidden> 
         <label for="interes" id="interes_label" hidden>Interes</label>
         <select class="form-control @error('interes') is-invalid 
             @enderror" name='interes' id="interes" hidden>
@@ -61,7 +61,7 @@
             <option value="0.055">5.5%</option>
         </select>
     </div>
-    <div class="form-group col-md-4 first">
+    <div class="form-group col-md-4 first" id="prima_div" hidden>
         <label for="prima" id="prima_label" hidden>Prima</label>
         <input type="number" accept="any" name="prima" class="form-control @error('prima') is-invalid 
         @enderror" id="prima" palceholder="$" value="{{old('prima')}}"
@@ -70,7 +70,7 @@
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
-    <div class="form-group col-md-4 first">
+    <div class="form-group col-md-4 first" id="n_couta_div" hidden>
         <label for="n_couta" id="n_couta_label" hidden>N Coutas</label>
         <input type="number" accept="any" name="n_coutas" class="form-control @error('n_coutas') is-invalid 
         @enderror" id="n_couta" palceholder="$" value="{{old('n_coutas')}}"

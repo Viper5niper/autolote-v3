@@ -9,6 +9,7 @@ class Credito extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
     protected $fillable = [
         'pendiente',
         'n_coutas',

@@ -56,8 +56,6 @@ class VentaController extends Controller
         $cliente = Cliente::findOrFail($request->cliente_id)->setAppends([]);
         $vehiculo = Vehiculo::findOrFail($request->vehiculo_id);
 
-        return $cliente;
-
         $payload = [
             "Cliente"=>$cliente,
             "Vehiculo"=>$vehiculo,

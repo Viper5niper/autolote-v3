@@ -73,3 +73,9 @@ Route::resource('empleado','EmpleadoController')->name('index','empleado')->midd
 
 Route::post('calculadora/generar',"CalculadoraController@generate")->name('calculadora.generate');
 Route::resource('calculadora','CalculadoraController')->name('index','calculadora');
+
+/** Rutas Creditos */
+
+Route::get('creditos/pay/{param?}','CreditoController@credito_pay')->name('credito.pay')->middleware(['auth:sanctum', 'verified']);
+Route::post('creditos/buscar','CreditoController@buscar_credito')->name('credito.buscar')->middleware(['auth:sanctum', 'verified']);
+Route::resource('creditos','CreditoController')->name('index','creditos')->middleware(['auth:sanctum', 'verified']);
