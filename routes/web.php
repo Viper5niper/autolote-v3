@@ -35,6 +35,8 @@ Route::resource('cliente','ClienteController')->middleware(['auth:sanctum', 'ver
 Route::get('cliente/delete/{id}', [ClienteController::class,'destroy'])
      ->name('cliente.destroy')->middleware(['auth:sanctum', 'verified']);
 
+/** Ruta de Vehiculos */
+
 Route::resource('vehiculo','VehiculoController')->name('index','vehiculo')->middleware(['auth:sanctum', 'verified']);
 
 /** Ruta de rentas */
