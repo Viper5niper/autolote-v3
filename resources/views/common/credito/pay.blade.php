@@ -41,7 +41,7 @@
     <p>Nombre:  {{$info['cliente']->nombre." ".$info['cliente']->apellido}}</p>
     <p>#Credito: {{$info['credito']->id}}</p> {{-- esta parte carga el numero de credito y el nombre de la persona --}}
 </div>
-<form action="{{route('creditos.update',["credito" => $info['credito']->id])}}" method="POST" class="form-horizontal">
+<form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->i : '0'])}}" method="POST" class="form-horizontal">
     @csrf
     @method('PATCH')
 <div class="form-row">

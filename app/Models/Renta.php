@@ -18,6 +18,15 @@ class Renta extends Model
         'json_array'
     ];
 
-    protected $casts = ['json_array'=>'array'];
-    
+    protected $casts = ['json_array' => 'array'];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class);
+    }
+
+    public function vehiculos()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
 }

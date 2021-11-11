@@ -10,39 +10,47 @@ class Cliente extends Model
     use HasFactory;
 
     protected $fillable = [
-            'nombre'   ,
-            'apellido' ,
-            'email'    ,
-            'direccion',
-            'telefono' ,
-            'celular'  ,
-            'tipo_doc' ,
-            'doc',
-            'licencia' ,
+        'nombre',
+        'apellido',
+        'email',
+        'direccion',
+        'telefono',
+        'celular',
+        'tipo_doc',
+        'doc',
+        'licencia',
     ];
 
     protected $appends = ['actions'];
 
-    public function getActionsAttribute(){
+    public function getActionsAttribute()
+    {
 
-        $btnEdit = '<a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/'.$this->id.'" title="Edit">
+        $btnEdit = '<a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
                         <i class="fa fa-lg fa-fw fa-eye"></i>
                     </a>';
-        $btnDelete = '<a class="btn btn-s btn-default text-danger mx-1 shadow delete_client" href="/cliente/delete/'.$this->id.'"" title="Delete">
+        $btnDelete = '<a class="btn btn-s btn-default text-danger mx-1 shadow delete_client" href="/cliente/delete/' . $this->id . '"" title="Delete">
                           <i class="fa fa-lg fa-fw fa-trash"></i>
                       </a>';
-        $btnDetails = '<a class="btn btn-s btn-default text-teal mx-1 shadow" href="/cliente/'.$this->id.'/editar" title="Details">
+        $btnDetails = '<a class="btn btn-s btn-default text-teal mx-1 shadow" href="/cliente/' . $this->id . '/editar" title="Details">
                           <i class="fa fa-lg fa-fw fa-pen"></i>
                        </a>';
 
-        return '<nobr>'.$btnDetails.$btnEdit.$btnDelete.'</nobr>';
+        return '<nobr>' . $btnDetails . $btnEdit . $btnDelete . '</nobr>';
     }
 
-    public function facturas(){
+    public function facturas()
+    {
         return $this->hasMany(Factura::class);
     }
 
-    public function creditos(){
+    public function creditos()
+    {
         return $this->hasMany(Credito::class);
+    }
+
+    public function rentas()
+    {
+        return $this->hasMany(Renta::class);
     }
 }

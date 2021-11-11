@@ -21,7 +21,45 @@
 
 
 @section('content')
-
+    <div class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th scope="col">Placa</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha de Renta</th>
+            <th scope="col">Fecha Devolucion</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Opcion</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($renta as $rent)
+            
+          @endforeach
+          <tr>
+            <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
+            <td>{{$rent['json_array']['Cliente']['nombre']." ".$rent['json_array']['Cliente']['apellido']}}</td>
+            <td>{{$rent['json_array']['inicio']}}</td>
+            <td>{{$rent['json_array']['final']}}</td>
+            <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
+            <td>@if ($rent['estado'] === 1)
+                    <a class="btn btn-flat text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
+                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                    </a>
+                    <a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
+                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                    </a>
+                @else
+                  <a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
+                        <i class="fa fa-lg fa-fw fa-eye"></i>
+                  </a>
+                @endif
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 @stop
 
 @section('css')
