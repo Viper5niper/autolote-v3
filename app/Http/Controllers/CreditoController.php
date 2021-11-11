@@ -18,8 +18,10 @@ class CreditoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
+        $creditos = Credito::paginate(16);
+        return view('admin.credito.index', compact('creditos'));
     }
 
     /**
@@ -49,6 +51,19 @@ class CreditoController extends Controller
      */
     public function show($id)
     {
+        try {
+            $credito = Credito::findOrFail($id);
+
+            $info['cliente'] = $credito->cliente;
+            unset($credito->cliente);
+            $info['credito'] = $credito;
+
+            return view('admin.credito.show', compact('info'));
+        } catch (Exception $ex) {
+            return redirect()->route('creditos')
+                ->with('message', 'No se encontro el credito')
+                ->with('status', 'warning');
+        }
     }
 
     public function credito_pay($param = 0)

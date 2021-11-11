@@ -20,28 +20,27 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col"># Credito</th>
+        <th scope="col">Cliente</th>
         <th scope="col">Monto</th>
         <th scope="col">Interes</th>
         <th scope="col">Saldo Actual</th>
         <th scope="col">Estado</th>
-        <th scope="col">Cliente</th>
         <th scope="col">Opcion</th>
       </tr>
     </thead>
     <tbody>
-      @foreach ($creditos as $item)
+      @foreach ($creditos as $credito)
       <tr>
-        <th scope="row">{{$item->id}}</th>
-        <td>{{$item->name}}</td>
-        <td>{{$item->email}}</td>
-        <td>{{$item->role == 1 ? "Admin" : "Usuario"}}</td>
+        <th scope="row">{{$credito->id}}</th>
+        <td>{{$credito->cliente->nombre." ".$credito->cliente->apellido}}</td>
+        <td>${{$credito->monto}}</td>
+        <td>{{$credito->interes * 100}}%</td>
+        <td>${{$credito['json_array']['saldo']}}</td>
+        <td>{{$credito->pendiente === 1 ? "Pendiente" : "Pagado"}}</td>
         <td>
-          <a href="{{route('user.edit',$item->id)}}" class="btn btn-outline-info"><i class="fas fa-pen"></i></a>
-          <a onclick="eliminar('{{route('user.destroy',$item->id)}}');" class="btn btn-outline-danger" data-toggle="modal"
-            data-target="#DeletedModal"><i class="fas fa-trash"></i></a>
+          <a href="{{route('creditos.show',$credito->id)}}" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
+          <a href="{{route('credito.pay',$credito->id)}}" class="btn btn-outline-danger"><i class="fas fa-shopping-cart"></i></a>
         </td>
-        <td>{{$item->name}}</td>
-        <td>{{$item->name}}</td>
       </tr>
       @endforeach
     </tbody>

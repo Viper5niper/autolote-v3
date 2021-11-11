@@ -34,29 +34,37 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($renta as $rent)
-            
-          @endforeach
-          <tr>
-            <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
-            <td>{{$rent['json_array']['Cliente']['nombre']." ".$rent['json_array']['Cliente']['apellido']}}</td>
-            <td>{{$rent['json_array']['inicio']}}</td>
-            <td>{{$rent['json_array']['final']}}</td>
-            <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
-            <td>@if ($rent['estado'] === 1)
-                    <a class="btn btn-flat text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a>
-                    <a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a>
-                @else
-                  <a class="btn btn-s btn-default text-primary mx-1 shadow" href="/cliente/' . $this->id . '" title="Edit">
-                        <i class="fa fa-lg fa-fw fa-eye"></i>
-                  </a>
-                @endif
-            </td>
-          </tr>
+          @if(isset($rentas[0]->id))
+             @foreach ($renta as $rent)
+              <tr>
+                <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
+                <td>{{$rent['json_array']['Cliente']['nombre']." ".$rent['json_array']['Cliente']['apellido']}}</td>
+                <td>{{$rent['json_array']['inicio']}}</td>
+                <td>{{$rent['json_array']['final']}}</td>
+                <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
+                <td>@if ($rent['estado'] === 1)
+                        {{--<a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="see">
+                            <i class="fa fa-eye"></i>
+                        </a>--}}
+                        <a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="return">
+                            <i class="fa fa-pen"></i>
+                        </a>
+                    @else
+                        **---**
+                      {{--<a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="see">
+                            <i class="fa fa-lg fa-fw fa-eye"></i>
+                      </a>--}}
+                    @endif
+                </td>
+              </tr>
+            @endforeach
+        @else
+            <tr>
+              <th scope="row" colspan="6">No hay rentas realizadas</th>
+            </tr>
+        @endif
+          
+        
         </tbody>
       </table>
     </div>
