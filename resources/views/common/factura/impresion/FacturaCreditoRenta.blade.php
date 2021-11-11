@@ -39,7 +39,7 @@
 <!-- IVA RETENIDO --><label style="margin-left: 188mm;margin-top: 119mm;position: absolute;"></label>
 <!-- VENTAS NO SUJETAS --><label style="margin-left: 188mm;margin-top: 125mm;position: absolute;"></label>
 <!-- VENTAS EXENTAS --><label style="margin-left: 188mm;margin-top: 131mm;position: absolute;"></label>
-<!-- TOTAL --><label style="margin-left: 188mm;margin-top: 137mm;position: absolute;">${{$factura->payload['monto']}}</label>
+<!-- TOTAL --><label style="margin-left: 188mm;margin-top: 137mm;position: absolute;">${{$factura->payload['total']}}</label>
 
 <script type="text/javascript">
         setTimeout(function(){

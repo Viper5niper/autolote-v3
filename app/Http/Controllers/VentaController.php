@@ -42,13 +42,13 @@ class VentaController extends Controller
         //
     }
 
-    public function create_venta_vehiculo($vehiculo_id = 0,$cliente_id = 0)
+    public function create_venta_vehiculo($vehiculo_id = 0, $cliente_id = 0)
     {
-    
+
         $cliente = $cliente_id == 0 ? new Cliente : Cliente::findOrFail($cliente_id);
         $vehiculo = $vehiculo_id == 0 ? new Vehiculo : Vehiculo::findOrFail($vehiculo_id);
-        
-        return view('/common/venta/create',['vehiculo'=>$vehiculo,'cliente'=>$cliente]);        
+
+        return view('/common/venta/create', ['vehiculo' => $vehiculo, 'cliente' => $cliente]);
     }
 
     public function store_venta_vehiculo(Request $request)
@@ -57,40 +57,40 @@ class VentaController extends Controller
         $vehiculo = Vehiculo::findOrFail($request->vehiculo_id);
 
         $payload = [
-            "Cliente"=>$cliente,
-            "Vehiculo"=>$vehiculo,
-            "n_factura"=>$request->n_factura,
-            "tipo"=>$request->tipo,
-            "area_factura"=>"V",
-            "descripcion"=>"Venta de Vehiculo",
+            "Cliente" => $cliente,
+            "Vehiculo" => $vehiculo,
+            "n_factura" => $request->n_factura,
+            "tipo" => $request->tipo,
+            "area_factura" => "V",
+            "tipo_venta" => $request->tipo_venta,
+            "descripcion" => "Venta de Vehiculo",
             "monto" => $request->monto,
-            "fecha_venta" => $request->fecha_venta,
+            "fecha" => $request->fecha_venta,
             "ncr" => $request->ncr,
-        ]; 
+        ];
 
-        $vehiculo->where('id',$request->vehiculo_id)->update(['estado'=>'V']);
+        $vehiculo->where('id', $request->vehiculo_id)->update(['estado' => 'V']);
 
-        if($request->tipo_venta === 'contado'){
+        if ($request->tipo_venta === 'contado') {
 
             $factura = Factura::create([
-                'n_factura'=>$request->n_factura,
-                'cliente_id' => (Int) $cliente->cliente_id,
+                'n_factura' => $request->n_factura,
+                'cliente_id' => (int) $cliente->cliente_id,
                 'credito_id' => null,
-                'vehiculo_id' => (Int) $vehiculo->vehiculo_id,
-                'tipo'=>$request->tipo,
-                'area_factura'=>"V",
-                'descripcion'=>"Venta de Vehiculo",
-                'payload'=> $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+                'vehiculo_id' => (int) $vehiculo->vehiculo_id,
+                'tipo' => $request->tipo,
+                'area_factura' => "V",
+                'descripcion' => "Venta de Vehiculo",
+                'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
             ]);
-    
-            return redirect()->route('factura.show',$factura->id);
 
-        }else{
-           
+            return redirect()->route('factura.show', $factura->id);
+        } else {
+
             $saldo = $request->monto - $request->prima;
 
             $json_array = [
-                'tipo'=>$request->tipo,
+                'tipo' => $request->tipo,
                 "fecha_venta" => $request->fecha_venta,
                 "ncr" => $request->ncr,
                 "prima" => $request->prima,
@@ -98,16 +98,16 @@ class VentaController extends Controller
             ];
 
             $fecha = preg_split("/[\s-]/", $request->fecha_venta);
-            
-            $dia_pago = $fecha[2]; 
+
+            $dia_pago = $fecha[2];
 
             $credito = [
-                'vehiculo_id' => (Int) $request->vehiculo_id,
-                'cliente_id' => (Int) $request->cliente_id,
-                'n_coutas' => (Int) $request->n_coutas,
-                'dia_pago' => (Int) $dia_pago,
-                'monto' => (Float) $saldo,
-                'interes' => (Float) $request->interes,
+                'vehiculo_id' => (int) $request->vehiculo_id,
+                'cliente_id' => (int) $request->cliente_id,
+                'n_coutas' => (int) $request->n_coutas,
+                'dia_pago' => (int) $dia_pago,
+                'monto' => (float) $saldo,
+                'interes' => (float) $request->interes,
                 'ult_pago' => $request->fecha_venta,
                 'json_array' => $json_array,
             ];
@@ -115,19 +115,18 @@ class VentaController extends Controller
             $result = Credito::create($credito);
 
             $factura = Factura::create([
-                'n_factura'=>$request->n_factura,
-                'cliente_id' => (Int) $cliente->cliente_id,
-                'credito_id' => (Int) $result->id,
-                'vehiculo_id' => (Int) $vehiculo->vehiculo_id,
-                'tipo'=>$request->tipo,
-                'area_factura'=>"V",
-                'descripcion'=>"Venta de Vehiculo",
-                'payload'=> $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+                'n_factura' => $request->n_factura,
+                'cliente_id' => (int) $cliente->cliente_id,
+                'credito_id' => (int) $result->id,
+                'vehiculo_id' => (int) $vehiculo->vehiculo_id,
+                'tipo' => $request->tipo,
+                'area_factura' => "V",
+                'descripcion' => "Venta de Vehiculo",
+                'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
             ]);
 
-            return redirect()->route('factura.show',$factura->id); 
+            return redirect()->route('factura.show', $factura->id);
         }
-
     }
 
     public function buscarVC(Request $request)
@@ -138,33 +137,32 @@ class VentaController extends Controller
         $cliente_id = $request->request->get('cliente_id');
         $vehiculo_id = $request->request->get('vehiculo_id');
 
-        try{
+        try {
 
-        if($type == 'cliente'){
-            $cliente = Cliente::where('doc',$criterio)
-                        ->orWhere('id',$criterio)
-                        ->firstOrFail();
-            $cliente_id = $cliente->id;
-        }
+            if ($type == 'cliente') {
+                $cliente = Cliente::where('doc', $criterio)
+                    ->orWhere('id', $criterio)
+                    ->firstOrFail();
+                $cliente_id = $cliente->id;
+            }
 
-        if($type == 'vehiculo'){
-            $vehiculo = Vehiculo::where('placa',$criterio)
-                        ->orWhere('id',$criterio)
-                        ->where('estado','D')
-                        ->firstOrFail();
-            $vehiculo_id = $vehiculo->id;
-        }
-        
+            if ($type == 'vehiculo') {
+                $vehiculo = Vehiculo::where('placa', $criterio)
+                    ->orWhere('id', $criterio)
+                    ->where('estado', 'D')
+                    ->firstOrFail();
+                $vehiculo_id = $vehiculo->id;
+            }
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            
-            return redirect()->route('venta.vehiculo',[$request->request->get('vehiculo_id'),$request->request->get('cliente_id')])
-            ->with('message','No se encontro el criterio de busqueda')
-            ->with('status','warning');
+
+            return redirect()->route('venta.vehiculo', [$request->request->get('vehiculo_id'), $request->request->get('cliente_id')])
+                ->with('message', 'No se encontro el criterio de busqueda')
+                ->with('status', 'warning');
         }
-        
-        return redirect()->route('venta.vehiculo',[$vehiculo_id,$cliente_id])
-        ->with('message',$criterio.' encontrado!')
-        ->with('status','success');
+
+        return redirect()->route('venta.vehiculo', [$vehiculo_id, $cliente_id])
+            ->with('message', $criterio . ' encontrado!')
+            ->with('status', 'success');
     }
     /**
      * Display the specified resource.

@@ -24,18 +24,27 @@
     <div class="form-group col-md-4 first">
         <label for="renta_ndr">N Dias de Renta</label>
         <input type="number" min="1" max="366" name="dias" class="form-control @error('dias') is-invalid 
-        @enderror" id="renta_ndr" onKeyUp="fecha_final('renta_inicio','renta_ndr','renta_final')" value="{{old('dias')}}"
+        @enderror" id="renta_ndr" onKeyUp="fecha_final('renta_inicio','renta_ndr','renta_final');total_renta('renta_ndr','renta_monto','renta_total');" value="{{old('dias')}}"
             required>
         @error('dias')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group col-md-4 first">
-        <label for="renta_monto">Monto</label>
+        <label for="renta_monto">Monto Diario</label>
         <input type="number" accept="any" name="monto" class="form-control @error('monto') is-invalid 
         @enderror" id="renta_monto" palceholder="$" value="{{old('monto')}}"
-            required>
+            onkeyup="total_renta('renta_ndr','renta_monto','renta_total');" required>
         @error('monto')
+        <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
+    </div>
+    <div class="form-group col-md-4 first">
+        <label for="renta_total">Total</label>
+        <input type="number" accept="any" name="total" class="form-control @error('total') is-invalid 
+        @enderror" id="renta_total" palceholder="$" value="{{old('total')}}"
+            readonly>
+        @error('total')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>

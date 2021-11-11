@@ -52,7 +52,7 @@ class FacturaController extends Controller
         return view('/common/factura/show', compact('factura'));
     }
 
-    public function show_renta_invoice($id)
+    public function show_print_invoice($id)
     {
         $factura = Factura::findOrFail($id);
         $fecha = preg_split("/[\s-]/", $factura->created_at);
@@ -81,6 +81,7 @@ class FacturaController extends Controller
         }
         
     }
+
 
     /**
      * Show the form for editing the specified resource.

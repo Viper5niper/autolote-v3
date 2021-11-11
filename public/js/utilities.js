@@ -104,6 +104,17 @@ function fecha_final(from,time,to)
     
 }
 
+function total_renta(ip0,ip1,ip2){
+    let dias = document.getElementById(ip0).value;
+    let monto = document.getElementById(ip1).value;
+    let total = document.getElementById(ip2);
+
+    let aux;
+    aux = dias * monto;
+    aux = aux.toFixed(2)
+    total.value = aux;
+}
+
 function allow_ncr(id_input,id_select,id_label){
     var select = document.getElementById(id_select).value;
     var input = document.getElementById(id_input);

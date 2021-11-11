@@ -146,26 +146,33 @@ class CreditoController extends Controller
             "Cliente" => $credito->cliente->setAppends([]),
             "n_factura" => $request->n_factura,
             "tipo" => $request->tipo,
-            "area_factura" => "V",
-            "descripcion" => "Venta de Vehiculo",
+            "area_factura" => "LC",
+            "descripcion" => $request->descripcion,
             "monto" => $request->monto,
-            "fecha_venta" => $request->fecha_venta,
+            "fecha" => $request->fecha,
             "ncr" => $request->ncr,
-            /* Revisar la factura de coutas para saber que se metera en el payload */
+            "saldo_anterior" => $json_array['saldo'],
+            "saldo_actual" => $request->saldo,
+            "saldo_abonado" => $request->abonado,
+            "interes" => $request->interes,
+            "dias_mora" => $request->mora,
+            "mora" => $request->dias_mora,
+            "dias_facturados" => $request->dias,
+            "total" => "",
+            "monto_credito" => $credito->monto,
+            "n_credito" => $credito->id,
         ];
-
 
         // $factura = Factura::create([
         //     'n_factura' => $request->n_factura,
-        //     'cliente_id' => (int) $cliente->cliente_id,
-        //     'credito_id' => null,
-        //     'vehiculo_id' => (int) $vehiculo->vehiculo_id,
+        //     'cliente_id' => (int) $credito->cliente_id,
+        //     'credito_id' => (int) $credito->id,
+        //     'vehiculo_id' => (int) $credito->vehiculo_id,
         //     'tipo' => $request->tipo,
-        //     'area_factura' => "V",
-        //     'descripcion' => "Venta de Vehiculo",
+        //     'area_factura' => "LC",
+        //     'descripcion' => "Pago de cuota",
         //     'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
         // ]);
-        /** Aqui voy a facturar */
 
         unset($request['_token']);
         unset($request['_method']);

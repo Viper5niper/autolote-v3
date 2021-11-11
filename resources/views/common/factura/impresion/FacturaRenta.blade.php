@@ -51,7 +51,7 @@
         
         <!-- FILA EXTRA VENTA TOTAl -->
         
-        <label style="margin-left: 100mm;margin-top: 181mm;position: absolute;">${{$factura->payload['monto']}}</label>
+        <label style="margin-left: 100mm;margin-top: 181mm;position: absolute;">${{$factura->payload['total']}}</label>
 
         </form>
         <script type="text/javascript">

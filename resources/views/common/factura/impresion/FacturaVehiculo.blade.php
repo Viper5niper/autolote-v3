@@ -11,7 +11,7 @@
         <!-- DIRECCION --><label style="margin-left: 13mm;margin-top: 52mm;position: absolute;">{{$factura->payload['Cliente']['direccion']}}</label>
         <!-- NIT O DUI --><input style="width:25mm; margin-left: 15mm;margin-top: 58mm;position: absolute;border:none;font-family:Verdana" value="{{$factura->payload['Cliente']['doc']}}">
         <!-- VENTA A CUENTA DE especificar que ella pidio aqui dijera si es credito -->
-        <label style="margin-left: 80mm;margin-top: 58mm;position: absolute;">  Venta</label>
+        <label style="margin-left: 80mm;margin-top: 58mm;position: absolute;"> Venta @if($factura->payload['tipo_venta' === 'contado']) de contado @else al credito @endif</label>
 
         <!-- Descripcion del producto -->
 

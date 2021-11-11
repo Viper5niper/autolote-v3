@@ -42,6 +42,7 @@ class RentaController extends Controller
             "area_factura"=>"R",
             "descripcion"=>"Renta de Vehiculo",
             "monto" => $request->monto,
+            "total" => $request->total,
             "dias" => $request->dias,
             "inicio" => $request->inicio,
             "final" => $request->final,

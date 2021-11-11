@@ -23,10 +23,10 @@
     @enderror
 </div>
 <div class="form-group col-md-4 first">
-    <label for="mora">Dias de Mora</label>
-    <input type="number" accept="any" name="mora" class="form-control @error('mora') is-invalid 
-    @enderror" id="mora" value="{{old('mora')}}">
-    @error('mora')
+    <label for="dias_mora">Dias de Mora</label>
+    <input type="number" accept="any" name="dias_mora" class="form-control @error('dias_mora') is-invalid 
+    @enderror" id="dias_mora" value="{{old('dias_mora')}}">
+    @error('dias_mora')
     <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>

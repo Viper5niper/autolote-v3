@@ -70,6 +70,8 @@
         @else
             <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{$info['credito']->json_array['historial_pagos'] + 1}}" hidden>
         @endif
+        <input type="text" name="mora" id="mora" hidden>
+        <input type="text" name="total" id="total" hidden>
         <div class="form-button pt-4"> <button type="submit"
             class="btn btn-primary btn-block btn-lg"><span>Pagar y Facturar</span></button> </div>
         </div>
