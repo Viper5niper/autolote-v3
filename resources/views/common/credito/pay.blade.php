@@ -59,7 +59,7 @@
     </div>
     <div class="form-group col-md-8 first">
         <label for="descripcion">Descripcion</label>
-        <input type="number" accept="any" name="descripcion" class="form-control @error('descripcion') is-invalid
+        <input type="text" accept="any" name="descripcion" class="form-control @error('descripcion') is-invalid
         @enderror" id="descripcion" value="{{old('descripcion')}}">
         @error('descripcion')
         <div class="invalid-feedback">{{ $message }}</div>
