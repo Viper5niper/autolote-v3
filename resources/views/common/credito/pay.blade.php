@@ -14,16 +14,17 @@
 </div>
 @stop
 
-{{-- Hacer lo siguiente, crear un if que se va encargar de contar cuantos creditos se vienen, si viene mas de uno 
-    quiere decir que se busco por cliente y el cliente tiene mas de un credito, si no quiere decir que se 
+{{-- Hacer lo siguiente, crear un if que se va encargar de contar cuantos creditos se vienen, si viene mas de uno
+    quiere decir que se busco por cliente y el cliente tiene mas de un credito, si no quiere decir que se
     busco el numero de credito directamente por lo que se podra cargar sin problema, si viene mas de un
-    credito, debemos lanzar un modal que nos permita seleccionar el credito que se va facturar, mostrando 
+    credito, debemos lanzar un modal que nos permita seleccionar el credito que se va facturar, mostrando
     informacion general para poder decidir y recargaremos la vista con el id del credito seleccionado, solo
     debemos averiguar como lanzar el modal --}}
 
 @section('content') <!--Contenido de la pagina-->
- 
+
 <div>
+
     <form action="{{route('credito.buscar')}}" method="POST">
         @csrf
         <div class="input-group mb-3">
@@ -40,14 +41,17 @@
 <div>
     <p>Nombre:  {{$info['cliente']->nombre." ".$info['cliente']->apellido}}</p>
     <p>#Credito: {{$info['credito']->id}}</p> {{-- esta parte carga el numero de credito y el nombre de la persona --}}
+    <script type="text/javascript">
+    const credit = @json($info['credito']);
+    </script>
 </div>
-<form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->i : '0'])}}" method="POST" class="form-horizontal">
+<form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->id : '0'])}}" method="POST" class="form-horizontal">
     @csrf
     @method('PATCH')
 <div class="form-row">
     <div class="form-group col-md-4 first" id="n_couta_div">
         <label for="n_factura"># Factura</label>
-        <input type="number" accept="any" name="n_factura" class="form-control @error('n_factura') is-invalid 
+        <input type="number" accept="any" name="n_factura" class="form-control @error('n_factura') is-invalid
         @enderror" id="n_factura" palceholder="$" value="{{old('n_factura')}}">
         @error('n_factura')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -55,7 +59,7 @@
     </div>
     <div class="form-group col-md-8 first">
         <label for="descripcion">Descripcion</label>
-        <input type="number" accept="any" name="descripcion" class="form-control @error('descripcion') is-invalid 
+        <input type="number" accept="any" name="descripcion" class="form-control @error('descripcion') is-invalid
         @enderror" id="descripcion" value="{{old('descripcion')}}">
         @error('descripcion')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -70,12 +74,11 @@
         @else
             <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{$info['credito']->json_array['historial_pagos'] + 1}}" hidden>
         @endif
-        <input type="text" name="mora" id="mora" hidden>
         <input type="text" name="total" id="total" hidden>
         <div class="form-button pt-4"> <button type="submit"
             class="btn btn-primary btn-block btn-lg"><span>Pagar y Facturar</span></button> </div>
         </div>
-    @endif 
+    @endif
 </div>
 </form>
 
@@ -93,7 +96,7 @@
             </tr>
         </thead>
         <tbody>
-            
+
         @if(isset($info['credito']->json_array['historial_pagos']))
             @foreach ($info['credito']->json_array['historial_pagos'] as $pago)
                 <tr>
@@ -115,7 +118,7 @@
                 <td>NO HAY DATOS</td>
                 <td>NO HAY DATOS</td>
                 <td>NO HAY DATOS</td>
-            </tr> 
+            </tr>
         @endif
 
         </tbody>
@@ -128,5 +131,6 @@
 @section('js')
 <script src="https://unpkg.com/imask"></script>
 <script src="/js/utilities.js"></script>
+<script src="/js/rentas.js"></script>
 @stop
 
