@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Factura;
+use App\Models\Cliente;
 use App\Models\Vehiculo;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,11 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $vehiculo = Vehiculo::findOrFail($id);
-        return view("/admin/factura/index",compact('vehiculo'));
+        $facturas = Factura::paginate(16);
+
+        return view("/admin/factura/index", compact('facturas'));
     }
 
     /**
@@ -26,7 +28,6 @@ class FacturaController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -59,27 +60,26 @@ class FacturaController extends Controller
         $factura['anio'] = $fecha[0];
         $factura['mes']  = $fecha[1];
         $factura['dia']  = $fecha[2];
-       
-        if($factura->area_factura === 'R'){
-            if($factura->tipo == 'consumidor') {
+
+        if ($factura->area_factura === 'R') {
+            if ($factura->tipo == 'consumidor') {
                 return view('/common/factura/impresion/FacturaRenta', compact('factura'));
-            }else{
+            } else {
                 return view('/common/factura/impresion/FacturaCreditoRenta', compact('factura'));
             }
-        }else if($factura->area_factura === 'V'){
-            if($factura->tipo == 'consumidor') {
+        } else if ($factura->area_factura === 'V') {
+            if ($factura->tipo == 'consumidor') {
                 return view('/common/factura/impresion/FacturaVehiculo', compact('factura'));
-            }else{
+            } else {
                 return view('/common/factura/impresion/FacturaCreditoVehiculo', compact('factura'));
             }
-        }else if($factura->area_factura === 'LC'){
-            if($factura->tipo == 'consumidor') {
+        } else if ($factura->area_factura === 'LC') {
+            if ($factura->tipo == 'consumidor') {
                 return view('/common/factura/impresion/FacturaCouta', compact('factura'));
-            }else{
+            } else {
                 return view('/common/factura/impresion/FacturaCreditoCouta', compact('factura'));
             }
         }
-        
     }
 
 

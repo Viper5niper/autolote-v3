@@ -127,6 +127,8 @@ function allow_ncr(id_input,id_select,id_label){
         label.setAttribute("hidden",true);
         input.setAttribute("hidden",true);
     }
+
+    
 }
 
 function show_hidden_input(input, condision, campo){

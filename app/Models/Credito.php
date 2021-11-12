@@ -14,17 +14,22 @@ class Credito extends Model
         'n_coutas',
         'dia_pago',
         'monto',
-        'interes', 
+        'interes',
         'ult_pago',
         'cliente_id',
         'vehiculo_id',
         'json_array',
     ];
 
-    protected $casts = ['json_array'=>'array'];
+    protected $casts = ['json_array' => 'array'];
 
-    public function cliente(){
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class);
     }
 
+    public function vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class);
+    }
 }

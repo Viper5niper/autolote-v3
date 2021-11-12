@@ -29,4 +29,9 @@ class Renta extends Model
     {
         return $this->belongsTo(Vehiculo::class);
     }
+
+    public function facturas()
+    {
+        return $this->belongsTo(Factura::class);
+    }
 }

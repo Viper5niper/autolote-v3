@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Cliente;
 
 class Factura extends Model
 {
@@ -20,18 +21,15 @@ class Factura extends Model
         'payload',
     ];
 
-    protected $casts = ['payload'=>'array'];
+    protected $casts = ['payload' => 'array'];
 
-    public function cliente(){
-        return $this->belongsTo(Cliente::class);
+    public function vehiculo()
+    {
+        return $this->belongsTo(Vehiculo::class, 'id');
     }
 
-    public function vehiculo(){
-        return $this->belongsTo(Vehiculo::class);
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id');
     }
-
-    // public function cliente(){
-    //     return $this->belongsTo(Cliente::class);
-    // }
-
 }

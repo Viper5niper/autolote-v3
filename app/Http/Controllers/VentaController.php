@@ -69,8 +69,6 @@ class VentaController extends Controller
             "ncr" => $request->ncr,
         ];
 
-        $vehiculo->where('id', $request->vehiculo_id)->update(['estado' => 'V']);
-
         if ($request->tipo_venta === 'contado') {
 
             $factura = Factura::create([
@@ -83,6 +81,8 @@ class VentaController extends Controller
                 'descripcion' => "Venta de Vehiculo",
                 'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
             ]);
+
+            $vehiculo->where('id', $request->vehiculo_id)->update(['estado' => 'V']);
 
             return redirect()->route('factura.show', $factura->id);
         } else {
@@ -121,9 +121,11 @@ class VentaController extends Controller
                 'vehiculo_id' => (int) $vehiculo->vehiculo_id,
                 'tipo' => $request->tipo,
                 'area_factura' => "V",
-                'descripcion' => "Venta de Vehiculo",
+                'descripcion' => "Venta de Vehiculo a Credito",
                 'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
             ]);
+
+            $vehiculo->where('id', $request->vehiculo_id)->update(['estado' => 'VP']);
 
             return redirect()->route('factura.show', $factura->id);
         }

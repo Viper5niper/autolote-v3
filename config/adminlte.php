@@ -348,8 +348,8 @@ return [
             'can'  => ['is-admin'],
             'submenu' => [
                 [
-                    'text' => 'Facturas',
-                    'url'  => 'menu/child1',
+                    'text'    => 'Facturas',
+                    'route'   => 'factura',
                     'icon'    => 'fa fa-archive',
                     'shift'   => 'ml-3',
                 ],
@@ -361,14 +361,14 @@ return [
                 ],
             ],
         ],
-        
+
         ['header' => 'AJUSTES'],
         [
             'text' => 'Perfil',
-            'route'=> 'perfil',
+            'route' => 'perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
-        
+
     ],
 
     /*

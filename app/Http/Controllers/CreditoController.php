@@ -55,7 +55,9 @@ class CreditoController extends Controller
             $credito = Credito::findOrFail($id);
 
             $info['cliente'] = $credito->cliente;
+            $info['vehiculo'] = $credito->vehiculo;
             unset($credito->cliente);
+            unset($credito->vehiculo);
             $info['credito'] = $credito;
 
             return view('admin.credito.show', compact('info'));
