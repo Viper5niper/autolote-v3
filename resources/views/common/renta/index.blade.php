@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          @if(isset($rentas[0]->id))
+          @if(isset($renta[0]->id))
              @foreach ($renta as $rent)
               <tr>
                 <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
@@ -63,8 +63,8 @@
               <th scope="row" colspan="6">No hay rentas realizadas</th>
             </tr>
         @endif
-          
-        
+
+
         </tbody>
       </table>
     </div>
