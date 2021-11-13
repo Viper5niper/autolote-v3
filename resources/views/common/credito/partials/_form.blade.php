@@ -8,7 +8,7 @@
 </div>
 <div class="form-group col-md-4 first">
     <label for="monto">Monto</label>
-    <input type="number" min=1 accept="any" name="monto" class="form-control @error('monto') is-invalid
+    <input type="number" step=".01" min=1 accept="any" name="monto" class="form-control @error('monto') is-invalid
     @enderror" onchange="calc(this);" id="monto" palceholder="$" value="{{old('monto')}}">
     @error('monto')
     <div class="invalid-feedback">{{ $message }}</div>
@@ -24,7 +24,7 @@
 </div>
 <div class="form-group col-md-4 first">
     <label for="mora">$ Mora</label>
-    <input type="number" accept="any" min=0 name="mora" class="form-control @error('mora') is-invalid
+    <input type="number" step=".01" accept="any" min=0 name="mora" class="form-control @error('mora') is-invalid
     @enderror" onchange="calc(this);" id="mora" value="{{old('mora')}}">
     @error('mora')
     <div class="invalid-feedback">{{ $message }}</div>

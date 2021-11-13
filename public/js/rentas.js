@@ -35,6 +35,11 @@ function calc(from){
   else{if(Monto<0){Monto=0;$("#monto").val(0);}}//si el monto se pone un numero menor a 0 se corrije
   $("#interes").val(Interes);//se pone el interes calculado
   Abonado = Monto -Interes-Mora;Abonado=Abonado.toFixed(2);//se calcula el total abonado
+  if(Abonado>nuevo_saldo){//si el valor abonado se pasa del saldo restante
+    Monto = +nuevo_saldo + +Interes + +Mora;Monto=Monto.toFixed(2);
+    $("#monto").val(Monto);//seajusta el motno a caval cubrir el saldo faltante nada mas
+    Abonado = Monto -Interes-Mora;Abonado=Abonado.toFixed(2);//y se vuelve a calcular
+  }
   $("#abonado").val(Abonado);//se ṕone el monto abonado
   nuevo_saldo=nuevo_saldo-Abonado;nuevo_saldo=nuevo_saldo.toFixed(2);//se calcula el saldo pendiente
   $("#saldo").val(nuevo_saldo);//se pone el saldo pendiente
