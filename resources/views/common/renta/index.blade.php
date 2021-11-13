@@ -43,10 +43,10 @@
                 <td>{{$rent['json_array']['final']}}</td>
                 <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
                 <td>@if ($rent['estado'] === 1)
-                        {{--<a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="see">
+                        <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.show",$rent->id)}}" title="see">
                             <i class="fa fa-eye"></i>
-                        </a>--}}
-                        <a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="return">
+                        </a>
+                        <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.return",$rent->id)}}" title="return">
                             <i class="fa fa-pen"></i>
                         </a>
                     @else

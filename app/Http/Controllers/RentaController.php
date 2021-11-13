@@ -6,6 +6,7 @@ use App\Models\Cliente;
 use App\Models\Renta;
 use App\Models\Vehiculo;
 use App\Models\Factura;
+use Exception;
 use Facade\FlareClient\Http\Client;
 use Illuminate\Http\Request;
 
@@ -17,16 +18,25 @@ class RentaController extends Controller
         return view('/common/renta/index', compact('renta'));
     }
 
-    public function create($vehiculo_id = 0,$cliente_id = 0)
+    public function create($vehiculo_id = 0, $cliente_id = 0)
     {
         $cliente = $cliente_id == 0 ? new Cliente : Cliente::findOrFail($cliente_id);
         $vehiculo = $vehiculo_id == 0 ? new Vehiculo : Vehiculo::findOrFail($vehiculo_id);
-        
-        return view('/common/renta/create',['vehiculo'=>$vehiculo,'cliente'=>$cliente]);
+
+        return view('/common/renta/create', ['vehiculo' => $vehiculo, 'cliente' => $cliente]);
     }
 
-    public function create_renta(){
+    public function return_vehiculo($id)
+    {
+        try {
 
+            $renta = Renta::findOrFail($id);
+            return view('common.renta.return_vehiculo', compact('renta'));
+        } catch (Exception $th) {
+            return redirect()->route('renta.return', $id)
+                ->with('message', 'No se encontro el vehiculo')
+                ->with('status', 'warning');
+        }
     }
 
     public function store(Request $request)
@@ -35,35 +45,35 @@ class RentaController extends Controller
         $vehiculo = Vehiculo::findOrFail($request->vehiculo_id);
 
         $payload = [
-            "Cliente"=>$cliente,
-            "Vehiculo"=>$vehiculo,
-            "n_factura"=>$request->n_factura,
-            "tipo"=>$request->tipo,
-            "area_factura"=>"R",
-            "descripcion"=>"Renta de Vehiculo",
+            "Cliente" => $cliente,
+            "Vehiculo" => $vehiculo,
+            "n_factura" => $request->n_factura,
+            "tipo" => $request->tipo,
+            "area_factura" => "R",
+            "descripcion" => "Renta de Vehiculo",
             "monto" => $request->monto,
             "total" => $request->total,
             "dias" => $request->dias,
             "inicio" => $request->inicio,
             "final" => $request->final,
             "ncr" => $request->ncr,
-        ]; 
+        ];
 
         $factura = Factura::create([
-            'n_factura'=>$request->n_factura,
-            'cliente_id' => (Int) $cliente->cliente_id,
+            'n_factura' => $request->n_factura,
+            'cliente_id' => (int) $cliente->cliente_id,
             'credito_id' => null,
-            'vehiculo_id' => (Int) $vehiculo->vehiculo_id,
-            'tipo'=>$request->tipo,
-            'area_factura'=>"R",
-            'descripcion'=>"Renta de Vehiculo",
-            'payload'=> $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+            'vehiculo_id' => (int) $vehiculo->vehiculo_id,
+            'tipo' => $request->tipo,
+            'area_factura' => "R",
+            'descripcion' => "Renta de Vehiculo",
+            'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
         ]);
-      
+
         $request->merge(['factura_id' =>  $factura->id]);
         $request->merge(['json_array' =>  $payload]);
 
-        $vehiculo->where('id',$request->vehiculo_id)->update(['estado'=>'R']);
+        $vehiculo->where('id', $request->vehiculo_id)->update(['estado' => 'R']);
 
         $renta = $request->validate([
             'vehiculo_id' => 'required',
@@ -76,13 +86,20 @@ class RentaController extends Controller
 
         $result = Renta::create($renta);
 
-        return redirect()->route('factura.show',$factura->id);
-
+        return redirect()->route('factura.show', $factura->id);
     }
 
     public function show($id)
     {
-        //
+        try {
+
+            $renta = Renta::findOrFail($id);
+            return view('common.renta.show', compact('renta'));
+        } catch (Exception $th) {
+            return redirect()->route('rentas', $id)
+                ->with('message', 'No se encontro el vehiculo')
+                ->with('status', 'warning');
+        }
     }
 
     public function edit($id)
@@ -109,32 +126,31 @@ class RentaController extends Controller
         $cliente_id = $request->request->get('cliente_id');
         $vehiculo_id = $request->request->get('vehiculo_id');
 
-        try{
+        try {
 
-        if($type == 'cliente'){
-            $cliente = Cliente::where('doc',$criterio)
-                        ->orWhere('id',$criterio)
-                        ->firstOrFail();
-            $cliente_id = $cliente->id;
-        }
+            if ($type == 'cliente') {
+                $cliente = Cliente::where('doc', $criterio)
+                    ->orWhere('id', $criterio)
+                    ->firstOrFail();
+                $cliente_id = $cliente->id;
+            }
 
-        if($type == 'vehiculo'){
-            $vehiculo = Vehiculo::where('placa',$criterio)
-                        ->orWhere('id',$criterio)
-                        ->where('estado','D')
-                        ->firstOrFail();
-            $vehiculo_id = $vehiculo->id;
-        }
-        
+            if ($type == 'vehiculo') {
+                $vehiculo = Vehiculo::where('placa', $criterio)
+                    ->orWhere('id', $criterio)
+                    ->where('estado', 'D')
+                    ->firstOrFail();
+                $vehiculo_id = $vehiculo->id;
+            }
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
-            
-            return redirect()->route('renta.create',[$request->request->get('vehiculo_id'),$request->request->get('cliente_id')])
-            ->with('message','No se encontro el criterio de busqueda')
-            ->with('status','warning');
+
+            return redirect()->route('renta.create', [$request->request->get('vehiculo_id'), $request->request->get('cliente_id')])
+                ->with('message', 'No se encontro el criterio de busqueda')
+                ->with('status', 'warning');
         }
-        
-        return redirect()->route('renta.create',[$vehiculo_id,$cliente_id])
-        ->with('message',$criterio.' encontrado!')
-        ->with('status','success');
+
+        return redirect()->route('renta.create', [$vehiculo_id, $cliente_id])
+            ->with('message', $criterio . ' encontrado!')
+            ->with('status', 'success');
     }
 }
