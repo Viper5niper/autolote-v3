@@ -75,9 +75,9 @@ class FacturaController extends Controller
             }
         } else if ($factura->area_factura === 'LC') {
             if ($factura->tipo == 'consumidor') {
-                return view('/common/factura/impresion/FacturaCouta', compact('factura'));
+                return view('/common/factura/impresion/FacturaCuota', compact('factura'));
             } else {
-                return view('/common/factura/impresion/FacturaCreditoCouta', compact('factura'));
+                return view('/common/factura/impresion/FacturaCreditoCuota', compact('factura'));
             }
         }
     }

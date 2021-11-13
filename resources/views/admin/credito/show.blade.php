@@ -60,6 +60,11 @@
                 <th scope="col">Dias Facturados</th>
                 <th scope="col">Mora</th>
                 <th scope="col">Interes</th>
+                @if(isset($info['credito']['json_array']['tipo']))
+                    @if($info['credito']['json_array']['tipo'] === 'credito')
+                        <th scope="col">IVA</th>
+                    @endif
+                @endif
                 <th scope="col">Abonado</th>
                 <th scope="col">Nuevo Saldo</th>
             </tr>
@@ -69,13 +74,16 @@
         @if(isset($info['credito']->json_array['historial_pagos']))
             @foreach ($info['credito']->json_array['historial_pagos'] as $pago)
                 <tr>
-                    <th scope="row">{{$pago->letra}}</th>
-                    <td>{{$pago->fecha}}</td>
-                    <td>{{$pago->dias}}</td>
-                    <td>{{$pago->mora}}</td>
-                    <td>{{$pago->interes}}</td>
-                    <td>{{$pago->abonado}}</td>
-                    <td>{{$pago->saldo}}</td>
+                    <th scope="row">{{$pago['letra']}}</th>
+                    <td>{{$pago['fecha']}}</td>
+                    <td>{{$pago['dias']}}</td>
+                    <td>{{$pago['mora']}}</td>
+                    <td>{{$pago['interes']}}</td>
+                    @if ($info['credito']['json_array']['tipo'] === 'credito')
+                        <td>{{$pago['iva']}}</td>
+                    @endif
+                    <td>{{$pago['abonado']}}</td>
+                    <td>{{$pago['saldo']}}</td>
                 </tr>
             @endforeach
         @else

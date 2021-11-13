@@ -52,7 +52,7 @@
     <div class="form-group col-md-4 first" id="n_couta_div">
         <label for="n_factura"># Factura</label>
         <input type="number" accept="any" name="n_factura" class="form-control @error('n_factura') is-invalid
-        @enderror" id="n_factura" palceholder="$" value="{{old('n_factura')}}">
+        @enderror" id="n_factura" palceholder="$" value="{{old('n_factura')}}" required>
         @error('n_factura')
         <div class="invalid-feedback">{{ $message }}</div>
         @enderror
@@ -72,7 +72,7 @@
         @if(!isset($info['credito']->json_array['historial_pagos']))
             <input type="number" accept="any" name="letra" class="form-control" id="letra" value="1" hidden>
         @else
-            <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{$info['credito']->json_array['historial_pagos'] + 1}}" hidden>
+            <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{count($info['credito']->json_array['historial_pagos']) + 1}}" hidden>
         @endif
         <input type="text" name="total" id="total" hidden>
         <div class="form-button pt-4"> <button type="submit"
@@ -91,6 +91,11 @@
                 <th scope="col">Dias Facturados</th>
                 <th scope="col">Mora</th>
                 <th scope="col">Interes</th>
+                @if(isset($info['credito']['json_array']['tipo']))
+                    @if ($info['credito']['json_array']['tipo'] === 'credito')
+                        <th scope="col">IVA</th>
+                    @endif
+                @endif
                 <th scope="col">Abonado</th>
                 <th scope="col">Nuevo Saldo</th>
             </tr>
@@ -100,13 +105,16 @@
         @if(isset($info['credito']->json_array['historial_pagos']))
             @foreach ($info['credito']->json_array['historial_pagos'] as $pago)
                 <tr>
-                    <th scope="row">{{$pago->letra}}</th>
-                    <td>{{$pago->fecha}}</td>
-                    <td>{{$pago->dias}}</td>
-                    <td>{{$pago->mora}}</td>
-                    <td>{{$pago->interes}}</td>
-                    <td>{{$pago->abonado}}</td>
-                    <td>{{$pago->saldo}}</td>
+                    <th scope="row">{{$pago['letra']}}</th>
+                    <td>{{$pago['fecha']}}</td>
+                    <td>{{$pago['dias']}}</td>
+                    <td>{{$pago['mora']}}</td>
+                    <td>{{$pago['interes']}}</td>
+                    @if ($info['credito']['json_array']['tipo'] === 'credito')
+                        <td>{{$pago['iva']}}</td>
+                    @endif
+                    <td>{{$pago['abonado']}}</td>
+                    <td>{{$pago['saldo']}}</td>
                 </tr>
             @endforeach
         @else

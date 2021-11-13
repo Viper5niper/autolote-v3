@@ -16,7 +16,7 @@
 </div>
 <div class="form-group col-md-4 first">
     <label for="dias">Dias Facturados</label>
-    <input type="number" min=1 max=30 accept="any" name="dias" class="form-control @error('dias') is-invalid
+    <input type="number" min="1" accept="any" name="dias" class="form-control @error('dias') is-invalid
     @enderror" onchange="calc(this);" id="dias" palceholder="$" value="{{old('dias')}}">
     @error('dias')
     <div class="invalid-feedback">{{ $message }}</div>
@@ -38,6 +38,17 @@
     <div class="invalid-feedback">{{ $message }}</div>
     @enderror
 </div>
+@if ($info['credito']['json_array']['tipo'] === 'credito')
+    <div class="form-group col-md-4 first">
+    <label for="iva">IVA</label>
+    <input type="number" accept="any" name="iva" class="form-control @error('iva') is-invalid
+    @enderror" id="iva" value="{{old('iva')}}" readonly>
+    @error('iva')
+    <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+<input type="text" name="subtotal" id="subtotal" hidden>
+@endif
 <div class="form-group col-md-4 first">
     <label for="abonado">Total abonado</label>
     <input type="number" accept="any" name="abonado" class="form-control @error('abonado') is-invalid

@@ -154,56 +154,62 @@ class CreditoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //try {
-        $factura = "";
-        $credito = Credito::findOrFail($id);
-        $json_array = $credito['json_array'];
+        try {
+            $factura = "";
+            $credito = Credito::findOrFail($id);
+            $json_array = $credito['json_array'];
 
-        $payload = [
-            "Cliente" => $credito->cliente->setAppends([]),
-            "n_factura" => $request->n_factura,
-            "tipo" => $request->tipo,
-            "area_factura" => "LC",
-            "descripcion" => $request->descripcion,
-            "monto" => $request->monto,
-            "fecha" => $request->fecha,
-            "ncr" => $request->ncr,
-            "saldo_anterior" => $json_array['saldo'],
-            "saldo_actual" => $request->saldo,
-            "saldo_abonado" => $request->abonado,
-            "interes" => $request->interes,
-            "dias_mora" => $request->mora,
-            "mora" => $request->dias_mora,
-            "dias_facturados" => $request->dias,
-            "total" => "",
-            "monto_credito" => $credito->monto,
-            "n_credito" => $credito->id,
-        ];
+            $payload = [
+                "Cliente" => $credito->cliente->setAppends([]),
+                "n_factura" => $request->n_factura,
+                "tipo" => $json_array['tipo'],
+                "area_factura" => "LC",
+                "descripcion" => $request->descripcion,
+                "monto" => $request->monto,
+                "fecha" => $request->fecha,
+                "ncr" => $json_array['ncr'],
+                "saldo_anterior" => $json_array['saldo'],
+                "saldo_actual" => $request->saldo,
+                "saldo_abonado" => $request->abonado,
+                "interes" => $request->interes,
+                "dias_mora" => $request->mora,
+                "iva" => $request->iva,
+                "subtotal" => $request->subtotal,
+                "mora" => $request->dias_mora,
+                "dias_facturados" => $request->dias,
+                "total" => $request->total,
+                "monto_credito" => $credito->monto,
+                "n_credito" => $credito->id,
+            ];
 
-        // $factura = Factura::create([
-        //     'n_factura' => $request->n_factura,
-        //     'cliente_id' => (int) $credito->cliente_id,
-        //     'credito_id' => (int) $credito->id,
-        //     'vehiculo_id' => (int) $credito->vehiculo_id,
-        //     'tipo' => $request->tipo,
-        //     'area_factura' => "LC",
-        //     'descripcion' => "Pago de cuota",
-        //     'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
-        // ]);
+            $factura = Factura::create([
+                'n_factura' => $request->n_factura,
+                'cliente_id' => (int) $credito->cliente_id,
+                'credito_id' => (int) $credito->id,
+                'vehiculo_id' => (int) $credito->vehiculo_id,
+                'tipo' => $json_array['tipo'],
+                'area_factura' => "LC",
+                'descripcion' => "Pago de cuota",
+                'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+            ]);
 
-        unset($request['_token']);
-        unset($request['_method']);
+            unset($request['_token']);
+            unset($request['_method']);
 
-        $all = $request->all();
-        $all['factura_id'] =  $factura;
+            $all = $request->all();
+            $all['factura_id'] =  $factura;
+            $json_array['saldo'] = $request->saldo;
+            $json_array['historial_pagos'][] = $all;
 
-        $json_array['historial_pagos'][] = $all;
+            $credito->update(['json_array' => $json_array]);
+            //return $payload;
+            return redirect()->route('factura.show', $factura->id);
+        } catch (Exception $ex) {
 
-        return $payload;
-
-        //}catch (Exception $ex) {
-
-        //    }
+            return redirect()->route('credito.pay', $id)
+                ->with('message', 'Ocurrio un error al pagar el credito')
+                ->with('status', 'warning');
+        }
     }
 
     /**
