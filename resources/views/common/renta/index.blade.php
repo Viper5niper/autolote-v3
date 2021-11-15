@@ -21,53 +21,60 @@
 
 
 @section('content')
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th scope="col">Placa</th>
-            <th scope="col">Cliente</th>
-            <th scope="col">Fecha de Renta</th>
-            <th scope="col">Fecha Devolucion</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Opcion</th>
-          </tr>
-        </thead>
-        <tbody>
-          @if(isset($renta[0]->id))
-             @foreach ($renta as $rent)
-              <tr>
-                <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
-                <td>{{$rent['json_array']['Cliente']['nombre']." ".$rent['json_array']['Cliente']['apellido']}}</td>
-                <td>{{$rent['json_array']['inicio']}}</td>
-                <td>{{$rent['json_array']['final']}}</td>
-                <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
-                <td>@if ($rent['estado'] === 1)
-                        <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.show",$rent->id)}}" title="see">
-                            <i class="fa fa-eye"></i>
-                        </a>
-                        <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.return",$rent->id)}}" title="return">
-                            <i class="fa fa-pen"></i>
-                        </a>
-                    @else
-                        **---**
-                      {{--<a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="see">
-                            <i class="fa fa-lg fa-fw fa-eye"></i>
-                      </a>--}}
-                    @endif
-                </td>
-              </tr>
-            @endforeach
-        @else
-            <tr>
-              <th scope="row" colspan="6">No hay rentas realizadas</th>
-            </tr>
-        @endif
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 card mx-auto my-3 p-5">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Fecha de Renta</th>
+                    <th scope="col">Fecha Devolucion</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Opcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @if(isset($renta[0]->id))
+                    @foreach ($renta as $rent)
+                      <tr>
+                        <th scope="row">{{$rent['json_array']['Vehiculo']['placa']}}</th>
+                        <td>{{$rent['json_array']['Cliente']['nombre']." ".$rent['json_array']['Cliente']['apellido']}}</td>
+                        <td>{{$rent['json_array']['inicio']}}</td>
+                        <td>{{$rent['json_array']['final']}}</td>
+                        <td>{{$rent['estado'] === 1 ? "Activa" : "Finalizada"}}</td>
+                        <td>@if ($rent['estado'] === 1)
+                                <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.show",$rent->id)}}" title="see">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+                                <a class='btn btn-lg ' style='background-color:transparent;' href="{{route("renta.return",$rent->id)}}" title="return">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                            @else
+                                **---**
+                              {{--<a class='btn btn-lg ' style='background-color:transparent;' href="/cliente/' . $this->id . '" title="see">
+                                    <i class="fa fa-lg fa-fw fa-eye"></i>
+                              </a>--}}
+                            @endif
+                        </td>
+                      </tr>
+                    @endforeach
+                @else
+                    <tr>
+                      <th scope="row" colspan="6">No hay rentas realizadas</th>
+                    </tr>
+                @endif
 
 
-        </tbody>
-      </table>
+                </tbody>
+              </table>
+            </div>
+        </div>
     </div>
+</div>
+    
 @stop
 
 @section('css')
