@@ -1,4 +1,4 @@
-<form class="form-row mb-4 mt-4" method="POST" action="{{route('renta.buscarvc')}}">
+<form class="form-row mb-4" method="POST" action="{{route('renta.buscarvc')}}">
     @csrf
     <div class="input-group col">
         <input type="text" name="criterio" class="form-control col">
@@ -22,7 +22,7 @@
         </div>
 
         <div id="collapseTwo" class="collapse @if($vehiculo->id) show @endif" aria-labelledby="headingTwo" data-parent="#accordion-2">
-            <div class="card-body col-">
+            <div class="">
                 @if ($vehiculo->id)
                     <div class="row">
                         <div class="col-6">

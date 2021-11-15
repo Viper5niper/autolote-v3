@@ -15,7 +15,7 @@
     </div>
 </form>
 <div id="accordion">
-    <div class="">
+    <div class=" ">
         <div class="" id="headingOne">
             <h5 class="mb-4">
                 <button class="btn btn-outline-primary col-md-12" data-toggle="collapse" data-target="#collapseOne"

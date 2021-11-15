@@ -21,33 +21,39 @@
 @stop
 
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 card mx-auto my-3 p-5">
+          <table class="table">
+            <thead class="thead">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre de Usuario</th>
+                <th scope="col">Correo Electronico</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($usuarios as $item)
+              <tr>
+                <th scope="row">{{$item->id}}</th>
+                <td>{{$item->name}}</td>
+                <td>{{$item->email}}</td>
+                <td>{{$item->role == 1 ? "Admin" : "Usuario"}}</td>
+                <td>
+                  <a href="{{route('user.edit',$item->id)}}" class="btn btn-outline-info"><i class="fas fa-pen"></i></a>
+                  <a onclick="eliminar('{{route('user.destroy',$item->id)}}');" class="btn btn-outline-danger" data-toggle="modal"
+                    data-target="#DeletedModal"><i class="fas fa-trash"></i></a>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
 
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Nombre de Usuario</th>
-      <th scope="col">Correo Electronico</th>
-      <th scope="col">Tipo</th>
-      <th scope="col">Opciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($usuarios as $item)
-    <tr>
-      <th scope="row">{{$item->id}}</th>
-      <td>{{$item->name}}</td>
-      <td>{{$item->email}}</td>
-      <td>{{$item->role == 1 ? "Admin" : "Usuario"}}</td>
-      <td>
-        <a href="{{route('user.edit',$item->id)}}" class="btn btn-outline-info"><i class="fas fa-pen"></i></a>
-        <a onclick="eliminar('{{route('user.destroy',$item->id)}}');" class="btn btn-outline-danger" data-toggle="modal"
-          data-target="#DeletedModal"><i class="fas fa-trash"></i></a>
-      </td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
 @include('/partials/_modal-deleted',
 ['modal_title'=> 'Eliminar Usuario',
 'modal_message'=>'Esta seguro que desea eliminar el Usuario?','btnTipo'=>'danger',

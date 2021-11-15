@@ -5,14 +5,20 @@
 @section('content_header')
 
 @include('partials._status')
-<div class="row mt-3">
-    <h1 class="col">Clientes</h1>
-    <div class="col">
-    <a class="btn btn-md btn-success float-right" href="{{route('cliente.create')}}">
-        Crear nuevo cliente
-    </a>
+<div class="card">
+  <div class="mx-3 mt-1 mb-3">
+    <div class="row mt-3">
+      <h1 class="col">Clientes</h1>
+      <div class="col">
+        <a class="btn btn-md btn-success float-right" href="{{route('cliente.create')}}">
+            Crear nuevo cliente
+        </a>
+      </div>
     </div>
+  </div>
 </div>
+
+
 @stop
 
 
@@ -21,15 +27,22 @@
 {{-- @include('partials._status') --}}
 
 {{-- Minimal example / fill data using the component slot --}}
-<x-adminlte-datatable class="mt-3" id="table_clientes" :heads="$heads" hoverable>
-    @foreach($config['data'] as $row)
-        <tr>
-            @foreach($heads as $h)
-                <td>{!! $row[$h] !!}</td>
-            @endforeach
-        </tr>
-    @endforeach
-</x-adminlte-datatable>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 card mx-auto my-3 p-5">
+          <x-adminlte-datatable class="mt-3" id="table_clientes" :heads="$heads" hoverable>
+              @foreach($config['data'] as $row)
+                  <tr>
+                      @foreach($heads as $h)
+                          <td>{!! $row[$h] !!}</td>
+                      @endforeach
+                  </tr>
+              @endforeach
+          </x-adminlte-datatable>
+        </div>
+    </div>
+</div>
 
 
 @stop

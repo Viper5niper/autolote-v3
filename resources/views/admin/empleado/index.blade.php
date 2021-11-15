@@ -9,15 +9,18 @@
 @section('content_header')  <!--Contenido de cabecera-->
 
 @include('partials._status')
-<div class="row mt-3">
-    <h1 class="col">Empleados</h1>
-    <div class="col">
-    <a class="btn btn-md btn-success float-right" href="{{route('empleado.create')}}">
-        Crear nuevo empleado
-    </a>
+<div class="card">
+  <div class="mx-3 mt-1 mb-3">
+    <div class="row mt-3">
+      <h1 class="col">Empleados</h1>
+      <div class="col">
+        <a class="btn btn-md btn-success float-right" href="{{route('empleado.create')}}">
+            Crear nuevo empleado
+        </a>
+      </div>
     </div>
+  </div>
 </div>
-
 @stop
 
 @section('content') <!--Contenido de la pagina-->

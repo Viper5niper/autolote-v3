@@ -3,17 +3,26 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Crear cliente</h1>
-@stop
+
 
 @section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-lg-11 card mx-auto my-3 p-5">
+            <h2>Crear Cliente</h2>
+            <hr>
+            <div class="col">
+                <form method="POST" action="{{ route('cliente.store') }}" class="mt-3">
+                    @include('admin.cliente._form',['cliente'=> $cliente])
 
-<form method="POST" action="{{ route('cliente.store') }}" class="mt-3">
+                    <button class="btn btn-primary btn-block btn-lg mt-4" type="submit">Crear cliente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-    @include('admin.cliente._form',['cliente'=> $cliente])
 
-      <button class="btn btn-primary" type="submit">Crear cliente</button>
-</form>
 @stop
 
 @section('css')
