@@ -6,7 +6,7 @@
 
 @include('partials._status')
 
-<div class="card">
+<div class="card mb-0">
   <div class="mx-3 mt-1 mb-3">
     <div class="row mt-3">
       <h1 class="col">Usuarios</h1>
@@ -19,25 +19,38 @@
   </div>
 </div>
 @stop
+@section('plugins.Datatables', true)
+@section('plugins.DatatablesPlugin', true) 
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-lg-11 card mx-auto my-3 p-5">
-          <table class="table">
-            <thead class="thead">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre de Usuario</th>
-                <th scope="col">Correo Electronico</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach ($usuarios as $item)
-              <tr>
-                <th scope="row">{{$item->id}}</th>
+<div class="">
+    <div class="">
+        <div class="col-lg-12 card mx-auto my-1 p-4">
+          @php
+            $heads = [
+              'ID',
+              'Nombre de Usuario',
+              'Correo Electronico',
+              'Tipo',
+              'Opciones',
+            ];
+
+            $config = [
+              'language' => [
+                    "url" => "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+                    "paginate" => [
+                    "next" => '»',
+                    "previous" => '«'
+                    ],
+              ],
+
+              'order' => [[1, 'asc']],
+            ];
+          @endphp
+          <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" striped hoverable beautify >                
+          @foreach($usuarios as $item)
+            <tr>
+             <th scope="row">{{$item->id}}</th>
                 <td>{{$item->name}}</td>
                 <td>{{$item->email}}</td>
                 <td>{{$item->role == 1 ? "Admin" : "Usuario"}}</td>
@@ -46,10 +59,9 @@
                   <a onclick="eliminar('{{route('user.destroy',$item->id)}}');" class="btn btn-outline-danger" data-toggle="modal"
                     data-target="#DeletedModal"><i class="fas fa-trash"></i></a>
                 </td>
-              </tr>
-              @endforeach
-            </tbody>
-          </table>
+            </tr>
+          @endforeach
+          </x-adminlte-datatable>
         </div>
     </div>
 </div>

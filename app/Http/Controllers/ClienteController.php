@@ -14,33 +14,11 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
 
-        $clientes = Cliente::get();
-        //dd($message);
-        //dd($clientes->toJson());
-        $heads = [
-            'id',
-            'nombre',
-            'apellido',
-            'tipo_doc',
-            'doc',
-            'direccion',
-            'telefono',
-            'celular',
-            'licencia',
-            'actions',
-        ];
+        $clientes = Cliente::paginate(16);
 
-        $items = $clientes->map->only($heads);
-
-        $config = [
-            'data' => $items,
-            'order' => [[1, 'asc']],
-            'columns' => [null, null, null, ['orderable' => false]],
-        ];
-
-        return view('admin.cliente.index', ["config" => $config, "heads" => $heads]);
+        return view('admin.cliente.index', compact('clientes'));
     }
 
     /**
@@ -50,7 +28,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        return view('admin.cliente.create',['cliente'=>new Cliente]);
+        return view('admin.cliente.create', ['cliente' => new Cliente]);
     }
 
     /**
@@ -60,14 +38,14 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(SaveClienteRequest $request)
-    {   
+    {
         $validated = $request->validated();
 
-        Cliente::create($validated);        
-        
+        Cliente::create($validated);
+
         return redirect()->route('cliente.index')
-        ->with('message','Cliente creado.')
-        ->with('status','success');
+            ->with('message', 'Cliente creado.')
+            ->with('status', 'success');
     }
 
     /**
@@ -88,7 +66,7 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Cliente $cliente)
-    {   
+    {
         return view('admin.cliente.edit', ['cliente' => $cliente]);
     }
 
@@ -100,14 +78,14 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(SaveClienteRequest $request, $id)
-    {   
+    {
         $validated = $request->validated();
 
         $cliente = Cliente::find($id)->update($validated);
 
         return redirect()->route('cliente.index')
-        ->with('message','Informacion editada.')
-        ->with('status','success');
+            ->with('message', 'Informacion editada.')
+            ->with('status', 'success');
     }
 
     /**
@@ -120,7 +98,7 @@ class ClienteController extends Controller
     {
         Cliente::findOrFail($id)->delete();
         return redirect()->route('cliente.index')
-        ->with('message','Cliente eliminado.')
-        ->with('status','success');
+            ->with('message', 'Cliente eliminado.')
+            ->with('status', 'success');
     }
 }

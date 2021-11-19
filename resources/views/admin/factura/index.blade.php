@@ -15,10 +15,7 @@
 
 @section('content')
 @section('plugins.Datatables', true)
-@section('plugins.DatatablesPlugin', true)
-
-<!-- Codigo php que parcea los datos del contralor para la datatable -->
-    
+@section('plugins.DatatablesPlugin', true)    
 
 <!--Contenido de la pagina-->
 <div class="container">
