@@ -45,6 +45,22 @@ class FacturaController extends Controller
                     $info[$index][] = "Rentas";
                     $info[$index][] = "Rentas";
                     break;
+                case 'STA':
+                    $info[$index][] = "Taller Automotriz";
+                    $info[$index][] = "Servicio de Taller";
+                    break;
+                case 'STP':
+                    $info[$index][] = "Taller de Pintura";
+                    $info[$index][] = "Servicio de Pintura";
+                    break;
+                case 'SC':
+                    $info[$index][] = "CarWash";
+                    $info[$index][] = "**-**";
+                    break;
+                case 'O':
+                    $info[$index][] = "Otros";
+                    $info[$index][] = "Multiples Servicios";
+                    break;
                 default:
                     $info[$index][] = "**--**";
                     $info[$index][] = "**--**";

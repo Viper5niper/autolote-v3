@@ -249,8 +249,8 @@ return [
             'can'  => ['is-admin'],
         ],
         [
-            'text'        => 'Ventas',
-            'url'         => 'admin/ventas',
+            'text'        => 'Servicios',
+            'route'       => 'servicios',
             'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-admin'],
         ],

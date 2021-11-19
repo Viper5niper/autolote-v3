@@ -85,3 +85,6 @@ Route::resource('calculadora', 'CalculadoraController')->name('index', 'calculad
 Route::get('creditos/pay/{param?}', 'CreditoController@credito_pay')->name('credito.pay')->middleware(['auth:sanctum', 'verified']);
 Route::post('creditos/buscar', 'CreditoController@buscar_credito')->name('credito.buscar')->middleware(['auth:sanctum', 'verified']);
 Route::resource('creditos', 'CreditoController')->name('index', 'creditos')->middleware(['auth:sanctum', 'verified']);
+
+/** Rutas Servicios */
+Route::resource('servicios', 'ServicioController')->name('index','servicios')->middleware(['auth:sanctum', 'verified']);
