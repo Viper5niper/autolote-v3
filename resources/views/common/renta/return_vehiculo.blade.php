@@ -40,10 +40,13 @@
 
     </tbody>
   </table>
-@php $hoy=new DateTime();$hoy->settime(0,0);//se toma la fecha de hoy a las 0 horas
+@php 
+
+  $hoy=new DateTime();$hoy->settime(0,0);//se toma la fecha de hoy a las 0 horas
   $final = new DateTime($renta['json_array']['final']);//se toma la fecha de entrega del vehiculo
   $ndias=0.00;$mora=0.00;//se pone por default 0 dias de retraso y 0 de mora
   $msg = "Devolver";//mensaje segun si hay mora o no XD
+  
   if($hoy>$final){//si la fecha de hoy sobrepasa la fecha de entrega entonces entrego tarde
     $diferencia=$final->diff($hoy);//se saca cuantos dias de retraso tiene
     $ndias=$diferencia->days;//se saca la diferencia en dias
@@ -51,7 +54,9 @@
     $mora = $mora*$ndias;$mora=round($mora, 2);//y se multiplica por cada dia de mora
     $msg="Devolver y Facturar Mora";//pa que cambie el texto diciendo que tambien se facturara en casod e haber mora
   }
+
 @endphp
+
 <div class="form-row justify-content-center ">
     <div class="form-group col-md-4 first" >
         <label for="n_dias">Dias Retraso</label>

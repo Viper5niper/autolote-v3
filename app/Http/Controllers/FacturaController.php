@@ -18,7 +18,44 @@ class FacturaController extends Controller
     {
         $facturas = Factura::paginate(16);
 
-        return view("/admin/factura/index", compact('facturas'));
+        $info = array();
+
+        foreach ($facturas as $index => $factura) {
+
+            $btnAccion = "<a href='{{route('factura.show',$factura->id)}}' class='btn btn-info'>Ver detalles</a>";
+
+            $info[$index][] = $factura->n_factura;
+            $info[$index][] = $factura->payload['Cliente']['nombre'] . " " . $factura->payload['Cliente']['apellido'];
+            $info[$index][] = $factura->tipo;
+
+            switch ($factura->area_factura) {
+                case 'V':
+                    $info[$index][] = "Ventas";
+                    if ($factura->credito_id != null) {
+                        $info[$index][] = "Venta a Credito";
+                    } else {
+                        $info[$index][] = "Venta de Contado";
+                    }
+                    break;
+                case 'LC':
+                    $info[$index][] = "Creditos";
+                    $info[$index][] = "Pago de Cuota";
+                    break;
+                case 'R':
+                    $info[$index][] = "Rentas";
+                    $info[$index][] = "Rentas";
+                    break;
+                default:
+                    $info[$index][] = "**--**";
+                    $info[$index][] = "**--**";
+            }
+
+            $info[$index][] = "$" . $factura->payload['monto'];
+            $info[$index][] = $factura->created_at;
+            $info[$index][] = '<nobr>' . $btnAccion . '</nobr>';
+        }
+
+        return view("/admin/factura/index", compact('info'));
     }
 
     /**
