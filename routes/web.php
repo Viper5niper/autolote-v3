@@ -33,7 +33,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index_das
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Route::get('/home','dash.index')->name('home');
 
-Route::resource('cliente', 'ClienteController')->middleware(['auth:sanctum', 'verified']);
+Route::resource('cliente', 'ClienteController')->name('index','cliente')->except(['destroy'])->middleware(['auth:sanctum', 'verified']);
 Route::get('cliente/delete/{id}', [ClienteController::class, 'destroy'])
     ->name('cliente.destroy')->middleware(['auth:sanctum', 'verified']);
 
@@ -59,6 +59,7 @@ Route::post('venta/buscarVC', 'VentaController@buscarVC')
 Route::resource('venta', 'VentaController')->name('index', 'venta')->middleware(['auth:sanctum', 'verified']);
 Route::get('/venta/crear/{vehiculo_id?}/{cliente_id?}', 'VentaController@create_venta_vehiculo')->name('venta.vehiculo')->middleware(['auth:sanctum', 'verified']);
 Route::post('/venta/vehiculo', 'VentaController@store_venta_vehiculo')->name('store.venta.vehiculo')->middleware(['auth:sanctum', 'verified']);
+Route::post('/venta/servicio', 'VentaController@store_venta_servicio')->name('store.venta.servicio')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Factura */
 Route::resource('factura', 'FacturaController')->name('index', 'factura')->middleware(['auth:sanctum', 'verified']);
@@ -91,4 +92,9 @@ Route::resource('creditos', 'CreditoController')->name('index', 'creditos')->mid
 Route::resource('servicios', 'ServicioController')->name('index','servicios')->middleware(['auth:sanctum', 'verified']);
 
 /** Rutas Ventas no facturadas */
-Route::resource('ventas/servicios', 'VentasNoFacturadasController')->name('index','ventasnofacturadas')->middleware(['auth:sanctum', 'verified']);
+Route::resource('sell', 'VentasNoFacturadasController')->names([
+    'index' => 'ventanf',
+    'create' => 'ventanf.create',
+    'show' => 'ventanf.show',
+    'store' => 'ventanf.store',
+])->middleware(['auth:sanctum', 'verified']);

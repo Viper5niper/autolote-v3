@@ -59,6 +59,10 @@
                     @include('common.factura.partials._cuota_table')
                   @break
 
+                  @case('O')
+                    @include('common.factura.partials._servicios_table')
+                  @break
+
                   @default
                     
                 @endswitch

@@ -297,19 +297,7 @@ return [
                 ],
             ],
         ],
-        /* Para encargados de sectores */
-        [
-            'text'        => 'Centro de servicios',
-            'url'         => 'admin/rentas',
-            'icon'        => 'fas fa-fw fa-hand-holding',
-            'can'  => ['is-sector'],
-        ],
-        [
-            'text'        => 'Reportes',
-            'url'         => 'admin/rentas',
-            'icon'        => 'fas fa-fw fa-dollar-sign',
-            'can'  => ['is-sector'],
-        ],
+
         ['header' => 'ADMINISTRACION', 'can'  => ['is-admin'],],
         [
             'text'        => 'Vehiculos',
@@ -319,7 +307,7 @@ return [
         ],
         [
             'text'        => 'Clientes',
-            'route'       => 'cliente.index',
+            'route'       => 'cliente',
             'icon'        => 'fas fa-fw fa-user-friends',
             'active' => ['pages', 'cliente', 'cliente*', 'regex:@^cliente/[0-9]+$@'],
             'can'  => ['is-admin'],
@@ -361,6 +349,21 @@ return [
                 ],
             ],
         ],
+
+        /* Para encargados de sectores */
+        [
+            'text'        => 'Centro de servicios',
+            'route'       => 'ventanf',
+            'icon'        => 'fas fa-fw fa-hand-holding',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Reportes',
+            'url'         => 'admin/rentas',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-sector'],
+        ],
+        
 
         /** Para usuarios de servicios */
         [

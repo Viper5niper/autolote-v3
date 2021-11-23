@@ -45,9 +45,10 @@ class ServicioController extends Controller
                 'descripcion' => 'required',
             ]
         );
+
         $fields = toUppercase($fields);
         $fields['descuento'] = $fields['descuento'] / 100;
-        $correlativo = Servicio::where('cod', 'like', $fields['area_empresa'].'%')->orderBy('cod', 'asc')->limit(1)->get();
+        $correlativo = Servicio::where('cod', 'like', $fields['area_empresa'].'%')->orderBy('cod', 'desc')->limit(1)->get();
 
         
         if(empty($correlativo[0])){

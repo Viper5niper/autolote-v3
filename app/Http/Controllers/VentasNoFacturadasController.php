@@ -14,7 +14,8 @@ class VentasNoFacturadasController extends Controller
      */
     public function index()
     {
-        //
+        $ventas = Ventas_no_Facturadas::paginate(10);
+        return view('common.ventas_no_facturadas.index',compact('ventas'));
     }
 
     /**
@@ -35,7 +36,18 @@ class VentasNoFacturadasController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        $json_array = [];
+        $json_array['nombre'] = $request['nombre'];
+        $json_array['apellido'] = $request['apellido'];
+        $json_array['doc'] = $request['doc'];
+        $json_array['placa'] = $request['placa'];
+        $json_array['servicios'] = json_decode($request['servicios']);
+
+        $ventas = Ventas_no_Facturadas::create(['json_array' => $json_array]);
+        
+        return redirect()->route('dashboard')
+        ->with('message', 'Venta Registrada con exito')
+        ->with('status', 'success');
     }
 
     /**
@@ -44,9 +56,10 @@ class VentasNoFacturadasController extends Controller
      * @param  \App\Models\Ventas_no_Facturadas  $ventas_no_Facturadas
      * @return \Illuminate\Http\Response
      */
-    public function show(Ventas_no_Facturadas $ventas_no_Facturadas)
+    public function show($id)
     {
-        //
+        $venta = Ventas_no_Facturadas::findOrFail($id);
+        return view('common.ventas_no_facturadas.show',compact('venta'));
     }
 
     /**

@@ -16,6 +16,7 @@ class CreateVentasNoFacturadasTable extends Migration
         Schema::create('ventas_no__facturadas', function (Blueprint $table) {
             $table->id();
             $table->longText('json_array');
+            $table->timestamps();
         });
     }
 

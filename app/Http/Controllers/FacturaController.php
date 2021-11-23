@@ -132,6 +132,12 @@ class FacturaController extends Controller
             } else {
                 return view('/common/factura/impresion/FacturaCreditoCuota', compact('factura'));
             }
+        } else if ($factura->area_factura === 'O'){
+            if ($factura->tipo == 'consumidor') {
+                return view('/common/factura/impresion/FacturaServicios', compact('factura'));
+            } else {
+                return view('/common/factura/impresion/FacturaCreditoServicio', compact('factura'));
+            }
         }
     }
 

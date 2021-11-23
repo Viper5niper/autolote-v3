@@ -131,8 +131,8 @@
       </div>
   </div>
   @include('/partials/_modal-deleted',
-    ['modal_title'=> 'Eliminar Usuario',
-    'modal_message'=>'Esta seguro que desea eliminar el Usuario?','btnTipo'=>'danger',
+    ['modal_title'=> 'Eliminar Servicio',
+    'modal_message'=>'Esta seguro que desea eliminar el servicio?','btnTipo'=>'danger',
     'ruta'=>''])
 @stop
 
