@@ -24,9 +24,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dash.index');
-})->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index_dashboard'])->name('dashboard')->middleware(['auth:sanctum', 'verified']);;
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dash.index');
+// })->name('dashboard');
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -88,3 +89,6 @@ Route::resource('creditos', 'CreditoController')->name('index', 'creditos')->mid
 
 /** Rutas Servicios */
 Route::resource('servicios', 'ServicioController')->name('index','servicios')->middleware(['auth:sanctum', 'verified']);
+
+/** Rutas Ventas no facturadas */
+Route::resource('ventas/servicios', 'VentasNoFacturadasController')->name('index','ventasnofacturadas')->middleware(['auth:sanctum', 'verified']);

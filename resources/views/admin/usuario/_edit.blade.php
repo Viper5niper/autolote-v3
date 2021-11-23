@@ -35,9 +35,15 @@
             @if ($usuario->role === 1)
             <option value="1" selected>Admin</option>
             <option value="2">Usuario</option>
-            @else
+            <option value="3">Servicios</option>
+            @elseif($usuario->role === 2)
             <option value="1">Admin</option>
             <option value="2" selected>Usuario</option>
+            <option value="3">Servicios</option>
+            @else
+            <option value="1">Admin</option>
+            <option value="2">Usuario</option>
+            <option value="3" selected>Servicios</option>
             @endif
         </select>
         @error('role')

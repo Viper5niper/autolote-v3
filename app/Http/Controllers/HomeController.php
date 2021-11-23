@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Servicio;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('admin.index');
+    }
+
+    public function index_dashboard()
+    {
+
+        if (auth()->user()->role === 1){
+            return view('admin.index');
+        } else if(auth()->user()->role === 2){
+            return view('dash.index');
+        } else if (auth()->user()->role === 3){
+            $servicios = Servicio::get();
+            return view('dash.dashboard_3',compact('servicios'));
+    }
+       
     }
 }

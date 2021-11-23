@@ -41,6 +41,7 @@
         <option disabled selected>Seleccione un Rol</option>
         <option value="1">Admin</option>
         <option value="2">Usuario</option>
+        <option value="3">Servicios</option>
     </select>
     @error('role')
     <div class="invalid-feedback">{{ $message }}</div>

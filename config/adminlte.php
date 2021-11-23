@@ -241,7 +241,7 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],*/
-        ['header' => 'TRANSACCIONES'],
+        ['header' => 'TRANSACCIONES','can'  => ['is-admin'],'can'  => ['is-sector'],],
         [
             'text'        => 'Inicio',
             'url'         => '/dashboard',
@@ -362,6 +362,14 @@ return [
             ],
         ],
 
+        /** Para usuarios de servicios */
+        [
+            'text'        => 'Servicios',
+            'route'         => 'servicios',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-service'],
+        ],
+
         ['header' => 'AJUSTES'],
         [
             'text' => 'Perfil',
@@ -369,6 +377,7 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
 
+        
     ],
 
     /*
