@@ -28,7 +28,7 @@
     @forelse($empleados as $empleado)
         <div class="card mx-2" >
             <img style="width: 18rem;height:18rem" src="{{!empty($empleado->images) ? $empleado->path.$empleado->images[0]
-            : 'img/profile.png'}}" 
+            : '/img/profile.png'}}" 
             class="card-img-top rounded mx-auto d-block" alt="imagen de auto">
             <div class="card-body">
                 <h5 class="card-title">{{$empleado->doc}}</h5>
@@ -41,7 +41,7 @@
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">
                     <a href="{{route('empleado.show',$empleado->id)}}" class="btn btn-info">Ver</a>
-                    <a href="{{route('empleado.create')}}" class="btn btn-outline-success">Modificar</a>
+                    <a href="{{route('empleado.edit',$empleado->id)}}" class="btn btn-outline-success">Modificar</a>
                 </div>
                 
             </div>

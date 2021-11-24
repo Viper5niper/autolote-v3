@@ -43,7 +43,7 @@ class ClienteController extends Controller
 
         Cliente::create($validated);
 
-        return redirect()->route('cliente.index')
+        return redirect()->route('cliente')
             ->with('message', 'Cliente creado.')
             ->with('status', 'success');
     }
@@ -83,7 +83,7 @@ class ClienteController extends Controller
 
         $cliente = Cliente::find($id)->update($validated);
 
-        return redirect()->route('cliente.index')
+        return redirect()->route('cliente')
             ->with('message', 'Informacion editada.')
             ->with('status', 'success');
     }
@@ -97,7 +97,7 @@ class ClienteController extends Controller
     public function destroy($id)
     {
         Cliente::findOrFail($id)->delete();
-        return redirect()->route('cliente.index')
+        return redirect()->route('cliente')
             ->with('message', 'Cliente eliminado.')
             ->with('status', 'success');
     }

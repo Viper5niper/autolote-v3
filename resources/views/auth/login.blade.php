@@ -23,7 +23,11 @@
     {{ session('status') }}
 </div>
 @endif
-
+@if (Route::has('login') && Auth::check())
+    <script>
+        window.location.href = '{{route("dashboard")}}'; //using a named route
+    </script>        
+@endif
 <body>
     <main class="login-form mt-5">
         <div class="container">

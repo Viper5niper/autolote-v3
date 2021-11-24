@@ -24,12 +24,14 @@
             <a class="btn btn-md btn-outline-success" href="{{route('renta.create',$vehiculo->id)}}">
                 Rentar
             </a>
+            @if(auth()->user()->role === 1)
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
                 Editar
             </a>
             <a class="btn btn-md btn-outline-danger" data-toggle="modal" data-target="#DeletedModal">
                 Eliminar
             </a>
+            @endif
         </div>
     </div>
 </div>

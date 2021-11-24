@@ -21,7 +21,7 @@
       @include('admin.cliente._form',['cliente'=> $cliente])
 
       <button class="btn btn-primary" type="submit">Guardar Cambios</button>
-      <a class="btn btn-secondary" href="{{route('cliente.index')}}">Ir a Lista de clientes</a>
+      <a class="btn btn-secondary" href="{{route('cliente')}}">Ir a Lista de clientes</a>
       
 </form>
 @stop

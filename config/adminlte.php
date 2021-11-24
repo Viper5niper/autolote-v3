@@ -241,7 +241,7 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],*/
-        ['header' => 'TRANSACCIONES','can'  => ['is-admin'],'can'  => ['is-sector'],],
+        ['header' => 'TRANSACCIONES','can' => ['is-admin']],
         [
             'text'        => 'Inicio',
             'url'         => '/dashboard',
@@ -272,7 +272,7 @@ return [
             'icon'        => 'fa fa-calculator',
             'can'  => ['is-admin'],
         ],
-        [
+       /* [
             'text'    => 'Servicios',
             'icon'    => 'fas fa-fw fa-hand-holding',
             'can'  => ['is-admin'],
@@ -296,7 +296,7 @@ return [
                     'shift'   => 'ml-3',
                 ],
             ],
-        ],
+        ],*/
 
         ['header' => 'ADMINISTRACION', 'can'  => ['is-admin'],],
         [
@@ -352,20 +352,51 @@ return [
 
         /* Para encargados de sectores */
         [
+            'text'        => 'Inicio',
+            'url'         => '/dashboard',
+            'icon'        => 'fas fa-fw fa-home',
+            'can'  => ['is-sector'],
+        ],
+        [
             'text'        => 'Centro de servicios',
             'route'       => 'ventanf',
             'icon'        => 'fas fa-fw fa-hand-holding',
             'can'  => ['is-sector'],
         ],
         [
-            'text'        => 'Reportes',
-            'url'         => 'admin/rentas',
+            'text'        => 'Pago de Cuota',
+            'route'         => 'credito.pay',
             'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-sector'],
         ],
-        
+        [
+            'text'        => 'Rentas',
+            'route'         => 'renta',
+            'icon'        => 'fas fa-fw fa-car-side',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Vehiculos',
+            'route'       => 'vehiculo',
+            'icon'        => 'fas fa-fw fa-car',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Creditos',
+            'route'         => 'creditos',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Calculadora',
+            'route'         => 'calculadora',
+            'icon'        => 'fa fa-calculator',
+            'can'  => ['is-sector'],
+        ],
 
+        
         /** Para usuarios de servicios */
+        
         [
             'text'        => 'Servicios',
             'route'         => 'servicios',
