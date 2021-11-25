@@ -24,8 +24,8 @@
 @endphp
 @foreach ($creditos as $index => $credito)
   @php
-    $btnShow = "<a href='{{route('creditos.show',$credito->id)}}' class='btn btn-outline-info'><i class='fas fa-eye'></i></a>";
-    $btnPay = "<a href='{{route('credito.pay',$credito->id)}}' class='btn btn-outline-danger'><i class='fas fa-shopping-cart'></i></a>";
+    //$btnShow = "<a href='".route('credito.show',$credito->id)."' class='btn btn-outline-info'><i class='fas fa-eye'></i></a>";
+    $btnPay = "<a href='".route('credito.pay',$credito->id)."' class='btn btn-outline-danger'><i class='fas fa-shopping-cart'></i></a>";
                 
     $info[$index][] = $credito->id;
     $info[$index][] = $credito->cliente->nombre." ".$credito->cliente->apellido;
@@ -33,7 +33,7 @@
     $info[$index][] = ($credito->interes * 100)."%";
     $info[$index][] = "$ ".$credito['json_array']['saldo'];
     $info[$index][] = $credito->pendiente === 1 ? "Pendiente" : "Pagado";
-    $info[$index][] = "<nobr>".$btnShow." ".$btnPay."</nobr>"
+    $info[$index][] = "<nobr>"/*.$btnShow." "*/.$btnPay."</nobr>"
                 
   @endphp
 @endforeach

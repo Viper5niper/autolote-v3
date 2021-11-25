@@ -44,7 +44,7 @@
                 <p>Nombre:  {{$info['cliente']->nombre." ".$info['cliente']->apellido}}</p>
                 <p>#Credito: {{$info['credito']->id}}</p> {{-- esta parte carga el numero de credito y el nombre de la persona --}}
             </div>
-            <form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->i : '0'])}}" method="POST" class="form-horizontal">
+            <form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->id : '0'])}}" method="POST" class="form-horizontal">
                 @csrf
                 @method('PATCH')
             <div class="form-row">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="form-group col-md-8 first">
                     <label for="descripcion">Descripcion</label>
-                    <input type="number" accept="any" name="descripcion" class="form-control @error('descripcion') is-invalid 
+                    <input type="text"  name="descripcion" class="form-control @error('descripcion') is-invalid 
                     @enderror" id="descripcion" value="{{old('descripcion')}}">
                     @error('descripcion')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -71,7 +71,7 @@
                     @if(!isset($info['credito']->json_array['historial_pagos']))
                         <input type="number" accept="any" name="letra" class="form-control" id="letra" value="1" hidden>
                     @else
-                        <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{$info['credito']->json_array['historial_pagos'] + 1}}" hidden>
+                        <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{count($info['credito']->json_array['historial_pagos']) + 1}}" hidden>
                     @endif
                     <input type="text" name="mora" id="mora" hidden>
                     <input type="text" name="total" id="total" hidden>
@@ -100,13 +100,16 @@
                     @if(isset($info['credito']->json_array['historial_pagos']))
                         @foreach ($info['credito']->json_array['historial_pagos'] as $pago)
                             <tr>
-                                <th scope="row">{{$pago->letra}}</th>
-                                <td>{{$pago->fecha}}</td>
-                                <td>{{$pago->dias}}</td>
-                                <td>{{$pago->mora}}</td>
-                                <td>{{$pago->interes}}</td>
-                                <td>{{$pago->abonado}}</td>
-                                <td>{{$pago->saldo}}</td>
+                                <th scope="row">{{$pago['letra']}}</th>
+                                <td>{{$pago['fecha']}}</td>
+                                <td>{{$pago['dias']}}</td>
+                                <td>{{$pago['mora']}}</td>
+                                <td>{{$pago['interes']}}</td>
+                                @if ($info['credito']['json_array']['tipo'] === 'credito')
+                                <td>{{$pago['iva']}}</td>
+                                @endif
+                                <td>{{$pago['abonado']}}</td>
+                                <td>{{$pago['saldo']}}</td>
                             </tr>
                         @endforeach
                     @else
@@ -133,6 +136,9 @@
 
 @endsection
 @section('js')
+<script type="text/javascript">
+    const credit = @json($info['credito']);
+</script>
 <script src="https://unpkg.com/imask"></script>
 <script src="/js/utilities.js"></script>
 <script src="/js/rentas.js"></script>
