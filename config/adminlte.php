@@ -376,6 +376,12 @@ return [
             'can'  => ['is-sector'],
         ],
         [
+            'text'        => 'Crear Cliente',
+            'route'         => 'cliente.create',
+            'icon'        => 'fas fa-fw fa-user-friends',
+            'can'  => ['is-sector'],
+        ],
+        [
             'text'        => 'Vehiculos',
             'route'       => 'vehiculo',
             'icon'        => 'fas fa-fw fa-car',

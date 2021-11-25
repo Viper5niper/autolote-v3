@@ -109,7 +109,22 @@ class RentaController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+       
+        if($request->n_dias === "0"){
+            $renta = Renta::find($id);
+            $vehiculo = Vehiculo::find($renta['vehiculo_id']);
+
+            $renta->where('id',$id)->update(['estado'=>'0']);
+            $vehiculo->where('id', $vehiculo['id'])->update(['estado' => 'D']);
+
+            return redirect()->route('renta', $id)
+            ->with('message', 'Vehiculo Devuelto con exito')
+            ->with('status', 'success');
+        }else{
+            return redirect()->route('renta', $id)
+            ->with('message', 'Upss Algo Salio Mal')
+            ->with('status', 'danger');
+        }
     }
 
     public function destroy($id)

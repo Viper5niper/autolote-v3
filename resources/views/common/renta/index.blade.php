@@ -55,9 +55,9 @@
       <td>@if($rent['estado'] === 1 )
         <h5><span class="badge badge-success">Activa</span></h5> @else  <h5><span class="badge badge-secondary">Finalizada</span></h5> @endif</td>
       <td>@if ($rent['estado'] === 1)
-            <a class='btn btn-outline-info' href="{{route("renta.show",$rent->id)}}" title="see">
+            {{-- <a class='btn btn-outline-info' href="{{route("renta.show",$rent->id)}}" title="see">
               <i class="fa fa-eye"></i>
-            </a>
+            </a> --}}
             <a class='btn btn-outline-primary' href="{{route("renta.return",$rent->id)}}" title="return">
               <i class="fa fa-undo"></i>
             </a>

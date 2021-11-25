@@ -56,8 +56,10 @@
   }
 
 @endphp
-
-<div class="form-row justify-content-center ">
+<form action="{{route('renta.update',$renta->id)}}" method="POST">
+  @csrf
+  @method('PATCH')
+  <div class="form-row justify-content-center ">
     <div class="form-group col-md-4 first" >
         <label for="n_dias">Dias Retraso</label>
         <input type="number" readonly accept="any" name="n_dias" class="form-control @error('n_dias') is-invalid
@@ -79,6 +81,7 @@
   <div class="form-button pt-4"> <button type="submit"
       class="btn btn-primary btn-block btn-lg"><span>{{$msg}}</span></button> </div>
   </div>
+</form>
   <!-- VAYA we aca creas un form que llame auna wea nose como manejan que desencadene el evento de guardar
     hace que tome el campo de mora y dias y cualquiera de los que ocupes en los de la factura de Rentas
     y haces algo primero evaluas si la mora es >0 si es verdadero entonces solo mandas a hacer un Update
