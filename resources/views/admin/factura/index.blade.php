@@ -10,7 +10,13 @@
 @stop
 
 @section('content_header')
-    <!--Contenido de cabecera-->
+<div class="card mb-0">
+  <div class="mx-3 mt-1 mb-3">
+    <div class="row mt-3">
+      <h1 class="col">Facturas</h1>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('content')
@@ -18,53 +24,47 @@
 @section('plugins.DatatablesPlugin', true)    
 
 <!--Contenido de la pagina-->
-<div class="container">
-    <div class="row">
-        <div class="col-12 card d-flex justify-content-center mx-auto p-3">
-            <h2>Facturar</h2>
-        </div>
-        <div class="col-12 card pt-3 pb-3">
-            {{-- Setup data for datatables --}}
-            @php
-                $heads = [
-                    '# Factura',
-                    'Cliente',
-                    'Tipo',
-                    'Area',
-                    'Tipo de Servicio',
-                    'Monto',
-                    'Fecha',
-                    'Opcion',
-                ];
+    <div class="col-lg-12 card pt-3 pb-3">
+        {{-- Setup data for datatables --}}
+        @php
+            $heads = [
+                '# Factura',
+                'Cliente',
+                'Tipo',
+                'Area',
+                'Tipo de Servicio',
+                'Monto',
+                'Fecha',
+                'Opcion',
+            ];
 
-                $config = [
-                    'language' => [
-                        "url" => "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
-                        "paginate" => [
-                            "next" => '»',
-                            "previous" => '«'
-                        ],
+            $config = [
+                'language' => [
+                    "url" => "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+                    "paginate" => [
+                        "next" => '»',
+                        "previous" => '«'
                     ],
+                ],
 
-                    'order' => [[1, 'asc']],
-                   
-                    
-                ];
+                'order' => [[1, 'asc']],
+                
+                
+            ];
 
-            @endphp
-    
-            <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" striped hoverable beautify with-buttons>                
-               @foreach($info as $row)
-                    <tr>
-                        @foreach($row as $cell)
-                            <td>{!! $cell !!}</td>
-                        @endforeach
-                    </tr>
-                @endforeach
-            </x-adminlte-datatable>               
-        </div>
+        @endphp
+
+        <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" striped hoverable beautify with-buttons>                
+            @foreach($info as $row)
+                <tr>
+                    @foreach($row as $cell)
+                        <td>{!! $cell !!}</td>
+                    @endforeach
+                </tr>
+            @endforeach
+        </x-adminlte-datatable>               
     </div>
-</div>
+
 @endsection
 
 @section('css')

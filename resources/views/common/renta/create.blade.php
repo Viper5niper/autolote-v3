@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-11 card mx-auto my-3 p-5">
+        <div class="col-lg-12 card mx-auto my-3 p-5">
             <h2>Renta Vehiculo</h2>
             <hr>
             <div class="col" id="ac1">
