@@ -3,21 +3,28 @@
 @section('title', 'Vehiculo')
 
 @section('content_header')
-<pre>
-@php
-    if(!empty($vehiculo->rentas)){
-        print_r($vehiculo->rentas);   
-    }
-     
-@endphp
-</pre>
 <!--Contenido de cabecera-->
-<div class="d-flex p-2 bd-highlight">
-    <div class="col-lg-12">
-        <div class="float-left mb-3">
-            <h1>Informacion del Vehiculo</h1>
+<div class="card">
+  <div class="mx-3 mt-1 mb-3">
+    <div class="row mt-3">
+      <h1 class="col">Informacion del Vehiculo</h1>
+    </div>
+  </div>
+</div>
+@stop
+@section('content')
+<div class="container">
+    <div class="card mx-auto my-3 p-5">
+        <div class="row">
+            @if(!empty($vehiculo->images))
+            <div class="col-12 col-lg-6 fotorama mx-auto" data-allowfullscreen="true" data-nav="thumbs">
+                @foreach ($vehiculo->images as $image)
+                <a href=""><img src="{{$vehiculo->path.$image}}" width="50px" height="50px"></a>
+                @endforeach
+            </div>
+            @endif
         </div>
-        <div class="btn-group float-right" role="group" aria-label="">
+        <div class="btn-group col mt-4 mb-4 mx-auto" role="group" aria-label="">
             <a class="btn btn-md btn-outline-success" href="{{route('factura',$vehiculo)}}">
                 Vender
             </a>
@@ -33,28 +40,27 @@
             </a>
             @endif
         </div>
+        <table class="table">
+                <thead class="thead">
+                <tr>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Año</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>{{$vehiculo->placa}}</th>
+                    <td>{{$vehiculo->marca}}</td>
+                    <td>{{$vehiculo->modelo}}</td>
+                    <td>{{$vehiculo->anio}}</td>
+                </tr>
+                </tbody>
+            </table>
     </div>
 </div>
 
-@stop
-@section('content')
-<div class="container">
-    <div class="row">
-        @if(!empty($vehiculo->images))
-        <div class="col-12 col-lg-6 fotorama" data-allowfullscreen="true" data-nav="thumbs">
-            @foreach ($vehiculo->images as $image)
-            <a href=""><img src="{{$vehiculo->path.$image}}" width="144" height="96"></a>
-            @endforeach
-        </div>
-        @endif
-        <div class="col-12 col-lg-6">
-            {{$vehiculo->placa}}
-            {{$vehiculo->marca}}
-            {{$vehiculo->modelo}}
-            {{$vehiculo->anio}}
-        </div>
-    </div>
-</div>
 
 @include('/partials/_modal-deleted',
 ['modal_title'=> 'Eliminar Vehiculo '.$vehiculo->placa,

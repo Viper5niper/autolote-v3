@@ -7,8 +7,6 @@
 @stop
 
 @section('content_header')  <!--Contenido de cabecera-->
-
-@include('partials._status')
 <div class="card">
   <div class="mx-3 mt-1 mb-1 pb-3">
     <div class="row mt-3">
@@ -16,6 +14,8 @@
     </div>
   </div>
 </div>
+@include('partials._status')
+
 @stop
 @section('plugins.Datatables', true)
 @section('plugins.DatatablesPlugin', true)    
@@ -39,42 +39,41 @@
 @endforeach
 
 @section('content') <!--Contenido de la pagina-->
-  <div class="">
-      <div class="col-12 card pt-3 pb-3">
-        @php
-          $heads = [
-            '# Credito',
-            'Cliente',
-            'Monto',
-            'Interes',
-            'Saldo Actual',
-            'Estado',
-            'Opcion',
-          ];
+    <div class="col-12 card pt-3 pb-3">
+      @php
+        $heads = [
+          '# Credito',
+          'Cliente',
+          'Monto',
+          'Interes',
+          'Saldo Actual',
+          'Estado',
+          'Opcion',
+        ];
 
-          $config = [
-            'language' => [
-                  "url" => "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
-                  "paginate" => [
-                  "next" => '»',
-                  "previous" => '«'
-                  ],
-            ],
+        $config = [
+          'language' => [
+                "url" => "//cdn.datatables.net/plug-ins/1.11.3/i18n/es-mx.json",
+                "paginate" => [
+                "next" => '»',
+                "previous" => '«'
+                ],
+          ],
 
-            'order' => [[1, 'asc']],
-          ];
-        @endphp
-        <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" striped hoverable beautify with-buttons>                
-          @foreach($info as $row)
-            <tr>
-              @foreach($row as $cell)
-                <td>{!! $cell !!}</td>
-              @endforeach
-            </tr>
-          @endforeach
-        </x-adminlte-datatable>               
-      </div>
-  </div>
+          'order' => [[1, 'asc']],
+        ];
+      @endphp
+      <x-adminlte-datatable id="table1" :heads="$heads" :config="$config" head-theme="light" striped hoverable beautify with-buttons>                
+        @foreach($info as $row)
+          <tr>
+            @foreach($row as $cell)
+              <td>{!! $cell !!}</td>
+            @endforeach
+          </tr>
+        @endforeach
+      </x-adminlte-datatable>               
+    </div>
+
 
 @endsection
 @section('js')

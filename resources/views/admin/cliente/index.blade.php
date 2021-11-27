@@ -21,7 +21,7 @@
 @section('content')
 <div class="">
     <div class="">
-        <div class="col-lg-12 card mx-auto my-3 p-4">
+        <div class="col-lg-12 card mx-auto p-4">
           @php
 
             $heads = [
