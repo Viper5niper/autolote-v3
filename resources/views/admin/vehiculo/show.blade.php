@@ -25,7 +25,7 @@
             @endif
         </div>
         <div class="btn-group col mt-4 mb-4 mx-auto" role="group" aria-label="">
-            <a class="btn btn-md btn-outline-success" href="{{route('factura',$vehiculo)}}">
+            <a class="btn btn-md btn-outline-success" href="{{route('venta.vehiculo',$vehiculo->id)}}">
                 Vender
             </a>
             <a class="btn btn-md btn-outline-success" href="{{route('renta.create',$vehiculo->id)}}">
