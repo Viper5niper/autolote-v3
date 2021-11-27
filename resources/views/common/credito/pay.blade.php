@@ -79,10 +79,9 @@
                 @endif
                 <input type="text" name="mora" id="mora" hidden>
                 <input type="text" name="total" id="total" hidden>
-                <div class="row">
-                    <div class="col"> 
-                        <button type="submit" class="btn btn-primary btn-block">Pagar y Facturar</button> 
-                    </div>
+                <div class="col">
+                    <br> 
+                    <button type="submit" class="btn btn-primary btn-block mt-2">Pagar y Facturar</button> 
                 </div>
             @endif 
         </div>

@@ -76,7 +76,7 @@
     <input type="text" name="tipo" value="{{$renta['json_array']['tipo']}}" hidden>
     <input type="text" name="ncr" value="{{$renta['json_array']['ncr']}}" hidden>
     <input type="text" name="total" value="{{$total}}" hidden>
-    <div class="form-row justify-content-center ">
+    <div class="form-row">
       <div class="form-group col-md-4 first" >
           <label for="n_dias">Dias Retraso</label>
           <input type="number" readonly accept="any" name="n_dias" class="form-control @error('n_dias') is-invalid
@@ -93,7 +93,7 @@
           <div class="invalid-feedback">{{ $message }}</div>
           @enderror
       </div>
-      @if ($factura);
+      @if ($factura)
       <div class="form-group col-md-4 first">
         <label for="n_factura">N Factura</label>
         <input type="number" name="n_factura" class="form-control @error('n_factura') is-invalid
