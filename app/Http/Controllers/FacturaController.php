@@ -22,7 +22,7 @@ class FacturaController extends Controller
 
         foreach ($facturas as $index => $factura) {
 
-            $btnAccion = "<a href='{{route('factura.show',$factura->id)}}' class='btn btn-info'>Ver detalles</a>";
+            $btnAccion = "<a href='".route('factura.show',$factura->id)."' class='btn btn-info'>Ver detalles</a>";
 
             $info[$index][] = $factura->n_factura;
             $info[$index][] = $factura->payload['Cliente']['nombre'] . " " . $factura->payload['Cliente']['apellido'];
