@@ -73,20 +73,20 @@
         
           <input class="array" type="hidden" id="data-chart" name="data" value="{{ $servicios }}">
         <div class="col-12 card pt-3 pb-3">
-          <div>
             <form action="{{route('ventanf.store')}}" method="POST">
                 @csrf
-               
-                <input type="text" name="nombre" id="" placeholder="Nombre"> 
-                <input type="text" name="apellido" id="" placeholder="Apellido">
-                <input type="text" name="doc" id="" placeholder="DUI">
-                <input type="text" name="placa" id="" placeholder="Placa">
+            <div class="input-group">
+                <input class="form-control mx-1" type="text" name="nombre" id="" placeholder="Nombre"> 
+                <input class="form-control mx-1" type="text" name="apellido" id="" placeholder="Apellido">
+                <input class="form-control mx-1" type="text" name="doc" id="" placeholder="DUI">
+                <input class="form-control mx-1" type="text" name="placa" id="" placeholder="Placa">
                 <input class="array" type="hidden" id="data-db" name="servicios" value="">
-                <button name="" id="" class="btn btn-primary" href="#" role="button" >Guardar Venta</button>
+            </div>
+            <div class="my-2 row mx-1">
+              <button name="" id="" class="btn btn-primary col-lg-6" href="#" role="button" >Guardar Venta</button>
+              <a name="" id="" class="btn btn-danger col-lg-6" href="#" role="button" onclick="removeAllServices()">Cancelar</a>
+            </div>
             </form>
-            <a name="" id="" class="btn btn-danger" href="#" role="button" onclick="removeAllServices()">Cancelar</a>
-          </div>
-
             <table class="table table-bordered mt-4" id="carrito">
                 <thead>
                   <tr>

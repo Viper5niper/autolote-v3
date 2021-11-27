@@ -79,8 +79,10 @@
                 @endif
                 <input type="text" name="mora" id="mora" hidden>
                 <input type="text" name="total" id="total" hidden>
-                <div class="form-button pt-4"> <button type="submit"
-                    class="btn btn-primary btn-block btn-lg"><span>Pagar y Facturar</span></button> 
+                <div class="row">
+                    <div class="col"> 
+                        <button type="submit" class="btn btn-primary btn-block">Pagar y Facturar</button> 
+                    </div>
                 </div>
             @endif 
         </div>

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12 card mx-auto my-3 p-5">
-            <h2>Renta Vehiculo</h2>
+            <h2>Rentar Vehiculo</h2>
             <hr>
             <div class="col" id="ac1">
                 @include('common.renta.partials-create._form-ac1')
