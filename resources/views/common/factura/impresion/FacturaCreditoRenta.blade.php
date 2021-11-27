@@ -23,7 +23,7 @@
 <label style="margin-left: 9mm;margin-top: 85mm;position: absolute;"> </label>
 <!-- fila 6-->
 <label style="margin-left: 21mm;margin-top: 95mm;position: absolute;">${{$factura->payload['monto']}}</label>
-<label style="margin-left: 155mm;margin-top: 95mm;position: absolute;"></label>
+<label style="margin-left: 9mm;margin-top: 95mm;position: absolute;">{{ isset($factura->payload['mora']) ? "Monto por Mora: " : "" }}</label>
 <label style="margin-left: 165mm;margin-top: 95mm;position: absolute;"></label>
 <label style="margin-left: 176mm;margin-top: 95mm;position: absolute;"></label>
 <label style="margin-left: 188mm;margin-top: 95mm;position: absolute;"></label>

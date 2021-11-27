@@ -111,6 +111,7 @@ class RentaController extends Controller
     {
        
         if($request->n_dias === "0"){
+            
             $renta = Renta::find($id);
             $vehiculo = Vehiculo::find($renta['vehiculo_id']);
 
@@ -120,10 +121,45 @@ class RentaController extends Controller
             return redirect()->route('renta', $id)
             ->with('message', 'Vehiculo Devuelto con exito')
             ->with('status', 'success');
+
         }else{
-            return redirect()->route('renta', $id)
-            ->with('message', 'Upss Algo Salio Mal')
-            ->with('status', 'danger');
+            
+            $renta = Renta::find($id);
+            $vehiculo = Vehiculo::find($renta['vehiculo_id']);
+            $cliente = Cliente::find($renta['cliente_id']);
+
+            $renta->where('id',$id)->update(['estado'=>'0']);
+            $vehiculo->where('id', $vehiculo['id'])->update(['estado' => 'D']);
+            
+            $payload = [
+                "Cliente" => $cliente,
+                "Vehiculo" => $vehiculo,
+                "n_factura" => $request->n_factura,
+                "tipo" => $request->tipo,
+                "area_factura" => "R",
+                "descripcion" => "Pago de Mora",
+                "mora" => "$request->mora",
+                "monto" => $request->mora,
+                "total" => $request->total,
+                "dias" => $request->n_dias,
+                "inicio" => $request->inicio,
+                "final" => $request->final,
+                "ncr" => $request->ncr,
+                
+            ];
+
+            $factura = Factura::create([
+                'n_factura' => $request->n_factura,
+                'cliente_id' => (int) $request->cliente_id,
+                'credito_id' => null,
+                'vehiculo_id' => (int) $request->vehiculo_id,
+                'tipo' => $request->tipo,
+                'area_factura' => "R",
+                'descripcion' => "Pago de Mora",
+                'payload' => $payload, //*Informacion necesaria que para poder generar una factura en el archivo o controaldor
+            ]);
+
+            return redirect()->route('factura.show', $factura->id);
         }
     }
 
