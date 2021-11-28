@@ -80,7 +80,7 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text">$</span>
                         </div>
-                        <input type="number" class="form-control @error('monto') is-invalid 
+                        <input type="number" accept="any" class="form-control @error('monto') is-invalid 
                         @enderror" value="{{old('monto')}}" id="monto" name="monto" onkeydown="money_mask(this);" required>
                         @error('monto')
                         <div class="invalid-feedback">{{ $message }}</div>

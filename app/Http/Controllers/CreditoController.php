@@ -201,7 +201,12 @@ class CreditoController extends Controller
             $json_array['saldo'] = $request->saldo;
             $json_array['historial_pagos'][] = $all;
 
-            $credito->update(['json_array' => $json_array]);
+            if((float) $request->saldo > 0){
+                $credito->update(['json_array' => $json_array]);
+            }else{
+                $credito->update(['json_array' => $json_array, 'pendiente' => '0']);
+            }
+            
             //return $payload;
             return redirect()->route('factura.show', $factura->id);
         } catch (Exception $ex) {

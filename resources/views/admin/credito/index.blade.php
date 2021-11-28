@@ -32,9 +32,9 @@
     $info[$index][] = "$ ".$credito->monto;
     $info[$index][] = ($credito->interes * 100)."%";
     $info[$index][] = "$ ".$credito['json_array']['saldo'];
-    $info[$index][] = $credito->pendiente === 1 ? "Pendiente" : "Pagado";
-    $info[$index][] = "<nobr>"/*.$btnShow." "*/.$btnPay."</nobr>"
-                
+    $info[$index][] = $credito->pendiente === 1 ? "<h5><span class='badge badge-success'>Pendiente</span></h5>" : "<h5><span class='badge badge-secondary'>Pagado</span></h5>";
+    $info[$index][] = $credito->pendiente === 1 ? "<nobr>"/*.$btnShow." "*/.$btnPay."</nobr>" : "**=**"
+  
   @endphp
 @endforeach
 

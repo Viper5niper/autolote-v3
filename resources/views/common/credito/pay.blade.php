@@ -48,6 +48,7 @@
             <p>Nombre:  {{$info['cliente']->nombre." ".$info['cliente']->apellido}}</p>
             <p>#Credito: {{$info['credito']->id}}</p> {{-- esta parte carga el numero de credito y el nombre de la persona --}}
         </div>
+        @if($info['credito']->pendiente === 1)
         <form action="{{route('creditos.update',["credito" => isset($info['credito']->id) ? $info['credito']->id : '0'])}}" method="POST" class="form-horizontal">
             @csrf
             @method('PATCH')
@@ -70,7 +71,7 @@
             </div>
         </div>
         <div class="form-row">
-            @if($info['credito']->pendiente === 1)
+            
                 @include('common.credito.partials._form')
                 @if(!isset($info['credito']->json_array['historial_pagos']))
                     <input type="number" accept="any" name="letra" class="form-control" id="letra" value="1" hidden>
@@ -83,10 +84,9 @@
                     <br> 
                     <button type="submit" class="btn btn-primary btn-block mt-2">Pagar y Facturar</button> 
                 </div>
-            @endif 
         </div>
         </form>
-
+        @endif 
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
