@@ -14,7 +14,7 @@
 @stop
 
 @section('content')
-<div class="col-12 card pt-3 pb-3">
+<div class="col-12 card pt-3 pb-3 mt-n3">
     @php
     $heads = [
         
