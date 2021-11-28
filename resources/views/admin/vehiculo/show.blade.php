@@ -38,8 +38,14 @@
             <a href=""><img src="{{$vehiculo->path.$image}}"></a>
             @endforeach
         </div>
-        @endif
+        @else
         <div class="col-md-6">
+            <img src="{{!empty($vehiculo->images) ? $vehiculo->path.$vehiculo->images[0]
+            : '/img/car.png'}}" 
+            class="" alt="imagen de auto" height="400px" width="500px">
+        </div>
+        @endif
+        <div class="col-md-6 mt-n3">
             <table class="table table-borderless">
                 <tr>
                     <td><h5><b>Marca</b></h5></td>
@@ -76,8 +82,6 @@
             </table>
         </div>
     </div>
-
-        
 </div>
 
 

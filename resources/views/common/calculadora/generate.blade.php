@@ -5,9 +5,14 @@
 @section('content')
 
 <div class="container">
-    
+    <br>
     <div class="row">
-        
+        <div class="col-lg-8"></div>
+        <div id="volver" class="col-lg-3">
+            <input  onclick="imprimir();" value="Imprimir" class="btn btn-primary btn-block" id="boton">
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-10 card d-flex justify-content-center mx-auto my-3 p-5">       
             @include('partials._status')
             <p>
@@ -31,8 +36,6 @@
                 @include('common.calculadora._tabla')
             </div>
         </div>
-        <div id="volver">
-            <input  onclick="imprimir();" value="Imprimir" style="width: 200px;background: forestgreen;color: white;	font-size: 15px;font-family: 'Lucida Sans';	margin-top: 10px;border-radius: 5px; padding: 10px 50px;cursor: pointer;" id="boton"></div>
     </div>
 </div>
 
