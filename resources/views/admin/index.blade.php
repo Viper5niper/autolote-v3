@@ -15,7 +15,7 @@
             <label for="menu-toggler"></label>
             <ul>
                 <li class="menu-item">
-                <a class="fas fa-fw fa-hand-holding" href="{{route('ventanf')}}" data-toggle="tooltip" data-placement="top" title="Centro de servicios"></a>
+                <a class="fas fa-fw fa-hand-holding" href="{{route('servicios')}}" data-toggle="tooltip" data-placement="top" title="Servicios"></a>
                 </li>
                 <li class="menu-item bi bi-mic-fill">
                 <a class="fas fa-fw fa-dollar-sign" href="{{route('credito.pay')}}" data-toggle="tooltip" data-placement="top" title="Pago de cuotas"></a>
