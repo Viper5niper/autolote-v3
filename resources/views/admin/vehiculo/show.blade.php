@@ -69,6 +69,10 @@
                     <td><h5><b>Capacidad</b></h5></td>
                     <td><h5>{{$vehiculo->capacidad}}</h5></td>
                 </tr>
+                <tr>
+                    <td><h5><b>Calidad</b></h5></td>
+                    <td><h5>{{$vehiculo->calidad}}</h5></td>
+                </tr>
             </table>
         </div>
     </div>

@@ -152,7 +152,7 @@
                     @enderror
                 </div> 
             </div>
-            <div class="form-button"> <button type="submit" class="btn btn-primary btn-block"
+            <div class="form-button"> <button type="submit" class="btn btn-primary btn-block btn-lg"
                 id="btn-pwd"><span>Generar Presupuesto</span></button> </div>
             </div>
             </form>

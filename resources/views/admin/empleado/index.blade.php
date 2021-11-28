@@ -31,12 +31,12 @@
             : '/img/profile.png'}}" 
             class="card-img-top rounded mx-auto d-block" alt="imagen de auto">
             <div class="card-body">
-                <h5 class="card-title">{{$empleado->doc}}</h5>
-                <p class="card-text">
+                <h4><b>{{$empleado->doc}}</b></h4>
+                <p class="card-text mt-n2">
                     <ul>
-                        <li>{{$empleado->nombre}}</li>
-                        <li>{{$empleado->apellido}}</li>
-                        <li>{{$empleado->cargo}}</li>
+                        <li><h5>{{$empleado->nombre}}</h5></li>
+                        <li><h5>{{$empleado->apellido}}</h5></li>
+                        <li><h5>{{$empleado->cargo}}</h5></li>
                     </ul>
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">

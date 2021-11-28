@@ -1,7 +1,7 @@
 <form class="form-row mb-4 mt-4" method="POST" action="{{route('venta.buscarvc')}}">
     @csrf
     <div class="input-group float-right">
-        <input type="text" name="criterio" class="form-control mx-1">
+        <input type="text" name="criterio" class="form-control">
         <input type="text" name="cliente_id" hidden class="form-control mx-1" value="{{$cliente->id ?? 0}}">
         <input type="text" name="vehiculo_id" hidden class="form-control mx-1" value="{{$vehiculo->id ?? 0}}">
         <input type="text" name="type" hidden class="form-control mx-1" value="vehiculo">
@@ -25,16 +25,33 @@
             <div class="card-body col-">
                 @if ($vehiculo->id)
                     <div class="row">
-                        <div class="col-6">
-                            <ul>
-                                <li>Placa: {{$vehiculo->placa}}</li>
-                                <li>Marca: {{$vehiculo->marca}}</li>
-                                <li>Poliza: {{$vehiculo->n_pol_s}}</li>
-                            </ul>
+                        <div class="col-lg-6 ml-n3">
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><h5><b>Placa</b></h5></td>
+                                    <td><h5>{{$vehiculo->placa}}</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5><b>Marca</b></h5></td>
+                                    <td><h5>{{$vehiculo->marca}}</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5><b>Año</b></h5></td>
+                                    <td><h5>{{$vehiculo->anio}}</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5><b>Modelo</b></h5></td>
+                                    <td><h5>{{$vehiculo->modelo}}</h5></td>
+                                </tr>
+                                <tr>
+                                    <td><h5><b>Color</b></h5></td>
+                                    <td><h5>{{$vehiculo->color}}</h5></td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="col-6">
-                            <img src="{{!empty($vehiculo->images) ? $vehiculo->path.$vehiculo->images[0]
-                                : '/img/car.png'}}" alt="imagen del vehiculo" width="100%" height="90%">
+                        <div class="col-lg-6">
+                            <img class="float-right" src="{{!empty($vehiculo->images) ? $vehiculo->path.$vehiculo->images[0]
+                                : '/img/car.png'}}" alt="imagen del vehiculo" width="80%" height="90%">
                         </div>
                     </div>
                     {{-- @php

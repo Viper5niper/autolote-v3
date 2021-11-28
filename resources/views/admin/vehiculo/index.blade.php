@@ -31,12 +31,12 @@
             : 'img/car.png'}}" 
             class="card-img-top rounded mx-auto d-block" alt="imagen de auto" style="height: 14rem;">
             <div class="card-body">
-                <h5 class="card-title">{{$vehiculoItem->placa}}</h5>
-                <p class="card-text">
+                <h4><b>{{$vehiculoItem->placa}}</b></h4>
+                <p class="card-text mt-n2">
                     <ul>
-                        <li>{{$vehiculoItem->marca}}</li>
-                        <li>{{$vehiculoItem->modelo}}</li>
-                        <li>{{$vehiculoItem->anio}}</li>
+                        <li><h5>{{$vehiculoItem->marca}}</h5></li>
+                        <li><h5>{{$vehiculoItem->modelo}}</h5></li>
+                        <li><h5>{{$vehiculoItem->anio}}</h5></li>
                     </ul>
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">

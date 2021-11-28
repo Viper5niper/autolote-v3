@@ -28,10 +28,18 @@
         <div id="collapseOne" class="collapse @if($cliente->id) show @endif" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="">
                 @if ($cliente->id)
-                <ul>
-                    <li>Nombre: {{$cliente->nombre}}</li>
-                    <li>Apellidos: {{$cliente->apellido}}</li>
-                </ul>
+                <div class="col-lg-4">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><h5><b>Nombre</b></h5></td>
+                            <td><h5>{{$cliente->nombre}}</h5></td>
+                        </tr>
+                        <tr>
+                            <td><h5><b>Apellidos</b></h5></td>
+                            <td><h5>{{$cliente->apellido}}</h5></td>
+                        </tr>
+                    </table>
+                </div>
                 {{-- @php
                     print_r($cliente)
                 @endphp --}}
