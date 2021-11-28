@@ -3,7 +3,13 @@
 @section('title', 'Bienvenid@')
 
 @section('content_header')
-   <h1></h1>
+<div class="card">
+  <div class="mx-3 mt-1 mb-1 pb-3">
+    <div class="row mt-3">
+      <h1 class="col">Detalle de servicio</h1>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('content')
@@ -11,28 +17,34 @@
 <div class="container">
     <div class="row">
         <div class="col-12 card pt-3 pb-3">
-          <div>
-            <input type="text" name="nombre" id="" value={{ $venta['json_array']['nombre'] }} readonly> 
-            <input type="text" name="apellido" id="" value={{ $venta['json_array']['apellido'] }} readonly>
-            <input type="text" name="doc" id="" value={{ $venta['json_array']['doc'] }} readonly>
-            <input type="text" name="placa" id="" value={{ $venta['json_array']['placa'] }} readonly>
-            
+          <div class="col">
+            <div class="input-group">
+              <input class="form-control" type="text" name="nombre" id="" value={{ $venta['json_array']['nombre'] }} readonly> 
+              <input class="form-control ml-1" type="text" name="apellido" id="" value={{ $venta['json_array']['apellido'] }} readonly>
+              <input class="form-control ml-1" type="text" name="doc" id="" value={{ $venta['json_array']['doc'] }} readonly>
+              <input class="form-control ml-1" type="text" name="placa" id="" value={{ $venta['json_array']['placa'] }} readonly>
+            </div>
+          
             @php
                 $aux = json_encode($venta['json_array']);
             @endphp
 
             <form action="{{route('store.venta.servicio')}}" method="POST">
                 @csrf
-                <input class="array" type="hidden" id="data-db" name="servicios" value="{{$aux}}">
-                <input type="text" name="n_factura" id="" placeholder="# factura">
-                <input type="text" name="descripcion" id="" placeholder="descripcion">
-                <select name="tipo" id="">
-                    <option value="consumidor">Consumidor Final</option>
-                    <option value="credito">Credito Fiscal</option>
-                </select>
-                <input type="text" name="ncr" id="" placeholder="ncr">
-                <input type="text" name="id" id="" value={{ $venta['id'] }} hidden>
-                <button name="" id="" class="btn btn-primary" role="button">Facturar</button>
+                <div class="input-group mt-3">
+                  <input class="array form-control" type="hidden" id="data-db" name="servicios" value="{{$aux}}">
+                  <input class="form-control" type="text" name="n_factura" id="" placeholder="# factura">
+                  <input class="form-control ml-1" type="text" name="descripcion" id="" placeholder="descripcion">
+                  <select class="form-control ml-1" name="tipo" id="">
+                      <option value="consumidor">Consumidor Final</option>
+                      <option value="credito">Credito Fiscal</option>
+                  </select>
+                  <input class="form-control ml-1" type="text" name="ncr" id="" placeholder="ncr">
+                  <input type="text" name="id" id="" value={{ $venta['id'] }} hidden>
+                </div>
+                <div class=" coi mt-3">
+                  <button name="" id="" class="btn btn-primary btn-block" role="button">Facturar</button>
+                </div>
             </form>
             
           </div>

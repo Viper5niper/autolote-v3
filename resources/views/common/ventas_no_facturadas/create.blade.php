@@ -76,11 +76,11 @@
             <form action="{{route('ventanf.store')}}" method="POST">
                 @csrf
             <div class="input-group">
-                <input class="form-control mx-1" type="text" name="nombre" id="" placeholder="Nombre"> 
-                <input class="form-control mx-1" type="text" name="apellido" id="" placeholder="Apellido">
-                <input class="form-control mx-1" type="text" name="doc" id="" placeholder="DUI">
-                <input class="form-control mx-1" type="text" name="placa" id="" placeholder="Placa">
-                <input class="array" type="hidden" id="data-db" name="servicios" value="">
+                <input class="form-control mx-1" type="text" name="nombre" id="" placeholder="Nombre" required> 
+                <input class="form-control mx-1" type="text" name="apellido" id="" placeholder="Apellido" required>
+                <input class="form-control mx-1" type="text" name="doc" id="" placeholder="DUI" required>
+                <input class="form-control mx-1" type="text" name="placa" id="" placeholder="Placa" required>
+                <input class="array" type="hidden" id="data-db" name="servicios" value="" required>
             </div>
             <div class="my-2 row mx-1">
               <button name="" id="" class="btn btn-primary col-lg-6" href="#" role="button" >Guardar Venta</button>
