@@ -3,6 +3,7 @@
 @section('title', 'Bienvenid@')
 
 @section('content_header')
+
 <div class="card">
   <div class="mx-3 mt-1 mb-1 pb-3">
     <div class="row mt-3">

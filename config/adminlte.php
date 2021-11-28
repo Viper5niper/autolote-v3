@@ -404,9 +404,9 @@ return [
         /** Para usuarios de servicios */
         
         [
-            'text'        => 'Servicios',
-            'route'         => 'servicios',
-            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'text'        => 'Inicio',
+            'url'         => '/dashboard',
+            'icon'        => 'fas fa-fw fa-home',
             'can'  => ['is-service'],
         ],
 
