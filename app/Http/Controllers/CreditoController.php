@@ -105,7 +105,7 @@ class CreditoController extends Controller
             $info = [];
             $result = preg_match('/^\d{8}-\d{1}$/', $request->param);
 
-            if ($result == 0) {
+            if ($result === 0) {
                 $credito = Credito::where('id', $request->param)
                     ->orWhere('cliente_id', $request->param)->firstOrFail();
 
@@ -119,7 +119,6 @@ class CreditoController extends Controller
                 $info['cliente'] = $cliente;
                 // return $info;
             }
-
 
             return view('common.credito.pay', compact('info'));
         } catch (Exception $ex) {

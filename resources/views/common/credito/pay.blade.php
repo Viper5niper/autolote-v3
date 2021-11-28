@@ -71,14 +71,12 @@
             </div>
         </div>
         <div class="form-row">
-            
                 @include('common.credito.partials._form')
                 @if(!isset($info['credito']->json_array['historial_pagos']))
                     <input type="number" accept="any" name="letra" class="form-control" id="letra" value="1" hidden>
                 @else
                     <input type="number" accept="any" name="letra" class="form-control" id="letra" value="{{count($info['credito']->json_array['historial_pagos']) + 1}}" hidden>
                 @endif
-                <input type="text" name="mora" id="mora" hidden>
                 <input type="text" name="total" id="total" hidden>
                 <div class="col">
                     <br> 
