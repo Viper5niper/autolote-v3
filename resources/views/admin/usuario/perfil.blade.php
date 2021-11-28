@@ -39,7 +39,7 @@
 @section('content')
 <div class="container">
     <div class="row gutters-sm">
-        <div class="col-md-4 mb-4">
+        <div class="col-md-4 mb-4 mt-n3">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
@@ -55,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8 mt-n3">
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="row">

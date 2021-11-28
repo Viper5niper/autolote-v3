@@ -12,26 +12,18 @@
   </div>
 </div>
 @stop
+
 @section('content')
-<div class="container">
-    <div class="card mx-auto my-3 p-5">
-        <div class="row">
-            @if(!empty($vehiculo->images))
-            <div class="col-12 col-lg-6 fotorama mx-auto" data-allowfullscreen="true" data-nav="thumbs">
-                @foreach ($vehiculo->images as $image)
-                <a href=""><img src="{{$vehiculo->path.$image}}" width="50px" height="50px"></a>
-                @endforeach
-            </div>
-            @endif
-        </div>
-        <div class="btn-group col mt-4 mb-4 mx-auto" role="group" aria-label="">
+<div class="card col-lg-12 mx-auto p-4 mt-n3">
+    <div class="row">
+        <div class="col-md-12 btn-group mb-3" role="group">
             <a class="btn btn-md btn-outline-success" href="{{route('venta.vehiculo',$vehiculo->id)}}">
                 Vender
             </a>
             <a class="btn btn-md btn-outline-success" href="{{route('renta.create',$vehiculo->id)}}">
                 Rentar
             </a>
-            @if(auth()->user()->role === 1)
+        @if(auth()->user()->role === 1)
             <a class="btn btn-md btn-outline-success" href="{{route('vehiculo.edit',['vehiculo'=>$vehiculo])}}">
                 Editar
             </a>
@@ -40,26 +32,50 @@
             </a>
             @endif
         </div>
-        <table class="table">
-                <thead class="thead">
+        @if(!empty($vehiculo->images))
+        <div class="col-md-6 fotorama" data-allowfullscreen="true" data-nav="thumbs">
+            @foreach ($vehiculo->images as $image)
+            <a href=""><img src="{{$vehiculo->path.$image}}"></a>
+            @endforeach
+        </div>
+        @endif
+        <div class="col-md-6">
+            <table class="table table-borderless">
                 <tr>
-                    <th scope="col">Placa</th>
-                    <th scope="col">Marca</th>
-                    <th scope="col">Modelo</th>
-                    <th scope="col">Año</th>
+                    <td><h5><b>Marca</b></h5></td>
+                    <td><h5>{{$vehiculo->marca}}</h5></td>
                 </tr>
-                </thead>
-                <tbody>
                 <tr>
-                    <th>{{$vehiculo->placa}}</th>
-                    <td>{{$vehiculo->marca}}</td>
-                    <td>{{$vehiculo->modelo}}</td>
-                    <td>{{$vehiculo->anio}}</td>
+                    <td><h5><b>Modelo</b></h5></td>
+                    <td><h5>{{$vehiculo->modelo}}</h5></td>
                 </tr>
-                </tbody>
+                <tr>
+                    <td><h5><b>Placa</b></h5></td>
+                    <td><h5>{{$vehiculo->placa}}</h5></td>
+                </tr>
+                <tr>
+                    <td><h5><b>Color</b></h5></td>
+                    <td><h5>{{$vehiculo->color}}</h5></td>
+                </tr>
+                <tr>
+                    <td><h5><b>Año</b></h5></td>
+                    <td><h5>{{$vehiculo->anio}}</h5></td>
+                </tr>
+                <tr>
+                    <td><h5><b>Tipo</b></h5></td>
+                    <td><h5>{{$vehiculo->tipo}}</h5></td>
+                </tr>
+                <tr>
+                    <td><h5><b>Capacidad</b></h5></td>
+                    <td><h5>{{$vehiculo->capacidad}}</h5></td>
+                </tr>
             </table>
+        </div>
     </div>
+
+        
 </div>
+
 
 
 @include('/partials/_modal-deleted',

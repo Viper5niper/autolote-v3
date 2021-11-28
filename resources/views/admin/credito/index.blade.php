@@ -39,7 +39,7 @@
 @endforeach
 
 @section('content') <!--Contenido de la pagina-->
-    <div class="col-12 card pt-3 pb-3">
+    <div class="col-lg-12 mt-n3 card pt-3 pb-3">
       @php
         $heads = [
           '# Credito',

@@ -24,7 +24,7 @@
 @stop
 
 @section('content') <!--Contenido de la pagina-->
-<div class="row d-flex justify-content-center mx-auto">
+<div class="row d-flex justify-content-center mx-auto mt-n3">
     @forelse($empleados as $empleado)
         <div class="card mx-2" >
             <img style="width: 18rem;height:18rem" src="{{!empty($empleado->images) ? $empleado->path.$empleado->images[0]

@@ -3,14 +3,20 @@
 @section('title', 'Bienvenid@')
 
 @section('content_header')
-   <h1></h1>
+<div class="card">
+  <div class="mx-3 mt-1 mb-1 pb-3">
+    <div class="row mt-3">
+      <h1 class="col">Facturar Servicio</h1>
+    </div>
+  </div>
+</div>
 @stop
 
 @section('content')
 @include('partials._status')
 <div class="container">
     <div class="row">
-        <div class="col-12 card pt-3 pb-3">
+        <div class="col-12 card pt-3 pb-3 mt-n3">
             @php
               $heads = [
                 
@@ -82,7 +88,7 @@
                 <input class="form-control mx-1" type="text" name="placa" id="" placeholder="Placa" required>
                 <input class="array" type="hidden" id="data-db" name="servicios" value="" required>
             </div>
-            <div class="my-2 row mx-1">
+            <div class="mt-3 row mx-1">
               <button name="" id="" class="btn btn-primary col-lg-6" href="#" role="button" >Guardar Venta</button>
               <a name="" id="" class="btn btn-danger col-lg-6" href="#" role="button" onclick="removeAllServices()">Cancelar</a>
             </div>

@@ -66,7 +66,7 @@
 
 @section('content') <!--Contenido de la pagina-->
   <div class="">
-      <div class="col-12 card pt-3 pb-3">
+      <div class="col-lg-12 card pt-3 pb-3 mt-n3">
         @php
           $heads = [
             
