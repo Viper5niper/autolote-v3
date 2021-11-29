@@ -225,7 +225,7 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
+        /* Navbar items:
         [
             'type'         => 'navbar-search',
             'text'         => 'search',
@@ -240,8 +240,8 @@ return [
         [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
-        ],
-        ['header' => 'TRANSACCIONES'],
+        ],*/
+        ['header' => 'TRANSACCIONES','can' => ['is-admin']],
         [
             'text'        => 'Inicio',
             'url'         => '/dashboard',
@@ -249,22 +249,30 @@ return [
             'can'  => ['is-admin'],
         ],
         [
-            'text'        => 'Ventas',
-            'url'         => 'admin/ventas',
+            'text'        => 'Servicios',
+            'route'       => 'servicios',
             'icon'        => 'fas fa-fw fa-dollar-sign',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'        => 'Pago de Cuota',
+            'route'         => 'credito.pay',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Rentas',
-            'url'         => 'admin/rentas',
+            'route'         => 'renta',
             'icon'        => 'fas fa-fw fa-car-side',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-admin'],
         ],
         [
+            'text'        => 'Calculadora',
+            'route'         => 'calculadora',
+            'icon'        => 'fa fa-calculator',
+            'can'  => ['is-admin'],
+        ],
+       /* [
             'text'    => 'Servicios',
             'icon'    => 'fas fa-fw fa-hand-holding',
             'can'  => ['is-admin'],
@@ -288,61 +296,128 @@ return [
                     'shift'   => 'ml-3',
                 ],
             ],
-        ],
-        /* Para encargados de sectores */
-        [
-            'text'        => 'Centro de servicios',
-            'url'         => 'admin/rentas',
-            'icon'        => 'fas fa-fw fa-hand-holding',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
-            'can'  => ['is-sector'],
-        ],
-        [
-            'text'        => 'Reportes',
-            'url'         => 'admin/rentas',
-            'icon'        => 'fas fa-fw fa-dollar-sign',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
-            'can'  => ['is-sector'],
-        ],
+        ],*/
+
         ['header' => 'ADMINISTRACION', 'can'  => ['is-admin'],],
         [
             'text'        => 'Vehiculos',
             'route'       => 'vehiculo',
             'icon'        => 'fas fa-fw fa-car',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Clientes',
-            'route'       => 'cliente.index',
+            'route'       => 'cliente',
             'icon'        => 'fas fa-fw fa-user-friends',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'active' => ['pages', 'cliente', 'cliente*', 'regex:@^cliente/[0-9]+$@'],
             'can'  => ['is-admin'],
         ],
         [
             'text'        => 'Usuarios',
-            'url'         => 'admin/rentas',
+            'route'       => 'user',
             'icon'        => 'fas fa-fw fa-user',
-            'label'       => 'nuevo',
-            'label_color' => 'success',
             'can'  => ['is-admin'],
         ],
+        [
+            'text'        => 'Empleados',
+            'route'       => 'empleado',
+            'icon'        => 'fas fa-fw fa-user',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'        => 'Creditos',
+            'route'         => 'creditos',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-admin'],
+        ],
+        [
+            'text'    => 'Colsultas',
+            'icon'    => 'fa fa-bookmark',
+            'can'  => ['is-admin'],
+            'submenu' => [
+                [
+                    'text'    => 'Facturas',
+                    'route'   => 'factura',
+                    'icon'    => 'fa fa-archive',
+                    'shift'   => 'ml-3',
+                ],
+                [
+                    'text' => 'Reportes',
+                    'url'  => 'menu/child2',
+                    'icon'    => 'fa fa-file',
+                    'shift'   => 'ml-3',
+                ],
+            ],
+        ],
+
+        /* Para encargados de sectores */
+        [
+            'text'        => 'Inicio',
+            'url'         => '/dashboard',
+            'icon'        => 'fas fa-fw fa-home',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Centro de servicios',
+            'route'       => 'ventanf',
+            'icon'        => 'fas fa-fw fa-hand-holding',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Pago de Cuota',
+            'route'         => 'credito.pay',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Rentas',
+            'route'         => 'renta',
+            'icon'        => 'fas fa-fw fa-car-side',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Crear Cliente',
+            'route'         => 'cliente.create',
+            'icon'        => 'fas fa-fw fa-user-friends',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Vehiculos',
+            'route'       => 'vehiculo',
+            'icon'        => 'fas fa-fw fa-car',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Creditos',
+            'route'         => 'creditos',
+            'icon'        => 'fas fa-fw fa-dollar-sign',
+            'can'  => ['is-sector'],
+        ],
+        [
+            'text'        => 'Calculadora',
+            'route'         => 'calculadora',
+            'icon'        => 'fa fa-calculator',
+            'can'  => ['is-sector'],
+        ],
+
+        
+        /** Para usuarios de servicios */
+        
+        [
+            'text'        => 'Inicio',
+            'url'         => '/dashboard',
+            'icon'        => 'fas fa-fw fa-home',
+            'can'  => ['is-service'],
+        ],
+
         ['header' => 'AJUSTES'],
         [
             'text' => 'Perfil',
-            'url'  => 'admin/settings',
+            'route' => 'perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
-        [
-            'text' => 'Cambiar Clave',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
+
+        
     ],
 
     /*
@@ -381,8 +456,9 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
+
                 [
                     'type' => 'js',
                     'asset' => false,
@@ -398,6 +474,47 @@ return [
                     'asset' => false,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/buttons/2.0.1/js/buttons.bootstrap4.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => '//cdn.datatables.net/buttons/2.0.1/css/buttons.bootstrap4.min.css',
+                ],
+
             ],
         ],
         'Select2' => [

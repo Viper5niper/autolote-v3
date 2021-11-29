@@ -19,7 +19,7 @@ class VehiculoController extends Controller
      */
     public function index()
     {
-        $vehiculos = Vehiculo::paginate(16);
+        $vehiculos = Vehiculo::where('estado','D')->paginate(16);
         return view("/admin/vehiculo/index", compact('vehiculos'));
     }
 
@@ -49,9 +49,10 @@ class VehiculoController extends Controller
         $vehiculo = Vehiculo::create($fields);
 
         $files = $request->file('images');
-
-        foreach ($files as $file) {
-            upload_global($file, $vehiculo->path);
+        if ($files) {
+            foreach ($files as $file) {
+                upload_global($file, $vehiculo->path);
+            }
         }
 
         return redirect()->route('vehiculo')
@@ -67,8 +68,6 @@ class VehiculoController extends Controller
      */
     public function show($id)
     {
-
-        //dd(Vehiculo::findOrFail($id));
         return view('/admin/vehiculo/show', ['vehiculo' => Vehiculo::findOrFail($id)]);
     }
 
@@ -119,7 +118,15 @@ class VehiculoController extends Controller
     public function destroy($id)
     {
 
-        Vehiculo::findOrFail($id)->delete();
+        try {
+            Vehiculo::findOrFail($id)->delete();
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+
+            return redirect()->route('vehiculo')
+                ->with('message', 'Peticion no puede ser procesada vehiculo no existe [VE003]')
+                ->with('status', 'warning');
+        }
+
         return redirect()->route('vehiculo')
             ->with('message', 'Vehiculo eliminado.')
             ->with('status', 'success');

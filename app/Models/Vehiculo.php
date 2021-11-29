@@ -55,6 +55,10 @@ class Vehiculo extends Model
         });
     }
 
+    public function rentas(){
+        return $this->hasMany(Renta::class);
+    }
+
     public function getPathAttribute()
     {
         return '/v/' . $this->placa . '-' . $this->id . '/';
@@ -65,4 +69,10 @@ class Vehiculo extends Model
         $path = public_path() . '/v/' . $this->placa . '-' . $this->id;
         return is_dir($path) ? array_slice(scandir($path), 2) : [];
     }
+
+    public function facturas(){
+        return $this->hasMany(Factura::class);
+    }
+
+
 }
