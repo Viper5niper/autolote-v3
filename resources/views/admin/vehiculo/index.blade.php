@@ -33,11 +33,7 @@
             <div class="card-body">
                 <h4><b>{{$vehiculoItem->placa}}</b></h4>
                 <p class="card-text mt-n2">
-                    <ul>
-                        <li><h5>{{$vehiculoItem->marca}}</h5></li>
-                        <li><h5>{{$vehiculoItem->modelo}}</h5></li>
-                        <li><h5>{{$vehiculoItem->anio}}</h5></li>
-                    </ul>
+                    {{$vehiculoItem->marca . ' ' . $vehiculoItem->modelo . ' ' . $vehiculoItem->anio }}
                 </p>
                 <div class="btn-group d-flex " role="group" aria-label="">
                     <a href="{{route('vehiculo.show',$vehiculoItem->id)}}" class="btn btn-info">Ver</a>
